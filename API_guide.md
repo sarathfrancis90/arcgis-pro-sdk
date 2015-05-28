@@ -180,7 +180,7 @@ Add a summary and remarks xml code comment element. The summary is a single line
 
 For example: “Opens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc.”
 
-```
+```c#
 /// <summary>
 /// Represents a spatial bookmark which identifies a specific geographic location in 
 /// the map
