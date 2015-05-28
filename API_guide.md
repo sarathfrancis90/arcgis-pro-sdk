@@ -174,6 +174,7 @@ Again, only check in .cs files.
 
 You do NOT need to comment any internal classes or methods. For details on how to format and structure comments consult the Appendix and Reference sections of this document.
 
+
 ###For Classes, Structs, and Delegates :
 
 Add a summary and remarks xml code comment element. The summary is a single line. The remarks can be multiple lines using <para></para> tags for additional structuring of content. Begin the summary sentence with a verb. 
@@ -199,9 +200,77 @@ For example: “Opens the, Creates the, Returns the, Responds to, Represents a, 
 /// or manage the bookmarks for the map. For example <b>ZoomToBookmarkAsync</b> can be 
 /// used to zoom the active map to the location of the bookmark.</para>
 /// </remarks>
+public sealed class Bookmark : PropertyChangedBase {
 
 ```
 
+Note: For __sentence descriptions__ in the <summary></summary> or <remarks></remarks> of any entity or member refer to the **Documentation Team Guide**
+
+###For Interfaces:
+
+Begin the summary for an Interface like this: Provides a mechanism for <insert-interface-description-here>
+
+```c#
+/// <summary>
+/// Provides a mechanism for ....
+/// </summary>
+public interface IDisplayTable
+{
+```
+
+* It is not required to mention the Interface in the summary tag of the class that implements it.
+* All classes that implement the interface need triple slash comments.
+
+###For Enums:
+
+Add a summary. Begin the summary with the phrase __"Specifies…”__
+
+```c#
+   /// <summary>
+  /// Specifies the method used to store geographic location with the bookmark
+  /// </summary>
+  public enum BookmarkType {
+```
+
+Now, add comments to all __public and protected members__ of all public types.
+
+###For Fields:
+
+Fields should __not__ be in the public API with the exception of public const (i.e. constants). Document constants with a summary.
+
+###For Properties:
+
+Add a summary. If the Property is a __“getter”__, start the summary with the phrase “Gets the…” or “Gets if the…”. If the Property is a __“setter”__, start the summary with the phrase “Sets the…” or “Sets if the…”. If the Property is both a __“getter”__ and __“setter”__, start the summary with the phrase “Gets or sets the…” or “Gets and sets if the…”.
+
+```c#
+/// <summary>
+/// Gets the name of the bookmark
+/// </summary>
+public string Name
+    {
+      get { return _name; }
+      internal set { SetProperty(ref _name, value, () => Name); }
+    }
+```
+
+Use the <value> tag to create a “Property Value” section underneath your property “signature” on the output topic page.  
+
+```c#
+/// <summary>
+/// Retrieves an int.
+/// </summary>
+/// <value>
+/// Type: <see cref="System.Int32" /> 
+/// The stream length in bytes.
+/// </value>
+        public int myLength
+        {
+            get
+            {
+                return 2;
+            }
+        }
+```
 
 
 
