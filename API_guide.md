@@ -20,3 +20,21 @@ You will need the following software installed to author Reference API content:
 * <a href = "http://devinfo/sites/DeveloperCentral/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2fsites%2fDeveloperCentral%2fShared%20Documents%2fStarTeam%20Documents&View=%7b4652831D%2d65B5%2d47FC%2d9D7D%2d4388EC6DFC2A%7d">Star Team – the install document</a>
 
 Additionally, you may choose to download the <a href ="https://devtopia.esri.com/ArcGISPro-SDK/win-net-documentation">CSharp code comment examples</a> on devtopia. It is a Visual Studio solution containing various csharp source files each illustrating different formatting and structuring techniques for code comments.
+
+##Setting up for check in/out of Star Team
+In order to successfully update Triple Slash “\\\” changes to source code, PE’s need to understand a few things about the development process like:
+* Installing and then updating ArcGIS Pro using GetBuild batch files,
+* Pulling source code from StarTeam and checking it back in,
+* Keeping source code synchronized with Pro build numbers.
+Note to Product Engineers: 
+* Triple Slash “\\\” documentation requires that you read and write source code files from StarTeam.  This means that you need the appropriate StarTeam permissions.  
+* It is recommended that you have direct access to a machine in Redlands (it can be via remote desktop) because you will be running GetBuild  batch scripts that update your ArcGIS Pro build with current files.  If you are updating a remote machine, it could take a very long time.
+* It is also recommended that you uninstall ArcMap from the machine that is being used to update “\\\” doc.  It may not affect the “\\\” process but it does have some negative affect on the registry for some developers.
+The following steps assume you do NOT have ArcGIS Pro installed on your machine and there is NOT a folder called C:\ArcGIS already on your local machine.
+Install ArcGIS Pro
+You will only install Pro manually from a .MSI file once.  All subsequent updates will be done using GetBuildRelease batch scripts. 
+Step 1. Determine the most current build by opening the following file:
+	\\archive\11Builds_64\ReleaseOK.txt  - note the build number.
+Step 2. Based on the step above, install Pro from the appropriate folder in:
+	\\archive\11NonDevSetups\XXXX\ArcGISPro
+	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
