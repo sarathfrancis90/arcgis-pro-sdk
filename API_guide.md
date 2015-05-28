@@ -19,4 +19,4 @@ You will need the following software installed to author Reference API content:
 * <a href = "\\esri.com\Software\Desktop\DesktopA-L\Innovasys\DocumentX\2013">Document! X for Innovasys.</a>(This requires a license. You must request this software through your Manager) 
 * <a href = "http://devinfo/sites/DeveloperCentral/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2fsites%2fDeveloperCentral%2fShared%20Documents%2fStarTeam%20Documents&View=%7b4652831D%2d65B5%2d47FC%2d9D7D%2d4388EC6DFC2A%7d">Star Team – the install document</a>
 
-Additionally, you may choose to download the CSharp code comment examples on devtopia at: https://devtopia.esri.com/ArcGISPro-SDK/win-net-documentation. It is a Visual Studio solution containing various csharp source files each illustrating different formatting and structuring techniques for code comments.
+Additionally, you may choose to download the <a href ="https://devtopia.esri.com/ArcGISPro-SDK/win-net-documentation">CSharp code comment examples</a> on devtopia. It is a Visual Studio solution containing various csharp source files each illustrating different formatting and structuring techniques for code comments.
