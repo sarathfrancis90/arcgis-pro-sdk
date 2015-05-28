@@ -34,12 +34,18 @@ The following steps assume you do NOT have ArcGIS Pro installed on your machine 
 
 ###Install ArcGIS Pro
 
-You will only install Pro manually from a .MSI file once.  All subsequent updates will be done using GetBuildRelease batch scripts. </br>
-**Step 1**. Determine the most current build by opening the following file:</br>
-	[\\archive\11Builds_64\ReleaseOK.txt](\\archive\11Builds_64\ReleaseOK.txt)  - note the build number.</br>
-**Step 2**. Based on the step above, install Pro from the appropriate folder in:</br>
-	[\\archive\11NonDevSetups\XXXX\ArcGISPro](\\archive\11NonDevSetups\XXXX\ArcGISPro)</br>
-	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)</br>
+You will only install Pro manually from a .MSI file once.  All subsequent updates will be done using GetBuildRelease batch scripts.  
+
+**Step 1**. Determine the most current build by opening the following file:
+
+	[\\archive\11Builds_64\ReleaseOK.txt](\\archive\11Builds_64\ReleaseOK.txt)  - note the build number.
+
+**Step 2**. Based on the step above, install Pro from the appropriate folder in:
+
+	[\\archive\11NonDevSetups\XXXX\ArcGISPro](\\archive\11NonDevSetups\XXXX\ArcGISPro)
+
+	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
+
 
 
 
