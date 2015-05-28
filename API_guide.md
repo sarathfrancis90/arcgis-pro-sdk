@@ -6,7 +6,7 @@ The guide is split into three parts:
 * A more detailed API Documentation Reference documentation generation process
 * An Appendix containing a code comment formatting reference:
 
-There are also numerous examples of code comments in this guide. Additionally, there is an example csproj illustrating different examples of code comment formatting and structuring that can be downloaded from the <a href="https://devtopia.esri.com/ArcGISPro-SDK/win-net-documentation">Pro App SDK github repository</a> . You will need to login to devtopia first.
+There are also numerous examples of code comments in this guide. Additionally, there is an example csproj illustrating different examples of code comment formatting and structuring that can be downloaded from the <a href=" https://devtopia.esri.com/ArcGISPro-SDK/win-net-documentation">Pro App SDK github repository</a> . You will need to login to devtopia first.
 
 ##Purpose of This Guide
 The purpose of this guide is to provide you, the author, with step by step instructions on how to document the Reference API using csharp code comments. Any publicly scoped type (to include protected base classes) and corresponding public and protected members in the ArcGIS Professional Managed Assemblies must be documented. The DotNet Reference API is one of the primary extensibility points for ArcGIS Professional available to 3rd party developers (the other extensibility points currently being Arcpy.Mapping via Python and Geoprocessing tools and toolboxes). 
@@ -40,3 +40,26 @@ Step 1. Determine the most current build by opening the following file:</br>
 Step 2. Based on the step above, install Pro from the appropriate folder in:</br>
 	[\\archive\11NonDevSetups\XXXX\ArcGISPro](\\archive\11NonDevSetups\XXXX\ArcGISPro)</br>
 	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)</br>
+
+
+
+
+
+###Run GetBuildRelease.bat
+
+
+The GetBuildRelease batch file will run a process that will replace many of the release DLLs with build DLLs as well as install many additional support files.  These files make it possible to compile your updated source code files.  
+First, you need to download the batch files from Star Team onto your local drive.  
+Step 1. Open Star Team to the ArcGIS11-Gold view.</br>
+Next you will build a folder structure on your local drive (within C:\ArcGIS) to store Star Team GetBuild batch files.  
+Step 2.  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the SharedArcGIS folder and select “Create Working Folders”.  
+
+
+Step 3: In Star Team, make sure the file tab is active, then highlight the SharedArcGIS folder (in the TOC), then click the All Descendants button to display the StarTeam files. Your screen should look similar to the graphic below.  
+
+
+
+
+
+
+
