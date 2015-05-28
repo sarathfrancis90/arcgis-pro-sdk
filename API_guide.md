@@ -36,10 +36,10 @@ The following steps assume you do NOT have ArcGIS Pro installed on your machine 
 
 You will only install Pro manually from a .MSI file once.  All subsequent updates will be done using GetBuildRelease batch scripts.  
 
-**Step 1**. Determine the most current build by opening the following file:  
+**Step 1**: Determine the most current build by opening the following file:  
 	[\\archive\11Builds_64\ReleaseOK.txt](\\archive\11Builds_64\ReleaseOK.txt)  - note the build number.
 
-**Step 2**. Based on the step above, install Pro from the appropriate folder in:  
+**Step 2**: Based on the step above, install Pro from the appropriate folder in:  
 	[\\archive\11NonDevSetups\XXXX\ArcGISPro](\\archive\11NonDevSetups\XXXX\ArcGISPro)  
 	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
 
@@ -54,14 +54,45 @@ You will only install Pro manually from a .MSI file once.  All subsequent update
 The GetBuildRelease batch file will run a process that will replace many of the release DLLs with build DLLs as well as install many additional support files.  These files make it possible to compile your updated source code files.  
 First, you need to download the batch files from Star Team onto your local drive.  
 
-**Step 1**. Open Star Team to the ArcGIS11-Gold view.  
+**Step 1**: Open Star Team to the ArcGIS11-Gold view.  
 
 Next you will build a folder structure on your local drive (within C:\ArcGIS) to store Star Team GetBuild batch files.  
 
-**Step 2**.  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the **SharedArcGIS** folder and select “Create Working Folders”.  
+**Step 2**:  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the **SharedArcGIS** folder and select “Create Working Folders”.  
 
 
-**Step 3**. In Star Team, make sure the file tab is active, then highlight the SharedArcGIS folder (in the TOC), then click the All Descendants button to display the StarTeam files. Your screen should look similar to the graphic below.  
+**Step 3**: In Star Team, make sure the file tab is active, then highlight the SharedArcGIS folder (in the TOC), then click the All Descendants button to display the StarTeam files. Your screen should look similar to the graphic below.  
+
+There are over 16K file that will be downloaded.  Many of the files in this shared folder are needed so you can complile your modified solutions.  There is also an SDK subfolder that will provide examples and code snippets.  
+
+**Step 4**: Right-click Status: Missing (xxx items) and select **Check Out All …,** select Current revision and click OK.  
+
+This can take a while but it is a one time check-out.  
+
+**Step 5**: In file explorer, browse to C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts.  Double-click the GetBuildRelease.bat.  
+
+**Step 6**: When finished, you will be prompted to press enter to close the CMD.
+
+
+**IMPORTANT NOTE (Running GetBuild for a specific build):**  
+
+This may not happen often, but sometimes you don't want to move to the currently available build of Pro (because there could be known issues with it, you may want to roll back to another build for testing, etc).  For these cases, there is a file you can edit that allows you to control exactly which build of the software gets installed locally when you run GetBuildRelease.bat.  
+
+To do this – Open the C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts\GetBuildScript.ps1 file in NotePad and modify the second line to include the build number between the two double quotes.  
+
+If there is no value between the quotes (just two double quotes), then the current release is installed when GetBuildRelease is executed.  
+
+###Check out source code and other support files
+
+
+Similar to the steps above, you are going to create additional Working folders.  But this time, before checking out the files, you will make sure that the source code files are synchronized (i.e., same build) with the build of ArcGIS Pro you currently have installed.  
+
+Step 1. If necessary, open Star Team to the ArcGIS11-Gold view.  
+
+Step 2. **Go to View--> Select Configuration… ** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
+
+
+
 
 
 
