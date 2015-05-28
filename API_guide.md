@@ -50,8 +50,11 @@ Step 2. Based on the step above, install Pro from the appropriate folder in:</br
 
 The GetBuildRelease batch file will run a process that will replace many of the release DLLs with build DLLs as well as install many additional support files.  These files make it possible to compile your updated source code files.  
 First, you need to download the batch files from Star Team onto your local drive.  
-Step 1. Open Star Team to the ArcGIS11-Gold view.</br>
+
+Step 1. Open Star Team to the ArcGIS11-Gold view.  
+
 Next you will build a folder structure on your local drive (within C:\ArcGIS) to store Star Team GetBuild batch files.  
+
 Step 2.  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the SharedArcGIS folder and select “Create Working Folders”.  
 
 
