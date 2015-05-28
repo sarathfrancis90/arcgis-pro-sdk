@@ -31,10 +31,10 @@ Note to Product Engineers:
 * It is recommended that you have direct access to a machine in Redlands (it can be via remote desktop) because you will be running GetBuild  batch scripts that update your ArcGIS Pro build with current files.  If you are updating a remote machine, it could take a very long time.
 * It is also recommended that you uninstall ArcMap from the machine that is being used to update “\\\” doc.  It may not affect the “\\\” process but it does have some negative affect on the registry for some developers.
 The following steps assume you do NOT have ArcGIS Pro installed on your machine and there is NOT a folder called C:\ArcGIS already on your local machine.
-Install ArcGIS Pro
-You will only install Pro manually from a .MSI file once.  All subsequent updates will be done using GetBuildRelease batch scripts. 
-Step 1. Determine the most current build by opening the following file:
-	\\archive\11Builds_64\ReleaseOK.txt  - note the build number.
-Step 2. Based on the step above, install Pro from the appropriate folder in:
-	\\archive\11NonDevSetups\XXXX\ArcGISPro
-	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
+###Install ArcGIS Pro
+You will only install Pro manually from a .MSI file once.  All subsequent updates will be done using GetBuildRelease batch scripts. </br>
+Step 1. Determine the most current build by opening the following file:</br>
+	\\archive\11Builds_64\ReleaseOK.txt  - note the build number.</br>
+Step 2. Based on the step above, install Pro from the appropriate folder in:</br>
+	\\archive\11NonDevSetups\XXXX\ArcGISPro</br>
+	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)</br>
