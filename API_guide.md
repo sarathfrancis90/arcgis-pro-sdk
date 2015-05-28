@@ -110,21 +110,21 @@ Create a working folder for your respective ArcGIS\ArcGISDesktop\ArcGISXXXX cont
  
 **Step 1**: Run GetBuildRelease.bat from C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts  
 
-	[\\archive\11Builds_64\ReleaseOK.txt](\\archive\11Builds_64\ReleaseOK.txt)  - note the build number.  
+[\\archive\11Builds_64\ReleaseOK.txt](\\archive\11Builds_64\ReleaseOK.txt)  - note the build number.  
 
-	See notes above to run a GetBuild on a specific build number.  
+See notes above to run a GetBuild on a specific build number.  
 
 **Step 2**: Set your Star Team label to match the ArcGIS Pro build number from above.  
 
-	Go to View --> Select Configuration.  
+Go to View --> Select Configuration.  
 
 **Step 3**: Check out all “Missing” and “Out Of Date” files for all appropriate folders.  Be sure to check the All Descendants button first.  Use “Check Out…” on the Status: Missing (xxx items) or Status: Out of Date (xx items) groups.
 
-	Basic rules:  
+Basic rules:  
 
-	* Be cautious to check out “modified” files from a labeled configuration because you may undo your changes.  
-	* Never check out “out of date” files from the “current” configuration because the files may not have been compiled.  
-	* Anything that is marked “Not in View” is something that got removed. You will need to manually remove that file from your local folder structure.  
+* Be cautious to check out “modified” files from a labeled configuration because you may undo your changes.  
+* Never check out “out of date” files from the “current” configuration because the files may not have been compiled.  
+* Anything that is marked “Not in View” is something that got removed. You will need to manually remove that file from your local folder structure.  
 
 To avoid these conflicts, it is best not to increment GetBuild by just a single build after changes were installed.  You want to make sure your changes have been installed into the source code.
 
@@ -138,7 +138,7 @@ To avoid these conflicts, it is best not to increment GetBuild by just a single 
 **Step 7**: Open the Configuration Manager (from the pull-down arrow next to Release in the graphic above) and make sure you 1) set the Active solution platform = x64 and 2) you are only building the solution for the managed code, not the native code.  In the example below, there is only a checked checkbox for ArcGISDesktop.Layouts.
 
  
-	Rule – you will make changes to the solution, but never check it into StarTeam, only check in .cs files.
+Rule – you will make changes to the solution, but never check it into StarTeam, only check in .cs files.
 
 **Step 8**: __KNOW WHAT *.CS FILES TO EDIT!__  Talk to your developer. For the Layout team, these files are located under API\Models:
 
@@ -164,7 +164,7 @@ To avoid these conflicts, it is best not to increment GetBuild by just a single 
 
 **Step 17**: If the contents are OK, right-click on your modified items and select __Check In__
  
-	Again, only check in .cs files.
+Again, only check in .cs files.
 
 **Step 18**:  Associate CR with Check In and add comments.
 	 
