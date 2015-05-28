@@ -327,7 +327,7 @@ Corresponding help as seen through the Intellisense in Visual Studio:
 
  
 
-####For Methods with parameters:
+#####For Methods with parameters:
 
 To specify parameters that are types in Pro, please use “cref”. Examples:
 
@@ -341,13 +341,13 @@ To specify parameters that are types in Pro, please use “cref”. Examples:
 	{
 ```
 
-####For Methods with Optional\default parameters
+#####For Methods with Optional\default parameters
 
 To specify the default values for optional parameters in a method, use the following format:
 ```c#
 /// <param name="checkXYZSetting">(optional) Description goes here. (default value = false)</param>
 ```
-####Synchronous API Methods that must be called on a specific thread.
+#####Synchronous API Methods that must be called on a specific thread.
 
 It is common in the API for synchronous methods to throw an exception if they are called from the wrong thread. Thread affinity should be explicitly documented in the <summary></summary> section of the method header as follows:
 
@@ -373,7 +373,7 @@ It is common in the API for synchronous methods to throw an exception if they ar
 
 Be sure to add the <exception></exception> tags for the exceptions resulting from calling a synchronous method from the wrong thread.
 
-####For return types:
+#####For return types:
 
 If your method returns a type that is documented in the ArcGIS Pro API Guide (one of the Pro types such as a “Bookmark”), you have to create a “cref” for that object. This allows direct linking to that type.  If your method returns a string, an int or double, it is optional to create a “cref” to link it to msdn.
 
@@ -399,7 +399,7 @@ public int GetInt32()
 …
 ```
 
-####For return types of Task or Task <T>:
+#####For return types of Task or Task <T>:
 
 Per MSDN
 
@@ -494,11 +494,11 @@ Note: Copy edit and content review will be performed by the web documentation te
 In the API Reference guide generated, every Assembly has an Overview page where you can describe the Assembly and all the namespaces in it.  These descriptions cannot be made using triple slash comments in the source code. Follow the steps below to add Assembly and Namespace description to your assembly.
 
  
-####Assembly Description 
+#####Assembly Description 
 
 Currently, no Assembly description is needed.
 
-####Namespace Description
+#####Namespace Description
 
 **Step 1**: In the ArcGIS11-Gold view of StarTeam, browse to SharedArcGIS\SDK\NamespaceDescription folder.  In this location, there are folders that match each assembly name. Browse into the folder of your assembly.  For example:   SharedArcGIS\SDK\AssemblyDescription\ArcGIS.Desktop.Mapping.
 
@@ -524,7 +524,7 @@ There are instances of public or protected scoped classes or members that we wan
 
 To exclude a type and/or member from the generated API Reference or to suppress the XML compiler warnings use the following comment: ///<exclude></exclude>
 
-####Shared Internals
+#####Shared Internals
 
 “Internal” ArcGIS Pro managed code that is __scoped public__ (to enable access by other internal ESRI teams) __but__ is for internal ESRI use is referred to as “Shared Internals”. Shared Internal code is declared within an “Internal” namespace that follows the naming convention “ArcGIS.Desktop.Internal.XXXX”. 
 
@@ -556,7 +556,7 @@ namespace ArcGIS.Desktop.Internal.NotSupportedNamespace {
 }
 ```
 
-###Protected Members in a Public Sealed class
+#####Protected Members in a Public Sealed class
 
 Normally, protected members MUST be triple-slashed. However, in the case of a protected method in a public class that has been marked as “sealed”, protected members must be excluded. They are not visible in the public API.
 
