@@ -174,7 +174,33 @@ Again, only check in .cs files.
 
 You do NOT need to comment any internal classes or methods. For details on how to format and structure comments consult the Appendix and Reference sections of this document.
 
+###For Classes, Structs, and Delegates :
 
+Add a summary and remarks xml code comment element. The summary is a single line. The remarks can be multiple lines using <para></para> tags for additional structuring of content. Begin the summary sentence with a verb. 
+
+For example: “Opens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc.”
+
+```
+/// <summary>
+/// Represents a spatial bookmark which identifies a specific geographic location in 
+/// the map
+/// </summary>
+/// <remarks>
+/// <para>Bookmarks can be spatial (2D or 3D) or temporal. If your map is time-enabled, 
+/// bookmarks can be created for a specific point in time. Bookmarks in an ArcGIS
+/// Pro project are associated and managed with the map they were created. Bookmarks 
+/// are transferable, so you can re-use bookmarks between multiple maps and scenes
+/// in your project, as well as with or without temporal information.</para>
+/// <para>The map's collection of bookmarks can be returned using the 
+/// <b>GetMapBoomarks</b> method on the 
+/// <see cref="ArcGIS.Desktop.Mapping.BookmarksManager" /> class.
+/// <see cref="ArcGIS.Desktop.Mapping.BookmarksManager"/> also provides several static 
+/// methods that take a Bookmark as a parameter to either set the location of the map 
+/// or manage the bookmarks for the map. For example <b>ZoomToBookmarkAsync</b> can be 
+/// used to zoom the active map to the location of the bookmark.</para>
+/// </remarks>
+
+```
 
 
 
