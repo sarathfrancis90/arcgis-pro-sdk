@@ -87,9 +87,9 @@ If there is no value between the quotes (just two double quotes), then the curre
 
 Similar to the steps above, you are going to create additional Working folders.  But this time, before checking out the files, you will make sure that the source code files are synchronized (i.e., same build) with the build of ArcGIS Pro you currently have installed.  
 
-Step 1. If necessary, open Star Team to the ArcGIS11-Gold view.  
+**Step 1**: If necessary, open Star Team to the ArcGIS11-Gold view.  
 
-Step 2. **Go to View--> Select Configuration… ** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
+**Step 2**. **Go to View--> Select Configuration…** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
 
 
 
