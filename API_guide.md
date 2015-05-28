@@ -89,7 +89,90 @@ Similar to the steps above, you are going to create additional Working folders. 
 
 **Step 1**: If necessary, open Star Team to the ArcGIS11-Gold view.  
 
-**Step 2**. **Go to View--> Select Configuration…** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
+**Step 2**: **Go to View--> Select Configuration…** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
+
+The status bar in the lower left-hand corner should update with the appropriate label.  
+	 
+**Step 3**: Create a working folders for:  
+
+ArcGIS\ArcGISDesktop\ServiceContracts – everyone needs this  
+
+ArcGIS\ArcGISDesktop\ArcGISXXXX *  -  team specific folder(s)  
+
+Create a working folder for your respective ArcGIS\ArcGISDesktop\ArcGISXXXX content (e.g. ArcGISLayout, ArcGISMapping, ArcGISCatalog, etc.), depending on which sub-folder pertains to your content.  
+
+**Step 4**: Again, for each folder above make sure the file tab is active, then highlight that folder (in the TOC), then click the All Descendants button to display the StarTeam files. Finally right-click Status: Missing (xxx items) and select Check Out All and click OK.  
+
+**Note**: you don’t need to set the label since you’ve already configured it in Star Team.  I.e., the Current revision will use the label you set.  Setting the label (to the same one) won’t hurt either.  
+
+
+##Quick Reference Guide
+ 
+**Step 1**: Run GetBuildRelease.bat from C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts  
+
+	[\\archive\11Builds_64\ReleaseOK.txt](\\archive\11Builds_64\ReleaseOK.txt)  - note the build number.  
+
+	See notes above to run a GetBuild on a specific build number.  
+
+**Step 2**: Set your Star Team label to match the ArcGIS Pro build number from above.  
+
+	Go to View --> Select Configuration.  
+
+**Step 3**: Check out all “Missing” and “Out Of Date” files for all appropriate folders.  Be sure to check the All Descendants button first.  Use “Check Out…” on the Status: Missing (xxx items) or Status: Out of Date (xx items) groups.
+
+	Basic rules:  
+
+	* Be cautious to check out “modified” files from a labeled configuration because you may undo your changes.  
+	* Never check out “out of date” files from the “current” configuration because the files may not have been compiled.  
+	* Anything that is marked “Not in View” is something that got removed. You will need to manually remove that file from your local folder structure.  
+
+To avoid these conflicts, it is best not to increment GetBuild by just a single build after changes were installed.  You want to make sure your changes have been installed into the source code.
+
+**Step 4**: Click **F5** to refresh each folder to make sure files are not missing or out of date.  
+
+**Step 5**: In File Explorer, double-click the solution file in the sub-folder you checked out. For example: ArcGISLayout.sln.  
+
+ 
+**Step 6**: If you open the solution, make sure the solutions configuration is set to Release.  
+	 
+**Step 7**: Open the Configuration Manager (from the pull-down arrow next to Release in the graphic above) and make sure you 1) set the Active solution platform = x64 and 2) you are only building the solution for the managed code, not the native code.  In the example below, there is only a checked checkbox for ArcGISDesktop.Layouts.
+
+ 
+	Rule – you will make changes to the solution, but never check it into StarTeam, only check in .cs files.
+
+**Step 8**: __KNOW WHAT *.CS FILES TO EDIT!__  Talk to your developer. For the Layout team, these files are located under API\Models:
+
+	 
+**Step 9**: Edit your “\\\” documentation.  __Suggested workflow__ - the Layout team API developer, stubs out the Triple Slash comments in all the appropriate places.  This process makes it much easier for the PE to know exactly where they need to insert their documentation.
+
+	 
+**Step 10**: Correct typos and spelling using the Visual Studio spell checker extension.
+
+**Step 11**: Optionally, use the “Edit Documentation” Document! X Visual Studio extension to preview how your documentation will look on the output.
+
+**Step 12**: Save your solution.
+
+**Step 13**: Build your solution and verify there are no errors and close.
+
+**Step 14**: Reset your Label back to __Current Configuration__.  Go to View --> Select Configuration.  You must be in the current view to create CRs and check in changes.  You always check into the current release.
+
+**Step 15**: All source code changes must be associated with a CR.  __Create a CR__ for the Doc change (or use an existing CR). If it is a blanket CR for Doc changes that is fine. Assign yourself to the CR. 
+
+**Step 16**: Compare contents.  Right-click your modified item and select __Compare Contents__.  This allows your to verify the changes made.  If things don’t look right, work with your developer.  In the graphic below, you see the original on the left and the modified file on the right.  In this example, the Dev only stubbed out the ///summary, not the remarks.  The revised version made the correction and added “///” doc.
+
+ 
+
+**Step 17**: If the contents are OK, right-click on your modified items and select __Check In__
+ 
+	Again, only check in .cs files.
+
+**Step 18**:  Associate CR with Check In and add comments.
+	 
+**Step 19**: Hope you did not break the build!!!
+
+**Step 20**: Begin documenting your code comments. You must comment all public and protected types in the managed code only. You must comment all public and protected members on public and protected types (to include statics) with the following exception: protected members on public sealed classes should be __excluded__ from the API documentation. Refer to the section __Excluding types and members from the API Reference__ for more information.
+
+You do NOT need to comment any internal classes or methods. For details on how to format and structure comments consult the Appendix and Reference sections of this document.
 
 
 
