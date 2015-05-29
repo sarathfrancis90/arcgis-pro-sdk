@@ -1536,7 +1536,7 @@ Code examples can be included without referencing external content by copy-pasti
       
 You must always escape the < and > characters when embedded within \<code> sections. Because Document! X uses the %...% syntax for shortcut links i.e. %Class.Member%, the literal '%' characters must also be escaped with a '/' (like so: /%) to show a percent sign in output documentation. 
 
-CDATA sections can be used in the <code> tag to escape special characters (like '%'  or ‘\<’). A CDATA section will leave HTML type refs unchanged. For example &lt; and &gt; within a CDATA section will remain as "&lt;" and "&gt;" rather than < and >.
+CDATA sections can be used in the \<code> tag to escape special characters (like '%'  or ‘\<’). A CDATA section will leave HTML type refs unchanged. For example &lt; and &gt; within a CDATA section will remain as "&lt;" and "&gt;" rather than < and >.
 
 In this example, a CDATA section is used to prevent the '%' signs used in the SQL Query Clause from being interpreted as a class href:
 
@@ -1551,7 +1551,7 @@ You can include code examples inside the <remarks> section but they will __not__
  
 ###XML and DAML Code Examples
 
-__XAML__ and __DAML__ files can be added using the same techniques for DotNet source code. Either reference an external source code file (whether it be .xml, .xaml, etc.) or copy-paste xml or daml into the <code></code> block directly (and then escape all the ‘<’ and ‘>’ characters). Change the language attribute to lang="XAML" to get the correct colorization and syntax.
+__XAML__ and __DAML__ files can be added using the same techniques for DotNet source code. Either reference an external source code file (whether it be .xml, .xaml, etc.) or copy-paste xml or daml into the \<code\>\</code\> block directly (and then escape all the ‘<’ and ‘>’ characters). Change the language attribute to lang="XAML" to get the correct colorization and syntax.
 
 ```C#
 ///<code title="Example Config.xml (DAML)" source=" ArcGISDesktop\SDK\Examples\Config.xml" lang="XAML"></code>
@@ -1586,7 +1586,7 @@ Here is an example of XAML copied and pasted within the <code></code> tags. Note
  
    ####4. Links to Web Content
 
-Links to external web content such as other online documentation pages or reference web sites uses an HTML 1.0 <a></a> “anchor” tag. The anchor tag has an “href” attribute that contains the URI to the linked resource. URIs should be “http” or “https” only. 
+Links to external web content such as other online documentation pages or reference web sites uses an HTML 1.0 \<a\>\</a\> “anchor” tag. The anchor tag has an “href” attribute that contains the URI to the linked resource. URIs should be “http” or “https” only. 
 
 ```C#
     ///<big><b><u>Other Resources</u></b></big>
@@ -1608,10 +1608,17 @@ Refer to the _Documentation Team Guide_ for help on writing guidelines.  If you 
 Quick links to some useful topics in this guide are:
 
    [Topic Titles](http://docresources.esri.com/docguide/#/Topic_titles/01170000006q000000/)
+
    [Writing and punctuation tips](http://docresources.esri.com/docguide/#/Writing_and_punctuation_tips/01170000004p000000/)
+
    [Punctuation Rules](http://docresources.esri.com/docguide/#/Punctuation_rules/01170000002s000000/)
+
    [Tips for writing steps](http://docresources.esri.com/docguide/#/Tips_for_writing_steps/011700000047000000/)
+
    [Sentence clarity rules](http://docresources.esri.com/docguide/#/Sentence_clarity_rules/01170000006r000000/)
+
    [Using Numbers](http://docresources.esri.com/docguide/#/Using_numbers/01170000001m000000/)
+
    [Bullet and number lists](http://docresources.esri.com/docguide/#/Bullet_and_number_lists/01170000002q000000/)
+
    [Capitalization rules](http://docresources.esri.com/docguide/#/Capitalization_rules/011700000060000000/)
