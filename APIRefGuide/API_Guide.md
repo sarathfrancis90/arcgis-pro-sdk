@@ -652,6 +652,81 @@ If this is a public class but it is not sealed - the protected members are comme
 Note: For details on how to suppress the XML compiler warnings for undocumented public and protected types without having to tag each occurrence with an “<exclude>” tag please refer to __Suppressing Compiler Warnings for XML Comments.__
 
 
+##API Documentation Reference
+
+###Overview of the Documentation Generation Process
+
+Reference API documentation is generated from source code comment headers written by the SDK Leads or Developers. The Microsoft C# compiler supports including XML elements in special comment fields (marked by triple slashes - '///') directly before a code block to which the comments refer. For example: 
+
+```C#
+ ///<summary>Performs an important function
+ ///</summary>
+ public class MyClass{}
+```             
+
+The C# compiler (via the __/doc__ option set on the .csproj Build property page) will search for all XML tags in the source code of a .csproj and create an XML documentation file for that assembly.
+
+ 
+
+By default it has a naming convention of AssemblyName.__XML__ (e.g. ArcGIS.Desktop.Framework.XML). The compiler generated XML documentation file is used by Visual Studio to generate Intellisense for all documented types within the assembly to which the XML documentation file refers. It can also be used by 3rd party content generation tools to create pretty-printed HTML documentation (for web sites, .chm files, IDE help, etc.) For ArcGIS Professional, we use a 3rd part content generation tool called __Document! X__ (from Innovasys). It actually makes two separate passes on the ProApp assemblies to create the API documentation: 
+
+   * A pass to generate HTML for web deployment
+
+   * A pass to generate XHTML compliant content which is incorporated into Visual Studio 2010+ “.mshc” formatted help content. (Note: To be determined if we support .mshc format for Pro App)
+
+###What Must Be Commented?
+
+Only public and protected scoped managed code in the managed CSharp projects (.csproj) need be commented. Shared internal code must be commented with a standard header for Internal namespaces, shared internal classes, and shared internal interfaces (see Appendix for the standard headers to use). Comments do NOT need to be added to any __native__ C++ code. The code comments from the following assemblies are currently included in the Reference API:
+
+From C:\Program Files\Esri\ArcGIS Professional\bin 
+   * ArcGIS.Core.dll 
+   * ArcGIS.Core.Data.dll (placeholder for the Geodatabase fine-grained API) 
+   * ArcGIS.Desktop.Framework.dll 
+   * ArcGISPro.exe
+
+From C:\Program Files\Esri\ArcGIS Professional\bin\Extensions\... 
+
+   * ArcGIS.Desktop.Analyst3D.dll 
+   * ArcGIS.Desktop.Catalog.dll 
+   * ArcGIS.Desktop.Core.dll 
+   * ArcGIS.Desktop.DataSourcesRaster.dll 
+   * ArcGIS.Desktop.Editing.dll 
+   * ArcGIS.Desktop.GeoProcessing.dll 
+   * ArcGIS.Desktop.Geostatistics.dll 
+   * ArcGIS.Desktop.Layouts.dll 
+   * ArcGIS.Desktop.Mapping.dll 
+   * ArcGIS.Desktop.NetworkAnalysis.Facility.dll 
+   * ArcGIS.Desktop.NetworkAnalysis.Transportation.dll 
+   * ArcGIS.Desktop.Schematics.dll
+   * ArcGIS.Desktop.Search.dll
+   * ArcGIS.Desktop.Sharing.dll
+   * ArcGIS.Desktop.TaskAssistant.dll
+
+Within these assemblies, the following types and members in the managed API must be commented:
+
+   1. All __public__ and __protected__ types to include:
+      * Classes
+      * Structs
+      * Interfaces
+      * Delegates
+      * Enums
+
+Note: refer to the __Excluding Types and Members from the API Reference__ section for excluding shared internal members and protected members in public sealed classes.
+
+   2. All public and protected members (within those public and protected types) to include:
+      * Fields and Values (for enums)
+      * Properties
+      * Constructors
+      * Methods
+      * Events
+
+   3. All shared internal members with a standard header (in Appendix) to include:
+      * Internal namespace declaration
+      * Classes
+      * Interfaces
+      * Use <exclude></exclude> for all public and protected members
+
+In order of priority, public class declarations __are to be commented first__. Public interface declarations second, public struct declarations third and enum declarations fourth. Members should be commented after all the type declarations are complete. In some cases, you, the author, may not know the purpose of a particular member and may need to consult with the DEV (and perhaps have them comment it).
 
 
 
