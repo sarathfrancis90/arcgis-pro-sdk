@@ -666,7 +666,7 @@ Reference API documentation is generated from source code comment headers writte
 
 The C# compiler (via the __/doc__ option set on the .csproj Build property page) will search for all XML tags in the source code of a .csproj and create an XML documentation file for that assembly.
 
- 
+![Output.png](../images/APIRefGuide/Output.png "API Documentation reference -  Output Image") 
 
 By default it has a naming convention of AssemblyName.__XML__ (e.g. ArcGIS.Desktop.Framework.XML). The compiler generated XML documentation file is used by Visual Studio to generate Intellisense for all documented types within the assembly to which the XML documentation file refers. It can also be used by 3rd party content generation tools to create pretty-printed HTML documentation (for web sites, .chm files, IDE help, etc.) For ArcGIS Professional, we use a 3rd part content generation tool called __Document! X__ (from Innovasys). It actually makes two separate passes on the ProApp assemblies to create the API documentation: 
 
@@ -740,7 +740,9 @@ The following compiler warnings are currently checked in the build.
 
 1570,1572,1573,1574,1584,1587,1591
 
-Refer to [SDK Gallery](http://sdkgallery) and the link  __“API Reference Build Warnings”__ to check your respective XML compiler warnings from the build:
+Refer to [SDK Gallery](http://sdkgallery) and the link  [__“API Reference Build Warnings__”](http://testbuild:82/XMLWarnings.php?) to check your respective XML compiler warnings from the build:
+
+![SDKGallery.png](../images/APIRefGuide/SDKGallery.png "API Documentation reference -  SDK Gallery") 
  
 The intention is that SDK Leads and other authors will make a complete pass over all their respective source code areas adding comments to the required types and members to remove all compiler warnings.
  
@@ -793,7 +795,7 @@ Each Assembly in the ArcGIS Professional Reference API is added as a top level n
 
 Here is a screenshot of the Table of Contents structure in a .chm that Document! X generates from source code comments (generated for the DocumentXExample project available for download on github). The structure of the online version will be the same (though styled differently).
 
- 
+![Document_Example_Assembly.png](../images/APIRefGuide/Document_Example_Assembly.png "API Documentation reference -  Document Example Assembly") 
 
 In the Table of Contents will be an Overview page (hand authored) and a “Namespaces” parent folder. Within the “Namespaces” folder are child folders, one per Namespace. 
 
@@ -805,13 +807,14 @@ The Classes folder hierarchy is described below. The Structures, Interfaces, Enu
 
 Within the Classes folder is the following content:
 
- 
+![Example.png](../images/APIRefGuide/Example.png "API Documentation reference -  DocumentX Example Assembly Example class") 
+
 
 ####Overview Page
 
 The Overview page is created from the type declaration comments. Whatever XML code comments the author adds to the comment block for the type declaration are output into each type’s Overview page. 
 
- 
+![Code_comment_Examples.png](../images/APIRefGuide/Code_comment_Examples.png "API Documentation reference -  Overview page") 
 
 An overview page is always generated (whether there are comments on the class declaration or not). For example, this code comment block generates this Overview page:
 
@@ -824,7 +827,7 @@ An overview page is always generated (whether there are comments on the class de
     public class ExampleClass {
 ```
 
-
+![Example_Class_class.png](../images/APIRefGuide/Example_Class_class.png "API Documentation reference -  Example Class code") 
  
 Document! X adds the syntax section along with the Inheritance Hierarchy, Requirements, and See Also sections. These sections it generates from reflection on the assembly along with parsing the assembly “.XML” file.
 
@@ -833,23 +836,23 @@ Document! X adds the syntax section along with the Inheritance Hierarchy, Requir
 
 The members page is automatically generated from the list of public and protected members associated with the class. 
 
+![Members_page.png](../images/APIRefGuide/Members_page.png "API Documentation reference -  Members Page") 
 
- 
 The summary statement of each member is used as the basic description of each member on the Members page.
 
-
+![Example Class members.png](../images/APIRefGuide/Example_Class_members.png "API Documentation reference - Example class Members Page") 
 
 ####Constructors Page
 
 This page lists the public constructors and their summary descriptions
+
+![Constructors.png](../images/APIRefGuide/Constructors.png "API Documentation reference -Constructors Page") 
  
-
-
 ###Methods, Fields, Properties, and Events
 
 Each public or protected member results in a separate page being generated under the relevant parent sub-folder. The format of an individual member page generally follows the format of the parent Overview page. 
  
-
+![Methods_Fields.png](../images/APIRefGuide/Methods_Fields.png "API Documentation reference - Methods, Fields, Properties") 
 
 A member page has a summary description, a syntax section showing usage, parameter descriptions, and return value (if appropriate). A remarks section is added if there are remarks for the individual member and an example section if code examples were added. How to include code examples is also shown in the following sections as well as in the Appendix.
 
@@ -869,21 +872,21 @@ You must complete the following steps prior to documenting (refer to the Quick G
 
 Within the \ArcGIS\ArcGISDesktop hierarchy, navigate to the location of your respective solution file that contains the managed code you will be commenting. Double-click on the “.sln” solution file to open it. Make sure the Solution Explorer pane is displayed within Visual Studio. If you do not have a side pane (like ArcGIS Pro Dock Panes) entitled "Solution Explorer" then go to the View->Solution Explorer menu option (or Ctrl+W, S key combination) to display it.
 
-
+![Solution_Explorer.png](../images/APIRefGuide/Solution_Explorer.png "API Documentation reference - Solution Explorer") 
  
 ###**Step 2:** Identify All Public and Protected Types in the Managed Code
 
 Within each source file, comment the public types and their members. Within the scope (i.e. __public class MyClass__ {...}) of a containing public type, do a top to bottom search for the keywords public or protected decorating any of its members. The simplest way to do this may be to do a "Find In Files" (Ctrl+Shift+F) over the managed csharp project content (ignore the native service C++ project if there is one).
 
-
+![FindInFiles.png](../images/APIRefGuide/FindInFiles.png "API Documentation reference - Find in Files") 
 
 In the Find In Files dialog type in the Find what: parameter "public class" and variants thereof (public abstract class, public static class,...) and enter "Current Project" for the Look in: parameter then press "Find All" (repeat for Interface, Struct, Enum). 
 
-
+![ArcGIS_Destop.core.png](../images/APIRefGuide/ArcGIS_Destop.core.png "API Documentation reference - ArcGIS Desktop Core")
 
 The Find Results window will list all found occurrences. Double click each entry in the Find Results window to jump to the relevant source file.
 
-
+![Find_resultsWindow.png](../images/APIRefGuide/Find_resultsWindow.png "API Documentation reference - Find Results")
  
 Change the “Find What:” parameter on the Find In Files dialog and repeat the search as needed (e.g. using public partial class, public static class, public enum, etc.).
 
@@ -944,7 +947,7 @@ The following remarks section uses bold, italics, and underlines. , The para tag
 ```
 This results in a Remarks that looks like:
 
- 
+![Remarks.png](../images/APIRefGuide/Remarks.png "API Documentation reference - Remarks") 
 
 Particular care has to be taken when adding in reserved characters to your comment text like "<" and ">". The reserved characters cannot be used and an HTML type reference such as &lt; or &gt; must be used instead (refer to __Character Type Reference Chart__ for a list of type references). See the Appendix for more details.
 
@@ -952,11 +955,11 @@ Particular care has to be taken when adding in reserved characters to your comme
 
 If you have Document! X installed, you can use the Document! X Visual Studio extension to edit code comments. Right Click on the source file being editing and select “Edit Documentation”. Document! X will open a documentation window showing the HTML output page it will generate for your comments. Any edits you make on this page (e.g. to the summary or remarks) will be automatically copied back to the XML code comments.
 
-
+![Edit_documentation.png](../images/APIRefGuide/Edit_documentation.png "API Documentation reference - BookmarkCS") 
  
 This opens the Document! X documentation view in Visual Studio.
 
-
+![Bookmark.png](../images/APIRefGuide/Bookmark.png "API Documentation reference - Bookmarks") 
  
 You can refer to this video from Innovasys for more information: 
 
@@ -976,7 +979,9 @@ Add a summary to each field or enum value:
         /// </summary>
         public string _aField = "";
 ```
- 
+
+![Public_Fields](../images/APIRefGuide/Public _fields.png "API Documentation reference - Public Fields") 
+
 An example of an enum. Start the summary with “Specifies…”.
 
 ```C#
@@ -1000,7 +1005,7 @@ public enum ExampleEnum {
 
 If you take the time to document each enum, Document! X will generate a nice table of all the Enum values along with their corresponding description from the summaries.
 
- 
+![ExampleEnum_Enumeration.png](../images/APIRefGuide/ExampleEnum_Enumeration.png "API Documentation reference - Emum values")  
 
 ####Properties
 
@@ -1037,7 +1042,7 @@ Additionally if the constructor or method:
 
 Note: for generic params or return types (e.g. Func<T>), describe T.
 
- 
+![Amethod method.png](../images/APIRefGuide/Amethod method.png "API Documentation reference - AMethod method")  
 
 ####For return types of Task or Task <T>:
 
@@ -1074,9 +1079,9 @@ This is because “<” and “>” are xml reserved characters and can cause problems w
 
 Similar to Properties and Fields, add a summary.  Events are listed in their own table at the bottom of the list of members on the class “Members” page. __Begin Event summaries with “Occurs when…”.__
 
- 
+![Property_Changed.png](../images/APIRefGuide/Property_Changed.png "API Documentation reference - Events")  
 
-
+![Public_Events.png](../images/APIRefGuide/Public_Events.png "API Documentation reference - Public Events")  
 
 ####Protected Methods in Public Sealed Classes
 
@@ -1093,15 +1098,16 @@ public sealed class APIBaseClass {
 
 ###**Step 5:** Review your Edits
 
-Use the Visual Studio spell check extension to check your comments. Correct any spelling errors. Note: typos are underlined in the comments like so: 
+Use the Visual Studio spell check extension to check your comments. Correct any spelling errors. Note: typos are underlined in the comments like so: ![Bookmark_spelling.png](../images/APIRefGuide/Bookmark_spelling.png "API Documentation reference - Bookmark Spelling")  
 
 Hover over the typo to show the spell check assistant. Click on the assistant to show options.
 
-
+![Bookmarks.png](../images/APIRefGuide/Bookmarks.png "API Documentation reference - Bookmarks")
  
 You can also run the spell checker from the Visual Studio Tools menu.
  
 
+![Spell_Checker.png](../images/APIRefGuide/Spell_Checker.png "API Documentation reference - VS Spell checker")
 
 Use the “Edit Documentation” Document! X Visual Studio extension to preview how your documentation will look on the output and to make changes to page content. You may also use the Edit Documentation view as a WYSIWYG editor to update summary and remarks comments.
 
@@ -1274,6 +1280,7 @@ A numbered list is formatted as follows:
 Results in a table that looks like this:
 
 
+![Result_table.png](../images/APIRefGuide/Result_table.png "API Documentation reference -Result Table")
 
 ###Shared Internals
 
@@ -1401,6 +1408,7 @@ Source code example files that will be used as examples have to be added to your
 Here, for example, is the subfolder for the Core.Geometry API reference code examples and the source code example file “GeometryCodeExamples.cs”  has been added to StarTeam.
 
 
+![GeometryCodeExamples.png](../images/APIRefGuide/GeometryCodeExamples.png "API Documentation reference -Geometry Code Excamples")
  
 Links to code files located within your respective StarTeam Example subfolder are added using a <example>__<code></code>__</example> tag. 
 
@@ -1580,7 +1588,8 @@ Here is an example of XAML copied and pasted within the \<code\>\</code\> tags. 
  ///&lt;/Window&gt;
  /// </code>
 ///</example>
-```
+
+![Xaml.png](../images/APIRefGuide/Xaml.png "API Documentation reference -XAML Code")
 
 ####4. Links to Web Content
 
