@@ -1554,7 +1554,7 @@ In this example, a CDATA section is used to prevent the '%' signs used in the SQ
 ///</code>
 ```
 
-You can include code examples inside the <remarks> section but they will __not__ be colorized and will require manual formatting using HTML line breaks, “<br/>”, or a <pre>...</pre> tag pair.
+You can include code examples inside the <remarks> section but they will __not__ be colorized and will require manual formatting using HTML line breaks, “\<br/\>”, or a \<pre\>...\</pre\> tag pair.
 
  
 ###XML and DAML Code Examples
