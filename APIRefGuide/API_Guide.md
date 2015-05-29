@@ -1,4 +1,4 @@
-##ArcGIS XI DotNet API Documentation Guide
+#ArcGIS XI DotNet API Documentation Guide
 The guide is split into three parts:
 * A Quick Reference Guide
 * Setting up for check in/out of Star Team
