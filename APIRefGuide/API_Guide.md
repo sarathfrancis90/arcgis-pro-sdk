@@ -1557,7 +1557,7 @@ __XAML__ and __DAML__ files can be added using the same techniques for DotNet so
 ///<code title="Example Config.xml (DAML)" source=" ArcGISDesktop\SDK\Examples\Config.xml" lang="XAML"></code>
 ```
 
-Here is an example of XAML copied and pasted within the <code></code> tags. Note how the ‘<’ and ‘>’ characters have been replaced by their HTML entity reference equivalents (‘&lt;’ and ‘&gt;’).
+Here is an example of XAML copied and pasted within the \<code\>\</code\> tags. Note how the ‘<’ and ‘>’ characters have been replaced by their HTML entity reference equivalents (‘&lt;’ and ‘&gt;’).
 ```C#
 ///<example>
 /// <para>Example XAML</para>
@@ -1582,9 +1582,7 @@ Here is an example of XAML copied and pasted within the <code></code> tags. Note
 ///</example>
 ```
 
-
- 
-   ####4. Links to Web Content
+####4. Links to Web Content
 
 Links to external web content such as other online documentation pages or reference web sites uses an HTML 1.0 \<a\>\</a\> “anchor” tag. The anchor tag has an “href” attribute that contains the URI to the linked resource. URIs should be “http” or “https” only. 
 
@@ -1607,18 +1605,11 @@ Refer to the _Documentation Team Guide_ for help on writing guidelines.  If you 
 
 Quick links to some useful topics in this guide are:
 
-   [Topic Titles](http://docresources.esri.com/docguide/#/Topic_titles/01170000006q000000/)
-
-   [Writing and punctuation tips](http://docresources.esri.com/docguide/#/Writing_and_punctuation_tips/01170000004p000000/)
-
-   [Punctuation Rules](http://docresources.esri.com/docguide/#/Punctuation_rules/01170000002s000000/)
-
-   [Tips for writing steps](http://docresources.esri.com/docguide/#/Tips_for_writing_steps/011700000047000000/)
-
-   [Sentence clarity rules](http://docresources.esri.com/docguide/#/Sentence_clarity_rules/01170000006r000000/)
-
-   [Using Numbers](http://docresources.esri.com/docguide/#/Using_numbers/01170000001m000000/)
-
-   [Bullet and number lists](http://docresources.esri.com/docguide/#/Bullet_and_number_lists/01170000002q000000/)
-
-   [Capitalization rules](http://docresources.esri.com/docguide/#/Capitalization_rules/011700000060000000/)
+   [Topic Titles](http://docresources.esri.com/docguide/#/Topic_titles/01170000006q000000/)  
+   [Writing and punctuation tips](http://docresources.esri.com/docguide/#/Writing_and_punctuation_tips/01170000004p000000/)  
+   [Punctuation Rules](http://docresources.esri.com/docguide/#/Punctuation_rules/01170000002s000000/)  
+   [Tips for writing steps](http://docresources.esri.com/docguide/#/Tips_for_writing_steps/011700000047000000/)  
+   [Sentence clarity rules](http://docresources.esri.com/docguide/#/Sentence_clarity_rules/01170000006r000000/)  
+   [Using Numbers](http://docresources.esri.com/docguide/#/Using_numbers/01170000001m000000/)  
+   [Bullet and number lists](http://docresources.esri.com/docguide/#/Bullet_and_number_lists/01170000002q000000/)  
+   [Capitalization rules](http://docresources.esri.com/docguide/#/Capitalization_rules/011700000060000000/)  
