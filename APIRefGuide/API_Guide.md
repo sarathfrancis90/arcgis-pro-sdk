@@ -44,8 +44,7 @@ You will only install Pro manually from a .MSI file once.  All subsequent update
 	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
 
 
-![Destination_folder.png](../images/APIRefGuide/Destination_folder.png "ArcGIS installation destination folder")
-
+![Destination_folder.png](../images/APIRefGuide/Destination_folder.png "ArcGIS installation - destination folder")
 
 
 ###Run GetBuildRelease.bat
@@ -60,12 +59,17 @@ Next you will build a folder structure on your local drive (within C:\ArcGIS) to
 
 **Step 2**:  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the **SharedArcGIS** folder and select “Create Working Folders”.  
 
+![Create_working_folders.png](../images/APIRefGuide/Create_working_folders.png "Run GetBuildRelease - Create working folders")
 
-**Step 3**: In Star Team, make sure the file tab is active, then highlight the SharedArcGIS folder (in the TOC), then click the All Descendants button to display the StarTeam files. Your screen should look similar to the graphic below.  
+**Step 3**: In Star Team, make sure the file tab is active, then highlight the SharedArcGIS folder (in the TOC), then click the All Descendants button to display the StarTeam files. Your screen should look similar to the graphic below. 
+
+![Mark_all descendants.png](../images/APIRefGuide/Mark_all descendants.png "Run GetBuildRelease - Mark All Descendants") 
 
 There are over 16K file that will be downloaded.  Many of the files in this shared folder are needed so you can complile your modified solutions.  There is also an SDK subfolder that will provide examples and code snippets.  
 
 **Step 4**: Right-click Status: Missing (xxx items) and select **Check Out All …,** select Current revision and click OK.  
+
+![Check_out_all.png](../images/APIRefGuide/Check_out_all.png "Run GetBuildRelease - Check out All") 
 
 This can take a while but it is a one time check-out.  
 
@@ -73,12 +77,15 @@ This can take a while but it is a one time check-out.
 
 **Step 6**: When finished, you will be prompted to press enter to close the CMD.
 
+![Close_CMD.png](../images/APIRefGuide/Close_CMD.png "Run GetBuildRelease - Close CMD") 
 
 **IMPORTANT NOTE (Running GetBuild for a specific build):**  
 
 This may not happen often, but sometimes you don't want to move to the currently available build of Pro (because there could be known issues with it, you may want to roll back to another build for testing, etc).  For these cases, there is a file you can edit that allows you to control exactly which build of the software gets installed locally when you run GetBuildRelease.bat.  
 
-To do this – Open the C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts\GetBuildScript.ps1 file in NotePad and modify the second line to include the build number between the two double quotes.  
+To do this – Open the C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts\__GetBuildScript.ps1__ file in NotePad and modify the second line to include the build number between the two double quotes.  
+
+![Get_build_Script.png](../images/APIRefGuide/Get_build_Script.png "Run GetBuildRelease - Get Build Script")
 
 If there is no value between the quotes (just two double quotes), then the current release is installed when GetBuildRelease is executed.  
 
@@ -91,7 +98,11 @@ Similar to the steps above, you are going to create additional Working folders. 
 
 **Step 2**: **Go to View--> Select Configuration…** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
 
+![View_Configuration.png](../images/APIRefGuide/View_Configuration.png "Check Out Source Code - View Configuration")
+
 The status bar in the lower left-hand corner should update with the appropriate label.  
+
+![Label.png](../images/APIRefGuide/Label.png "Check Out Source Code - Label")
 	 
 **Step 3**: Create a working folders for:  
 
@@ -132,19 +143,25 @@ To avoid these conflicts, it is best not to increment GetBuild by just a single 
 
 **Step 5**: In File Explorer, double-click the solution file in the sub-folder you checked out. For example: ArcGISLayout.sln.  
 
+![ArcGIS_Layout.png](../images/APIRefGuide/ArcGIS_Layout.png "Quick Reference Guide - ArcGISLayout")
  
 **Step 6**: If you open the solution, make sure the solutions configuration is set to Release.  
+
+![Release.png](../images/APIRefGuide/Release.png "Quick Reference Guide - Release")
 	 
 **Step 7**: Open the Configuration Manager (from the pull-down arrow next to Release in the graphic above) and make sure you 1) set the Active solution platform = x64 and 2) you are only building the solution for the managed code, not the native code.  In the example below, there is only a checked checkbox for ArcGISDesktop.Layouts.
 
+![ArcGIS_Desktop_layouts.png](../images/APIRefGuide/ArcGIS_Desktop_layouts.png "Quick Reference Guide -  ArcGIS Desktop Layouts")
  
 Rule – you will make changes to the solution, but never check it into StarTeam, only check in .cs files.
 
 **Step 8**: __KNOW WHAT *.CS FILES TO EDIT!__  Talk to your developer. For the Layout team, these files are located under API\Models:
 
+![CS_files.png](../images/APIRefGuide/CS_files.png "Quick Reference Guide CS files to edit")
 	 
 **Step 9**: Edit your “\\\” documentation.  __Suggested workflow__ - the Layout team API developer, stubs out the Triple Slash comments in all the appropriate places.  This process makes it much easier for the PE to know exactly where they need to insert their documentation.
 
+![Layout_Models_Code.png](../images/APIRefGuide/Layout_Models_Code.png "Quick Reference Guide - layout Models code")
 	 
 **Step 10**: Correct typos and spelling using the Visual Studio spell checker extension.
 
@@ -160,13 +177,17 @@ Rule – you will make changes to the solution, but never check it into StarTeam, 
 
 **Step 16**: Compare contents.  Right-click your modified item and select __Compare Contents__.  This allows your to verify the changes made.  If things don’t look right, work with your developer.  In the graphic below, you see the original on the left and the modified file on the right.  In this example, the Dev only stubbed out the ///summary, not the remarks.  The revised version made the correction and added “///” doc.
 
- 
+![Compare_Contents.png](../images/APIRefGuide/Compare_Contents.png "Quick Reference Guide Compare Contents") 
 
 **Step 17**: If the contents are OK, right-click on your modified items and select __Check In__
+
+![Check_in.png](../images/APIRefGuide/Check_in.png "Quick Reference Guide - Check In") 
  
 Again, only check in .cs files.
 
 **Step 18**:  Associate CR with Check In and add comments.
+
+![Comments.png](../images/APIRefGuide/Comments.png "Quick Reference Guide -  Add Comments") 
 	 
 **Step 19**: Hope you did not break the build!!!
 
@@ -272,6 +293,7 @@ Use the <value> tag to create a “Property Value” section underneath your propert
         }
 ```
 
+![Type_System.Int32.png](../images/APIRefGuide/Type_System.Int32.png "Quick Reference Guide -  Property value") 
 
 ###For Events:
 
@@ -325,7 +347,7 @@ Add a summary. Begin the summary with a verb. For example: Opens the, Creates th
 
 Corresponding help as seen through the Intellisense in Visual Studio:
 
- 
+![VS_Help.png](../images/APIRefGuide/VS_Help.png "Quick Reference Guide -  Visual Studio Help")  
 
 ####For Methods with parameters:
 
@@ -471,15 +493,21 @@ Add a summary. Describe the purpose of the value.
 
 Save your changes.
 
-**Step 7**: Correct typos and spelling using the Visual Studio spell checker extension. Spelling mistakes will be underlined.                                  Hover over the typo to show the spell check assistant. Click on the assistant to show options.
+**Step 7**: Correct typos and spelling using the Visual Studio spell checker extension. Spelling mistakes will be underlined.![Bookmark_spelling.png](../images/APIRefGuide/Bookmark_spelling.png "Quick Reference Guide -  Bookmarks Spelling")Hover over the typo to show the spell check assistant. Click on the assistant to show options.
 
+![Bookmarks.png](../images/APIRefGuide/Bookmarks.png "Quick Reference Guide -  Bookmarks")
  
 You can also run the spell checker from the Visual Studio Tools menu.
 
+![Spell_Checker.png](../images/APIRefGuide/Spell_Checker.png "Quick Reference Guide -  Spell Checker")
  
 Use the “Edit Documentation” Document! X Visual Studio extension to preview how your documentation will look on the output. Select the source file in the Solution Explorer, right click and select “Edit Documentation” from the context menu. A Documentation view of the source file will open in the Visual Studio. __You can also use the Edit Documentation view to add and update comment content__ if you prefer the WYSIWYG style of editing.
 
+![Edit_documentation.png](../images/APIRefGuide/Edit_documentation.png "Quick Reference Guide -  Edit Documentation")
+
 Opens the Document! X documentation view in Visual Studio.
+
+![BookMark_class.png](../images/APIRefGuide/BookMark_class.png "Quick Reference Guide -  Bookmark Class")
  
 **Step 8**: Build the .csproj. Ensure it builds correctly. Note: XML Comment warnings are currently suppressed.
 
@@ -493,6 +521,7 @@ Note: Copy edit and content review will be performed by the web documentation te
 
 In the API Reference guide generated, every Assembly has an Overview page where you can describe the Assembly and all the namespaces in it.  These descriptions cannot be made using triple slash comments in the source code. Follow the steps below to add Assembly and Namespace description to your assembly.
 
+![Namespace_Description.png](../images/APIRefGuide/Namespace_Description.png "Quick Reference Guide -  Namespace description")
  
 ####Assembly Description 
 
