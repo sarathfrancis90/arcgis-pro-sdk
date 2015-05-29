@@ -14,22 +14,22 @@ The purpose of this guide is to provide you, the author, with step by step instr
 ##Prerequisites
 
 You will need the following software installed to author Reference API content:
-* Either Visual Studio 2012 and Visual Studio Update 4 (or the latest update if it has since rev‚Äôd since this document was written). Note: the version of Visual Studio should always exactly match the version of the solution (.sln) files used for the __ArcGIS Professional code base__ (not the version used for the SDK or samples). This version will change over time.
+* Either Visual Studio 2012 and Visual Studio Update 4 (or the latest update if it has since revíd since this document was written). Note: the version of Visual Studio should always exactly match the version of the solution (.sln) files used for the __ArcGIS Professional code base__ (not the version used for the SDK or samples). This version will change over time.
 * [Visual Studio Spell Checker extension](http://visualstudiogallery.msdn.microsoft.com/7c8341f1-ebac-40c8-92c2-476db8d523ce)
 * <a href = "\\esri.com\Software\Desktop\DesktopA-L\Innovasys\DocumentX\2013">Document! X for Innovasys.</a>. This requires a license. You must request this software through your Manager
-* [Star Team ‚Äì the install document](http://devinfo/sites/DeveloperCentral/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2fsites%2fDeveloperCentral%2fShared%20Documents%2fStarTeam%20Documents&View=%7b4652831D%2d65B5%2d47FC%2d9D7D%2d4388EC6DFC2A%7d)
+* [Star Team ñ the install document](http://devinfo/sites/DeveloperCentral/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2fsites%2fDeveloperCentral%2fShared%20Documents%2fStarTeam%20Documents&View=%7b4652831D%2d65B5%2d47FC%2d9D7D%2d4388EC6DFC2A%7d)
 
 Additionally, you may choose to download the [CSharp code comment examples](https://devtopia.esri.com/ArcGISPro-SDK/win-net-documentation) on devtopia. It is a Visual Studio solution containing various csharp source files each illustrating different formatting and structuring techniques for code comments.
 
 ##Setting up for check in/out of Star Team
-In order to successfully update Triple Slash ‚Äú\\\‚Äù changes to source code, PE‚Äôs need to understand a few things about the development process like:
+In order to successfully update Triple Slash ì\\\î changes to source code, PEís need to understand a few things about the development process like:
 * Installing and then updating ArcGIS Pro using GetBuild batch files,
 * Pulling source code from StarTeam and checking it back in,
 * Keeping source code synchronized with Pro build numbers.
 Note to Product Engineers: 
-* Triple Slash ‚Äú\\\‚Äù documentation requires that you read and write source code files from StarTeam.  This means that you need the appropriate StarTeam permissions.  
+* Triple Slash ì\\\î documentation requires that you read and write source code files from StarTeam.  This means that you need the appropriate StarTeam permissions.  
 * It is recommended that you have direct access to a machine in Redlands (it can be via remote desktop) because you will be running GetBuild  batch scripts that update your ArcGIS Pro build with current files.  If you are updating a remote machine, it could take a very long time.
-* It is also recommended that you uninstall ArcMap from the machine that is being used to update ‚Äú\\\‚Äù doc.  It may not affect the ‚Äú\\\‚Äù process but it does have some negative affect on the registry for some developers.
+* It is also recommended that you uninstall ArcMap from the machine that is being used to update ì\\\î doc.  It may not affect the ì\\\î process but it does have some negative affect on the registry for some developers.
 The following steps assume you do NOT have ArcGIS Pro installed on your machine and there is NOT a folder called **C:\ArcGIS already on your local machine**.
 
 ###Install ArcGIS Pro
@@ -44,7 +44,7 @@ You will only install Pro manually from a .MSI file once.  All subsequent update
 	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
 
 
-[ArcGIS Pro Setup Destination folder](images/APIRefGuide/Pro_setup_dest_folder.png)
+![Pro_setup_dest_folder.png](../images/APIRefGuide/Pro_setup_dest_folder.png "ArcGIS installation destination folder")
 
 
 
@@ -58,14 +58,14 @@ First, you need to download the batch files from Star Team onto your local drive
 
 Next you will build a folder structure on your local drive (within C:\ArcGIS) to store Star Team GetBuild batch files.  
 
-**Step 2**:  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the **SharedArcGIS** folder and select ‚ÄúCreate Working Folders‚Äù.  
+**Step 2**:  Find the ArcGIS\SharedArcGIS folder in StarTeam. Right-click the **SharedArcGIS** folder and select ìCreate Working Foldersî.  
 
 
 **Step 3**: In Star Team, make sure the file tab is active, then highlight the SharedArcGIS folder (in the TOC), then click the All Descendants button to display the StarTeam files. Your screen should look similar to the graphic below.  
 
 There are over 16K file that will be downloaded.  Many of the files in this shared folder are needed so you can complile your modified solutions.  There is also an SDK subfolder that will provide examples and code snippets.  
 
-**Step 4**: Right-click Status: Missing (xxx items) and select **Check Out All ‚Ä¶,** select Current revision and click OK.  
+**Step 4**: Right-click Status: Missing (xxx items) and select **Check Out All Ö,** select Current revision and click OK.  
 
 This can take a while but it is a one time check-out.  
 
@@ -78,7 +78,7 @@ This can take a while but it is a one time check-out.
 
 This may not happen often, but sometimes you don't want to move to the currently available build of Pro (because there could be known issues with it, you may want to roll back to another build for testing, etc).  For these cases, there is a file you can edit that allows you to control exactly which build of the software gets installed locally when you run GetBuildRelease.bat.  
 
-To do this ‚Äì Open the C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts\GetBuildScript.ps1 file in NotePad and modify the second line to include the build number between the two double quotes.  
+To do this ñ Open the C:\ArcGIS\SharedArcGIS\Build\GetBuildScripts\GetBuildScript.ps1 file in NotePad and modify the second line to include the build number between the two double quotes.  
 
 If there is no value between the quotes (just two double quotes), then the current release is installed when GetBuildRelease is executed.  
 
@@ -89,13 +89,13 @@ Similar to the steps above, you are going to create additional Working folders. 
 
 **Step 1**: If necessary, open Star Team to the ArcGIS11-Gold view.  
 
-**Step 2**: **Go to View--> Select Configuration‚Ä¶** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
+**Step 2**: **Go to View--> Select ConfigurationÖ** then check the Labeled configuration / build number that matches your ArcGIS Pro install build number.  In the example below, the local install is for build 2971.  
 
 The status bar in the lower left-hand corner should update with the appropriate label.  
 	 
 **Step 3**: Create a working folders for:  
 
-ArcGIS\ArcGISDesktop\ServiceContracts ‚Äì everyone needs this  
+ArcGIS\ArcGISDesktop\ServiceContracts ñ everyone needs this  
 
 ArcGIS\ArcGISDesktop\ArcGISXXXX *  -  team specific folder(s)  
 
@@ -103,7 +103,7 @@ Create a working folder for your respective ArcGIS\ArcGISDesktop\ArcGISXXXX cont
 
 **Step 4**: Again, for each folder above make sure the file tab is active, then highlight that folder (in the TOC), then click the All Descendants button to display the StarTeam files. Finally right-click Status: Missing (xxx items) and select Check Out All and click OK.  
 
-**Note**: you don‚Äôt need to set the label since you‚Äôve already configured it in Star Team.  I.e., the Current revision will use the label you set.  Setting the label (to the same one) won‚Äôt hurt either.  
+**Note**: you donít need to set the label since youíve already configured it in Star Team.  I.e., the Current revision will use the label you set.  Setting the label (to the same one) wonít hurt either.  
 
 
 ##Quick Reference Guide
@@ -118,13 +118,13 @@ See notes above to run a GetBuild on a specific build number.
 
 Go to View --> Select Configuration.  
 
-**Step 3**: Check out all ‚ÄúMissing‚Äù and ‚ÄúOut Of Date‚Äù files for all appropriate folders.  Be sure to check the All Descendants button first.  Use ‚ÄúCheck Out‚Ä¶‚Äù on the Status: Missing (xxx items) or Status: Out of Date (xx items) groups.
+**Step 3**: Check out all ìMissingî and ìOut Of Dateî files for all appropriate folders.  Be sure to check the All Descendants button first.  Use ìCheck OutÖî on the Status: Missing (xxx items) or Status: Out of Date (xx items) groups.
 
 Basic rules:  
 
-* Be cautious to check out ‚Äúmodified‚Äù files from a labeled configuration because you may undo your changes.  
-* Never check out ‚Äúout of date‚Äù files from the ‚Äúcurrent‚Äù configuration because the files may not have been compiled.  
-* Anything that is marked ‚ÄúNot in View‚Äù is something that got removed. You will need to manually remove that file from your local folder structure.  
+* Be cautious to check out ìmodifiedî files from a labeled configuration because you may undo your changes.  
+* Never check out ìout of dateî files from the ìcurrentî configuration because the files may not have been compiled.  
+* Anything that is marked ìNot in Viewî is something that got removed. You will need to manually remove that file from your local folder structure.  
 
 To avoid these conflicts, it is best not to increment GetBuild by just a single build after changes were installed.  You want to make sure your changes have been installed into the source code.
 
@@ -138,17 +138,17 @@ To avoid these conflicts, it is best not to increment GetBuild by just a single 
 **Step 7**: Open the Configuration Manager (from the pull-down arrow next to Release in the graphic above) and make sure you 1) set the Active solution platform = x64 and 2) you are only building the solution for the managed code, not the native code.  In the example below, there is only a checked checkbox for ArcGISDesktop.Layouts.
 
  
-Rule ‚Äì you will make changes to the solution, but never check it into StarTeam, only check in .cs files.
+Rule ñ you will make changes to the solution, but never check it into StarTeam, only check in .cs files.
 
 **Step 8**: __KNOW WHAT *.CS FILES TO EDIT!__  Talk to your developer. For the Layout team, these files are located under API\Models:
 
 	 
-**Step 9**: Edit your ‚Äú\\\‚Äù documentation.  __Suggested workflow__ - the Layout team API developer, stubs out the Triple Slash comments in all the appropriate places.  This process makes it much easier for the PE to know exactly where they need to insert their documentation.
+**Step 9**: Edit your ì\\\î documentation.  __Suggested workflow__ - the Layout team API developer, stubs out the Triple Slash comments in all the appropriate places.  This process makes it much easier for the PE to know exactly where they need to insert their documentation.
 
 	 
 **Step 10**: Correct typos and spelling using the Visual Studio spell checker extension.
 
-**Step 11**: Optionally, use the ‚ÄúEdit Documentation‚Äù Document! X Visual Studio extension to preview how your documentation will look on the output.
+**Step 11**: Optionally, use the ìEdit Documentationî Document! X Visual Studio extension to preview how your documentation will look on the output.
 
 **Step 12**: Save your solution.
 
@@ -158,7 +158,7 @@ Rule ‚Äì you will make changes to the solution, but never check it into StarTeam
 
 **Step 15**: All source code changes must be associated with a CR.  __Create a CR__ for the Doc change (or use an existing CR). If it is a blanket CR for Doc changes that is fine. Assign yourself to the CR. 
 
-**Step 16**: Compare contents.  Right-click your modified item and select __Compare Contents__.  This allows your to verify the changes made.  If things don‚Äôt look right, work with your developer.  In the graphic below, you see the original on the left and the modified file on the right.  In this example, the Dev only stubbed out the ///summary, not the remarks.  The revised version made the correction and added ‚Äú///‚Äù doc.
+**Step 16**: Compare contents.  Right-click your modified item and select __Compare Contents__.  This allows your to verify the changes made.  If things donít look right, work with your developer.  In the graphic below, you see the original on the left and the modified file on the right.  In this example, the Dev only stubbed out the ///summary, not the remarks.  The revised version made the correction and added ì///î doc.
 
  
 
@@ -179,7 +179,7 @@ You do NOT need to comment any internal classes or methods. For details on how t
 
 Add a summary and remarks xml code comment element. The summary is a single line. The remarks can be multiple lines using <para></para> tags for additional structuring of content. Begin the summary sentence with a verb. 
 
-For example: ‚ÄúOpens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc.‚Äù
+For example: ìOpens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc.î
 
 ```c#
 /// <summary>
@@ -223,7 +223,7 @@ public interface IDisplayTable
 
 ###For Enums:
 
-Add a summary. Begin the summary with the phrase __"Specifies‚Ä¶‚Äù__
+Add a summary. Begin the summary with the phrase __"SpecifiesÖî__
 
 ```c#
    /// <summary>
@@ -240,7 +240,7 @@ Fields should __not__ be in the public API with the exception of public const (i
 
 ###For Properties:
 
-Add a summary. If the Property is a __‚Äúgetter‚Äù__, start the summary with the phrase ‚ÄúGets the‚Ä¶‚Äù or ‚ÄúGets if the‚Ä¶‚Äù. If the Property is a __‚Äúsetter‚Äù__, start the summary with the phrase ‚ÄúSets the‚Ä¶‚Äù or ‚ÄúSets if the‚Ä¶‚Äù. If the Property is both a __‚Äúgetter‚Äù__ and __‚Äúsetter‚Äù__, start the summary with the phrase ‚ÄúGets or sets the‚Ä¶‚Äù or ‚ÄúGets and sets if the‚Ä¶‚Äù.
+Add a summary. If the Property is a __ìgetterî__, start the summary with the phrase ìGets theÖî or ìGets if theÖî. If the Property is a __ìsetterî__, start the summary with the phrase ìSets theÖî or ìSets if theÖî. If the Property is both a __ìgetterî__ and __ìsetterî__, start the summary with the phrase ìGets or sets theÖî or ìGets and sets if theÖî.
 
 ```c#
 /// <summary>
@@ -253,7 +253,7 @@ public string Name
     }
 ```
 
-Use the <value> tag to create a ‚ÄúProperty Value‚Äù section underneath your property ‚Äúsignature‚Äù on the output topic page.  
+Use the <value> tag to create a ìProperty Valueî section underneath your property ìsignatureî on the output topic page.  
 
 ```c#
 /// <summary>
@@ -275,9 +275,9 @@ Use the <value> tag to create a ‚ÄúProperty Value‚Äù section underneath your pro
 
 ###For Events:
 
-Add a summary. Begin the summary with the phrase ‚ÄúOccurs when‚Ä¶‚Äù. 
+Add a summary. Begin the summary with the phrase ìOccurs whenÖî. 
 
-If an event is a CompositePresentationEvent, add a summary that begins with ‚ÄúOccurs when‚Ä¶‚Äù and document the event class methods using the guidance for Methods and Constructors.
+If an event is a CompositePresentationEvent, add a summary that begins with ìOccurs whenÖî and document the event class methods using the guidance for Methods and Constructors.
 
 ```c#
 /// <summary>
@@ -287,27 +287,27 @@ If an event is a CompositePresentationEvent, add a summary that begins with ‚ÄúO
     /// <summary>
     /// Subscribe to the FooEvent.
     /// </summary>
-///<returns><see cref=‚ÄùArcGIS.Core.Events.SubscriptionToken‚Äù/></returns>
-    public static SubscriptionToken Subscribe(‚Ä¶) {}
+///<returns><see cref=îArcGIS.Core.Events.SubscriptionTokenî/></returns>
+    public static SubscriptionToken Subscribe(Ö) {}
 
     /// <summary>
     /// Unsubscribe from the FooEvent
     /// </summary>
-    public static void Unsubscribe(‚Ä¶) { }
+    public static void Unsubscribe(Ö) { }
 
     /// <exclude></exclude>
-    protected override void OnSubscribe(‚Ä¶) { }
+    protected override void OnSubscribe(Ö) { }
 
 /// <exclude></exclude>
-   protected override void OnUnsubscribe(‚Ä¶) { }
+   protected override void OnUnsubscribe(Ö) { }
   }
 ```
 
-Note that the OnSubscribe and OnUnsubscribe methods are protected within a __public sealed__ class and so are __excluded__ from the public API reference with an ‚Äú<exclude></exclude>‚Äù comment. Refer to the section __Excluding Types and Members from the API Reference__ section for details.
+Note that the OnSubscribe and OnUnsubscribe methods are protected within a __public sealed__ class and so are __excluded__ from the public API reference with an ì<exclude></exclude>î comment. Refer to the section __Excluding Types and Members from the API Reference__ section for details.
 
 ###For Methods and Constructors:
 
-Add a summary. Begin the summary with a verb. For example: Opens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc. Add a remarks as necessary (at the author‚Äôs discretion). Document all parameters and the return value. Document all exceptions that can be thrown by the method using an <exception></exception> tag for each. Add a remarks as necessary (at the author‚Äôs discretion). 
+Add a summary. Begin the summary with a verb. For example: Opens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc. Add a remarks as necessary (at the authorís discretion). Document all parameters and the return value. Document all exceptions that can be thrown by the method using an <exception></exception> tag for each. Add a remarks as necessary (at the authorís discretion). 
 
 ```c#
 /// <summary>
@@ -327,9 +327,9 @@ Corresponding help as seen through the Intellisense in Visual Studio:
 
  
 
-#####For Methods with parameters:
+####For Methods with parameters:
 
-To specify parameters that are types in Pro, please use ‚Äúcref‚Äù. Examples:
+To specify parameters that are types in Pro, please use ìcrefî. Examples:
 
 ```c#
 /// <summary>
@@ -341,17 +341,17 @@ To specify parameters that are types in Pro, please use ‚Äúcref‚Äù. Examples:
 	{
 ```
 
-#####For Methods with Optional\default parameters
+####For Methods with Optional\default parameters
 
 To specify the default values for optional parameters in a method, use the following format:
 ```c#
 /// <param name="checkXYZSetting">(optional) Description goes here. (default value = false)</param>
 ```
-#####Synchronous API Methods that must be called on a specific thread.
+####Synchronous API Methods that must be called on a specific thread.
 
 It is common in the API for synchronous methods to throw an exception if they are called from the wrong thread. Thread affinity should be explicitly documented in the <summary></summary> section of the method header as follows:
 
-	1. If a method needs to be called on the MCT (Main CIM Thread) add the following text to the summary ‚ÄúThis method must be called on the MCT. Use QueuedTask.Run‚Äù:
+	1. If a method needs to be called on the MCT (Main CIM Thread) add the following text to the summary ìThis method must be called on the MCT. Use QueuedTask.Runî:
 
 ``` c#
 /// <summary>
@@ -360,7 +360,7 @@ It is common in the API for synchronous methods to throw an exception if they ar
 /// </summary>
 ```
 
-	2. If a method needs to be called on the UI Thread add the following text to the summary ‚ÄúThis method must be called on the UI thread.‚Äù:
+	2. If a method needs to be called on the UI Thread add the following text to the summary ìThis method must be called on the UI thread.î:
 
 ```c#
 /// <summary>
@@ -373,33 +373,33 @@ It is common in the API for synchronous methods to throw an exception if they ar
 
 Be sure to add the <exception></exception> tags for the exceptions resulting from calling a synchronous method from the wrong thread.
 
-#####For return types:
+####For return types:
 
-If your method returns a type that is documented in the ArcGIS Pro API Guide (one of the Pro types such as a ‚ÄúBookmark‚Äù), you have to create a ‚Äúcref‚Äù for that object. This allows direct linking to that type.  If your method returns a string, an int or double, it is optional to create a ‚Äúcref‚Äù to link it to msdn.
+If your method returns a type that is documented in the ArcGIS Pro API Guide (one of the Pro types such as a ìBookmarkî), you have to create a ìcrefî for that object. This allows direct linking to that type.  If your method returns a string, an int or double, it is optional to create a ìcrefî to link it to msdn.
 
 A few examples:
 
 ```c#
 /// <returns><see cref="ArcGIS.Desktop.Layouts.Models.Element.CIMEelement"/></returns>
 public CIMElement GetCIMElement()
-‚Ä¶
+Ö
 
 /// <returns><see cref="ArcGIS.Desktop.Mapping.Bookmark"/></returns>
 public Bookmark GetMyBookmark()
-‚Ä¶
+Ö
 
 Optional:
 /// <returns><see cref="System.String"/></returns>
 public string MakeString()
-‚Ä¶
+Ö
 
 
 /// <returns><see cref="System.Int32"/></returns>
 public int GetInt32()
-‚Ä¶
+Ö
 ```
 
-#####For return types of Task or Task <T>:
+####For return types of Task or Task <T>:
 
 Per MSDN
 
@@ -422,7 +422,7 @@ If your method returns Task<T> use this return statement pattern: A Task returni
 public Task<ReadOnlyObservableCollection<Bookmark>> QueryBookmarks()
 ```
 
-Note: For generic return types that use <> (‚Äúless than ‚Äì greater than angle brackets‚Äù) consider using {} (‚Äúcurly brackets‚Äù) instead. For example: Instead of
+Note: For generic return types that use <> (ìless than ñ greater than angle bracketsî) consider using {} (ìcurly bracketsî) instead. For example: Instead of
 
 ```c#
 /// <returns>Task<IEnumerable<Geometry>></returns>
@@ -477,7 +477,7 @@ Save your changes.
 You can also run the spell checker from the Visual Studio Tools menu.
 
  
-Use the ‚ÄúEdit Documentation‚Äù Document! X Visual Studio extension to preview how your documentation will look on the output. Select the source file in the Solution Explorer, right click and select ‚ÄúEdit Documentation‚Äù from the context menu. A Documentation view of the source file will open in the Visual Studio. __You can also use the Edit Documentation view to add and update comment content__ if you prefer the WYSIWYG style of editing.
+Use the ìEdit Documentationî Document! X Visual Studio extension to preview how your documentation will look on the output. Select the source file in the Solution Explorer, right click and select ìEdit Documentationî from the context menu. A Documentation view of the source file will open in the Visual Studio. __You can also use the Edit Documentation view to add and update comment content__ if you prefer the WYSIWYG style of editing.
 
 Opens the Document! X documentation view in Visual Studio.
  
@@ -494,29 +494,29 @@ Note: Copy edit and content review will be performed by the web documentation te
 In the API Reference guide generated, every Assembly has an Overview page where you can describe the Assembly and all the namespaces in it.  These descriptions cannot be made using triple slash comments in the source code. Follow the steps below to add Assembly and Namespace description to your assembly.
 
  
-#####Assembly Description 
+####Assembly Description 
 
 Currently, no Assembly description is needed.
 
-#####Namespace Description
+####Namespace Description
 
 **Step 1**: In the ArcGIS11-Gold view of StarTeam, browse to SharedArcGIS\SDK\NamespaceDescription folder.  In this location, there are folders that match each assembly name. Browse into the folder of your assembly.  For example:   SharedArcGIS\SDK\AssemblyDescription\ArcGIS.Desktop.Mapping.
 
 **Step 2**: In your assembly folder, you will notice text files that correspond to each namespace in that assembly. Open these namespace text files and replace the TODO line with the namespace description. Use this format for describing the namespace:
 
 ```c#
-The <namespace-goes-here> contains ‚Ä¶‚Ä¶
-The <namespace-goes-here> provides ‚Ä¶‚Ä¶
-The <namespace-goes-here> supports ‚Ä¶‚Ä¶
+The <namespace-goes-here> contains ÖÖ
+The <namespace-goes-here> provides ÖÖ
+The <namespace-goes-here> supports ÖÖ
 ```
 
 For namespaces in your API that will become Internal (post Beta) please include the following namespace description in your namespace text file:
 
-‚ÄúThis namespace contains classes and configuration types that are reserved for esri internal use only‚Äù
+ìThis namespace contains classes and configuration types that are reserved for esri internal use onlyî
 
-__Note:__ If you do not find your assembly‚Äôs folder or a specific namespace in your assembly, please create the folder for the assembly and\or the text file for the namespace in the assembly.
+__Note:__ If you do not find your assemblyís folder or a specific namespace in your assembly, please create the folder for the assembly and\or the text file for the namespace in the assembly.
 
-**Step 3**: Create a Change Request in the SharedArcGIS\SDK of starteam and assign it to a SDK team member ‚Äì Uma Harano or Wolfgang Kaiser.
+**Step 3**: Create a Change Request in the SharedArcGIS\SDK of starteam and assign it to a SDK team member ñ Uma Harano or Wolfgang Kaiser.
 
 ###Excluding Types and Members from the API Reference
 
@@ -524,11 +524,11 @@ There are instances of public or protected scoped classes or members that we wan
 
 To exclude a type and/or member from the generated API Reference or to suppress the XML compiler warnings use the following comment: ///<exclude></exclude>
 
-#####Shared Internals
+####Shared Internals
 
-‚ÄúInternal‚Äù ArcGIS Pro managed code that is __scoped public__ (to enable access by other internal ESRI teams) __but__ is for internal ESRI use is referred to as ‚ÄúShared Internals‚Äù. Shared Internal code is declared within an ‚ÄúInternal‚Äù namespace that follows the naming convention ‚ÄúArcGIS.Desktop.Internal.XXXX‚Äù. 
+ìInternalî ArcGIS Pro managed code that is __scoped public__ (to enable access by other internal ESRI teams) __but__ is for internal ESRI use is referred to as ìShared Internalsî. Shared Internal code is declared within an ìInternalî namespace that follows the naming convention ìArcGIS.Desktop.Internal.XXXXî. 
 
-Shared internals use a standard triple-slash class (or interface) header (refer to the __Appendix, Shared Internals__ section and the __Step by Step Guide, Step 6__, for more details). In the example below, the public and protected class members on the shared internal class have been tagged with an __‚Äú<exclude>‚Äù__ comment to suppress XML compiler warnings.
+Shared internals use a standard triple-slash class (or interface) header (refer to the __Appendix, Shared Internals__ section and the __Step by Step Guide, Step 6__, for more details). In the example below, the public and protected class members on the shared internal class have been tagged with an __ì<exclude>î__ comment to suppress XML compiler warnings.
 
 ```c#
 ///<summary>This namespace contains classes and 
@@ -556,9 +556,9 @@ namespace ArcGIS.Desktop.Internal.NotSupportedNamespace {
 }
 ```
 
-#####Protected Members in a Public Sealed class
+###Protected Members in a Public Sealed class
 
-Normally, protected members MUST be triple-slashed. However, in the case of a protected method in a public class that has been marked as ‚Äúsealed‚Äù, protected members must be excluded. They are not visible in the public API.
+Normally, protected members MUST be triple-slashed. However, in the case of a protected method in a public class that has been marked as ìsealedî, protected members must be excluded. They are not visible in the public API.
 
 To determine if you are dealing with a protected member in a public sealed class check the following:
 
@@ -569,7 +569,7 @@ public sealed class ExamplePublicSealedClass __Yes__
 public class ExamplePublicClass __No__
 ```
 
-If this is a public sealed class ‚Äì use an exclude comment on the protected members
+If this is a public sealed class ñ use an exclude comment on the protected members
 
 ```c#
 /// <summary>
@@ -620,7 +620,7 @@ If this is a public class but it is not sealed - the protected members are comme
     }
 ```
 
-Note: For details on how to suppress the XML compiler warnings for undocumented public and protected types without having to tag each occurrence with an ‚Äú<exclude>‚Äù tag please refer to __Suppressing Compiler Warnings for XML Comments.__
+Note: For details on how to suppress the XML compiler warnings for undocumented public and protected types without having to tag each occurrence with an ì<exclude>î tag please refer to __Suppressing Compiler Warnings for XML Comments.__
 
 
 
