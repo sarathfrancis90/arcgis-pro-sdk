@@ -1485,7 +1485,7 @@ It is a 5 step process:
 
    **Step 2:** Add an <example></example> tag directly underneath the <remarks></remarks> section within the triple-slash comment block. The example tag must be added after the remarks or it will not be shown.
 
-   **Step 3:** Add the <code></code> tag to the <example> section. Given a source code file names “example.cs”, use this path exactly within the code tag’s source attribute: <code title=”Title” source=”..\..\ArcGIS\SharedArcGIS\SDK\Examples\<sub-folder>\example.cs” lang=”CS”/>. As with images, there can be no deviation in this path component. It must be ”..\..\ArcGIS\ SharedArcGIS \SDK\Examples\<sub-folder>\” exactly whether the file location exists on your local harddrive or not.
+   **Step 3:** Add the **<code></code>** tag to the <example> section. Given a source code file names “example.cs”, use this path exactly within the code tag’s source attribute: **<code title=”Title” source=”..\..\ArcGIS\SharedArcGIS\SDK\Examples\<sub-folder>\example.cs” lang=”CS”/>**. As with images, there can be no deviation in this path component. It must be ”..\..\ArcGIS\ SharedArcGIS \SDK\Examples\<sub-folder>\” exactly whether the file location exists on your local harddrive or not.
 
    **Step 4:** Set the “lang” attribute to ensure proper colorization of the code. Values to use are:
 
