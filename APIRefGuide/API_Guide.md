@@ -1588,7 +1588,7 @@ Here is an example of XAML copied and pasted within the \<code\>\</code\> tags. 
  ///&lt;/Window&gt;
  /// </code>
 ///</example>
-
+```
 ![Xaml.png](../images/APIRefGuide/Xaml.png "API Documentation reference -XAML Code")
 
 ####4. Links to Web Content
