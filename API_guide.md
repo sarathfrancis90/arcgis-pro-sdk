@@ -44,7 +44,7 @@ You will only install Pro manually from a .MSI file once.  All subsequent update
 	Be sure to install into the C:\ArcGIS folder (NOT the default Program Files folder)
 
 
-
+[ArcGIS Pro Setup Destination folder](images/APIRefGuide/Pro_setup_dest_folder.png)
 
 
 
