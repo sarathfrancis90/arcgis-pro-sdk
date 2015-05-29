@@ -1091,7 +1091,7 @@ public sealed class APIBaseClass {
    protected void ProtectedMethod() {
 ```
 
-###**Step 5:*** Review your Edits
+###**Step 5:** Review your Edits
 
 Use the Visual Studio spell check extension to check your comments. Correct any spelling errors. Note: typos are underlined in the comments like so: 
 
@@ -1225,7 +1225,7 @@ The following HTML markup can be used to include (but not limited to):
    5. Use <para></para> tags to add paragraphs to the remarks text.
    6. __Headings.__ To place headings within your remarks use the following tag sequence:<big><b><u>__Heading__</u></b></big>.
       Follow the heading with a line break (<br/>) or empty paragraph (<para></para>) to force a new line.
-   7. HTML Entity Type references. All Entity type references are supported. Type references such as &lt; for < and &gt; for > are the most common. A complete list of type references can be found [here]: http://www.w3schools.com/tags/ref_types.asp
+   7. HTML Entity Type references. All Entity type references are supported. Type references such as &lt; for < and &gt; for > are the most common. A complete list of type references can be found [here]( http://www.w3schools.com/tags/ref_types.asp)
 
 ###Document Structure
 
