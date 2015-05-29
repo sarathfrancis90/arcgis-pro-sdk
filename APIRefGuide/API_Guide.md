@@ -1494,13 +1494,13 @@ It is a 5 step process:
       * Lang=”XML” for XML or DAML.
       * Lang=”XAML” for WPF XAML files
 
-A complete list of all possible values can be found here: _language attribute values._ Specifying a <code> tag without a language attribute will automatically assume C# which may not be correct. 
+A complete list of all possible values can be found here: _language attribute values.Specifying a \<code\> tag without a language attribute will automatically assume C# which may not be correct. 
 
    **Step 5:** Check in to Star Team the content file added to the __\ArcGIS\SharedArcGIS\SDK\Examples\<sub-folder>\__ folder.
 
-Note: You can __add multiple <code/> tags to an <example></example> section__ (but only __one__ example section to a comment block). Each code example that is added will show up as a tab on the example tab strip (added to the generated HTML documentation page). This is particularly important if you want to add a VB and a CS code example to the API Reference for your classes and methods.
+Note: You can add multiple \<code/\> tags to an \<example\>\</example\> section__ (but only __one__ example section to a comment block). Each code example that is added will show up as a tab on the example tab strip (added to the generated HTML documentation page). This is particularly important if you want to add a VB and a CS code example to the API Reference for your classes and methods.
 
-This is an example of multiple <code></code> tags added to the <example></example> section. They are all of different languages. Document! X will construct a tab string under the Example section to show each code example added.
+This is an example of multiple \<code\>\</code\> tags added to the \<example\>\</example\> section. They are all of different languages. Document! X will construct a tab string under the Example section to show each code example added.
 
 ```C#
 ///<example>
