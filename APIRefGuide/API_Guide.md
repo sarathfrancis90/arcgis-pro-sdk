@@ -1498,7 +1498,7 @@ A complete list of all possible values can be found here: _language attribute va
 
    **Step 5:** Check in to Star Team the content file added to the __\ArcGIS\SharedArcGIS\SDK\Examples\<sub-folder>\__ folder.
 
-Note: You can add multiple \<code/\> tags to an \<example\>\</example\> section__ (but only __one__ example section to a comment block). Each code example that is added will show up as a tab on the example tab strip (added to the generated HTML documentation page). This is particularly important if you want to add a VB and a CS code example to the API Reference for your classes and methods.
+Note: You can add multiple \<code> tags to an \<example\>\</example\> section__ (but only __one__ example section to a comment block). Each code example that is added will show up as a tab on the example tab strip (added to the generated HTML documentation page). This is particularly important if you want to add a VB and a CS code example to the API Reference for your classes and methods.
 
 This is an example of multiple \<code\>\</code\> tags added to the \<example\>\</example\> section. They are all of different languages. Document! X will construct a tab string under the Example section to show each code example added.
 
@@ -1513,7 +1513,7 @@ This is an example of multiple \<code\>\</code\> tags added to the \<example\>\<
 
 #####Inline Code Examples
 
-Code examples can be included without referencing external content by copy-pasting source code directly into the <code>...</code> block in. After pasting your code into the source comments, be sure to prefix each line with a triple-slash comment ('///') so the code is interpreted as a comment (and not as code) by the compiler. Add the lang attribute as before to ensure correct colorization.
+Code examples can be included without referencing external content by copy-pasting source code directly into the \<code\>...\</code\> block in. After pasting your code into the source comments, be sure to prefix each line with a triple-slash comment ('///') so the code is interpreted as a comment (and not as code) by the compiler. Add the lang attribute as before to ensure correct colorization.
 
 ```C#
  ///<example>
@@ -1534,9 +1534,9 @@ Code examples can be included without referencing external content by copy-pasti
  ///</example>
 ```
       
-You must always escape the < and > characters when embedded within <code> sections. Because Document! X uses the %...% syntax for shortcut links i.e. %Class.Member%, the literal '%' characters must also be escaped with a '/' (like so: /%) to show a percent sign in output documentation. 
+You must always escape the < and > characters when embedded within \<code> sections. Because Document! X uses the %...% syntax for shortcut links i.e. %Class.Member%, the literal '%' characters must also be escaped with a '/' (like so: /%) to show a percent sign in output documentation. 
 
-CDATA sections can be used in the <code> tag to escape special characters (like '%'  or ‘<’). A CDATA section will leave HTML type refs unchanged. For example &lt; and &gt; within a CDATA section will remain as "&lt;" and "&gt;" rather than < and >.
+CDATA sections can be used in the <code> tag to escape special characters (like '%'  or ‘\<’). A CDATA section will leave HTML type refs unchanged. For example &lt; and &gt; within a CDATA section will remain as "&lt;" and "&gt;" rather than < and >.
 
 In this example, a CDATA section is used to prevent the '%' signs used in the SQL Query Clause from being interpreted as a class href:
 
