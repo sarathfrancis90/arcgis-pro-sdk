@@ -740,7 +740,7 @@ The following compiler warnings are currently checked in the build.
 
 1570,1572,1573,1574,1584,1587,1591
 
-Refer to [SDK Gallery](http://sdkgallery)and the link  __“API Reference Build Warnings”__ to check your respective XML compiler warnings from the build:
+Refer to [SDK Gallery](http://sdkgallery) and the link  __“API Reference Build Warnings”__ to check your respective XML compiler warnings from the build:
  
 The intention is that SDK Leads and other authors will make a complete pass over all their respective source code areas adding comments to the required types and members to remove all compiler warnings.
  
@@ -787,7 +787,7 @@ namespace ArcGIS.Desktop.__Internal__.XXXXX
 ```
 This is the recommended approach for suppressing the compiler warnings for undocumented types and methods in Internal namespaces.
 
-###Overview of the Document! X Reference API Output Structure
+##Overview of the Document! X Reference API Output Structure
 
 Each Assembly in the ArcGIS Professional Reference API is added as a top level node to the online Reference API help, to the Visual Studio help, and .chm formatted help. Each Assembly will typically have one child node per namespace. 
 
@@ -853,4 +853,317 @@ Each public or protected member results in a separate page being generated under
 
 A member page has a summary description, a syntax section showing usage, parameter descriptions, and return value (if appropriate). A remarks section is added if there are remarks for the individual member and an example section if code examples were added. How to include code examples is also shown in the following sections as well as in the Appendix.
 
+
+##Step By Step Guide to Adding Comments to ArcGIS Professional Managed Source Code
+
+This process assumes you are using Visual Studio 2012 to do the code commenting (refer to the prerequisites section for the required software).
+
+You must complete the following steps prior to documenting (refer to the Quick Guide section):
+
+   * Open Star Team
+   * Create working folders for “ArcGIS\SharedArcGIS\SDK” (and sub-folders). Find folder SDK in StarTeam. Right-click and select “Create Working Folders”. Note: Ensure you have the folder mapped to the correct drive (e.g. C:\, D:\, etc.). Right-Click, select Properties and check the Working folder path.
+   * Checkout your respective ArcGIS\ArcGISDesktop\ArcGISxxxx (e.g. ArcGISMapping, ArcGISCatalog, etc.), depending on which sub-folder pertains to your content.
+   * Run GetBuildRelease script from SharedArcGIS\Build\GetBuildScripts (this ensures your build is in-sync with the code you just checked-out – assuming you checked out the latest configuration)
+
+###**Step1:** Open the Visual Studio Solution File for Your Respective Module
+
+Within the \ArcGIS\ArcGISDesktop hierarchy, navigate to the location of your respective solution file that contains the managed code you will be commenting. Double-click on the “.sln” solution file to open it. Make sure the Solution Explorer pane is displayed within Visual Studio. If you do not have a side pane (like ArcGIS Pro Dock Panes) entitled "Solution Explorer" then go to the View->Solution Explorer menu option (or Ctrl+W, S key combination) to display it.
+
+
+ 
+###**Step 2:** Identify All Public and Protected Types in the Managed Code
+
+Within each source file, comment the public types and their members. Within the scope (i.e. __public class MyClass__ {...}) of a containing public type, do a top to bottom search for the keywords public or protected decorating any of its members. The simplest way to do this may be to do a "Find In Files" (Ctrl+Shift+F) over the managed csharp project content (ignore the native service C++ project if there is one).
+
+
+
+In the Find In Files dialog type in the Find what: parameter "public class" and variants thereof (public abstract class, public static class,...) and enter "Current Project" for the Look in: parameter then press "Find All" (repeat for Interface, Struct, Enum). 
+
+
+
+The Find Results window will list all found occurrences. Double click each entry in the Find Results window to jump to the relevant source file.
+
+
+ 
+Change the “Find What:” parameter on the Find In Files dialog and repeat the search as needed (e.g. using public partial class, public static class, public enum, etc.).
+
+###**Step 3:** Add or Update the Type Comment Headers
+
+If a class, interface, struct, or enum declaration has __no__ header then add one by typing three successive forward-slash characters (i.e. "///"). Hit <Enter> after the last forward-slash. Visual Studio will automatically add an empty <summary> tag.  
+
+Next, add a <remarks> tag. Hit <Enter> after the </summary> tag to add a new comment line. Visual Stiudio will automatically add a new “///” comment. 
+
+```C#
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ExampleClass {
+```
+Update the <summary> tag with one or two lines describing the purpose of the type. __Begin the summary with a verb.__ For example: Opens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc.
+
+```C#
+    /// <summary>
+    /// Serves as an example class
+    /// </summary>
+    public class ExampleClass {
+```
+Type in the xml element “<remarks>”. Visual Studio will auto-complete the “<remarks>” tag with a closing “</remarks>” (Visual Studio automatically closes all XML comment tags inside a triple-slash code comment block). This is the basic triple-slash, “///”, type header
+
+```C#
+     /// <summary>
+    /// Serves an example class
+    /// </summary>
+    /// <remarks>
+    /// Remarks add more detailed information about the class
+    /// </remarks>
+    public class ExampleClass {
+
+```
+Update the <remarks></remarks> tag. Add content describing, in more detail, how the type should be used. You may also include example usage (note: the Appendix describes how to do more advanced content formatting and structuring as well as adding code examples into your “///” comments).
+
+Authors can also use basic HTML tagging to do formatting within the summary and remarks such as <b></b> for bold, <i></i> for italics, and so forth. That will suffice for most of the comment content. The Appendix has more advanced examples on how to make bullet lists, numbered lists, tables, links, bolded headings, code blocks and so forth. The <para></para> is the most useful tag for blocking out large remarks text into individual paragraphs. It is the preferred tag to use of the line break <br/> tag.
+
+The following remarks section uses bold, italics, and underlines. , The para tag is used to break the remarks section into 2 distinct paragraphs:
+
+```C#
+    /// <summary>
+    /// Serves as an example class
+    /// </summary>
+    /// <remarks>
+    /// Remarks add more detailed information about the class.
+    /// <para>
+    /// A new paragraph (&quot;&lt;para&gt;&quot;) starts here. This section of text 
+    /// is <b>bolded</b>. This section of text is <i>italicized</i>. This section of 
+    /// text is <u>underlined</u>
+    /// </para>
+    /// <para>
+    /// This is a second paragraph. It uses a &quot;&lt;para&gt;&quot; tag also
+    /// </para>
+    /// </remarks>
+    public class ExampleClass {
+```
+This results in a Remarks that looks like:
+
+ 
+
+Particular care has to be taken when adding in reserved characters to your comment text like "<" and ">". The reserved characters cannot be used and an HTML type reference such as &lt; or &gt; must be used instead (refer to __Character Type Reference Chart__ for a list of type references). See the Appendix for more details.
+
+###Using the Document! X Edit Documentation View
+
+If you have Document! X installed, you can use the Document! X Visual Studio extension to edit code comments. Right Click on the source file being editing and select “Edit Documentation”. Document! X will open a documentation window showing the HTML output page it will generate for your comments. Any edits you make on this page (e.g. to the summary or remarks) will be automatically copied back to the XML code comments.
+
+
+ 
+This opens the Document! X documentation view in Visual Studio.
+
+
+ 
+You can refer to this video from Innovasys for more information: 
+
+[![Video from Invensys](../images/APIRefGuide/Invensys_video.png](http://www.innovasys.com/movie/viewer/eb701a00-2eb1-4592-b35c-15cf2e5db88d)
+
+###**Step 4:** Add or Update the Public and Protected Members of Public and Protected Types
+
+Every public and protected member within a public or protected type should be commented. Basic examples of comment headers for each of the member types is shown.
+
+####Fields and Enums
+
+Add a summary to each field or enum value:
+
+```C#
+        /// <summary>
+        /// This is a field summary
+        /// </summary>
+        public string _aField = "";
+```
+ 
+An example of an enum. Start the summary with “Specifies…”.
+
+```C#
+/// <summary>
+/// Specifies an example of documentation for an Enum. Each member of the enum is.
+/// documented.</summary>
+/// <remarks>Remarks are probably not necessary for an enum</remarks>
+public enum ExampleEnum {
+        /// <summary>
+        /// Content is not associated with any <b>DockingManager</b> (Default State)
+        /// </summary>
+```
+        None,
+```C#
+        /// <summary>
+        /// Content is docked to a border of a <b>ResizingPanel</b> within a
+        /// <b>DockingManager</b> control
+        /// </summary>
+```
+        Docked,
+
+If you take the time to document each enum, Document! X will generate a nice table of all the Enum values along with their corresponding description from the summaries.
+
+ 
+
+####Properties
+
+Provide a summary tag for properties. If the Property is a __“getter”__, start the summary with the phrase _“Gets the…”_. If the Property is a __“setter”__, start the summary with the phrase “Sets the…”. If the Property is both a “getter” __and__ “setter”, start the summary with the phrase “Gets or Sets the…”.
+
+```C#
+/// <summary>
+        /// Gets or Sets the Name of the XXXX class
+        /// </summary>
+        public string Name { get; set; }
+```
+
+####Constructors and Methods
+
+Always provide a summary tag for methods and constructors. For methods, a remarks tag is also recommended. Start the summary with a verb. For example: Opens the, Creates the, Returns the, Responds to, Represents a, Provides access to, etc.
+
+Additionally if the constructor or method:
+
+   * Has parameters, add a <param></param> tag for each parameter.
+   * Returns a value other than void or Task, a <returns></returns> tag is required.
+   * Is a generic and takes a typedef parameter then add a <typeparam></typeparam> tag.
+
+```C#
+ /// <summary>
+        /// The method summary
+        /// </summary>
+        /// <remarks>The method remarks</remarks>
+        /// <param name="aParam">The parameter description</param>
+        /// <returns>A an empty string - for illustrative purposes only</returns>
+        public string AMethod(string aParam) {
+            return "";
+        }
+```
+
+Note: for generic params or return types (e.g. Func<T>), describe T.
+
+ 
+
+####For return types of Task or Task <T>:
+
+Per MSDN
+
+```C#
+/// <return>
+/// Type: System.Threading.Tasks.Task
+/// A Task that represents MoveBookmark.
+/// </return>
+public Task MoveBookmark(Bookmark bookmark, int newIndex)
+/// <return>
+/// Type: ReadOnlyObservableCollection<Bookmark>
+/// A Task returning a collection of bookmarks.
+/// </return>
+ 
+public Task<ReadOnlyObservableCollection<Bookmark>> QueryBookmarks()
+```
+
+Note: For generic return types that use <> (“less than – greater than angle brackets”) consider using {} (“curly brackets”) instead. For example: Instead of writing this
+
+```C#
+/// <returns>Task<IEnumerable<Geometry>></returns>
+```
+Consider writing this (note the use of {}’s)
+
+```C#
+/// <returns>Task{IEnumerable{Geometry}}</returns>
+```
+
+This is because “<” and “>” are xml reserved characters and can cause problems when included within the text of a triple-slash comment.
+
+####Events
+
+Similar to Properties and Fields, add a summary.  Events are listed in their own table at the bottom of the list of members on the class “Members” page. __Begin Event summaries with “Occurs when…”.__
+
+ 
+
+
+
+####Protected Methods in Public Sealed Classes
+
+Protected methods in public sealed classes are excluded from the API Reference (refer to __For Protected Methods__ and __Excluding Types and Members from the API Reference__ for more details):
+
+```C#
+/// <summary>
+/// Protected methods should be excluded in this class
+/// </summary>
+public sealed class APIBaseClass {
+      /// <exclude></exclude>
+   protected void ProtectedMethod() {
+```
+
+###**Step 5:*** Review your Edits
+
+Use the Visual Studio spell check extension to check your comments. Correct any spelling errors. Note: typos are underlined in the comments like so: 
+
+Hover over the typo to show the spell check assistant. Click on the assistant to show options.
+
+
+ 
+You can also run the spell checker from the Visual Studio Tools menu.
+ 
+
+
+Use the “Edit Documentation” Document! X Visual Studio extension to preview how your documentation will look on the output and to make changes to page content. You may also use the Edit Documentation view as a WYSIWYG editor to update summary and remarks comments.
+
+###**Step 6:** Document all shared internals
+
+For ArcGIS.Desktop.Internal… namespaces, add this comment above the namespace declaration:
+
+```C#
+///<summary>This namespace contains classes and 
+///configuration types that are <b>reserved</b> for esri internal use only
+///</summary>
+namespace ArcGIS.Desktop.Internal.XXXX {
+```
+
+For shared internal classes (within ArcGIS.Desktop.Internal… namespaces), add this comment above the class declaration:
+
+```C#
+/// <summary>This class is not for public use and is used internally by the system to 
+/// implement support for other esri modules
+/// </summary>
+public sealed partial class ASharedInternalClass {
+```
+
+For shared internal interfaces (within ArcGIS.Desktop.Internal… namespaces), add this comment above the interface declaration:
+
+```C#
+/// <summary>This interface is not for public use and is used internally by the system to 
+/// implement support for other esri modules
+/// </summary>
+public interface IInternalASharedInternalClass {
+```
+
+Exclude all public and protected members:
+
+```C#
+/// <summary>This class is not for public use and is used internally by the system to 
+    /// implement support for other esri modules</summary>
+    public class ExampleSharedInternalClassWithPublicScope {
+        /// <exclude></exclude>
+        public string Name { get; set; }
+        /// <exclude></exclude>
+        public string Description { get; set; }
+        /// <exclude></exclude>
+        public void DoFoo(string param1) {
+            
+        }
+
+        private void DoFooPrivate() {
+            //no need to "exclude" this - it is private
+        }
+    }
+```
+
+###**Step 7:** Save Your Edits, Compile, and Check In Changes to Star Team
+
+When you are satisfied with your edits, and have completed your review,, build the .csproj to check for errors and then check the changes in to Star Team. __This will include any images or other external content referenced in the comments__ (see the next section for specific instructions on using links to external content).
+
+Checked-in changes will be included in the next daily build (of the Reference API). To check the format and look and feel of newly added comments outside of the daily build schedule, authors can install their own copy Document! X to generate a local copy of the output documentation.
+
+To check in code comments use the following process:
+
+   * Build the .csproj. Ensure it builds correctly. Note: XML Comment warnings are currently suppressed.
+   * Create (or Open existing) a CR for the Doc change. If it is a blanket CR for Doc changes that is fine. Assign yourself to the CR. Check in your code comment changes
+   * Recommended: Assign another member of your team to the CR and ask them to perform a Doc review. Assign the CR to them as fixed, they can mark it as Verified Fixed if the changes look good otherwise, they can send the CR back to the SDK Lead to incorporate changes, install and repeat.
 
