@@ -960,7 +960,7 @@ This opens the Document! X documentation view in Visual Studio.
  
 You can refer to this video from Innovasys for more information: 
 
-[![Video from Invensys](../images/APIRefGuide/Invensys_video.png](http://www.innovasys.com/movie/viewer/eb701a00-2eb1-4592-b35c-15cf2e5db88d)
+[![Video from Invensys](../images/APIRefGuide/Invensys_video.png)](http://www.innovasys.com/movie/viewer/eb701a00-2eb1-4592-b35c-15cf2e5db88d)
 
 ###**Step 4:** Add or Update the Public and Protected Members of Public and Protected Types
 
