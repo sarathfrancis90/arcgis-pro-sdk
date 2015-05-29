@@ -728,5 +728,129 @@ Note: refer to the __Excluding Types and Members from the API Reference__ sectio
 
 In order of priority, public class declarations __are to be commented first__. Public interface declarations second, public struct declarations third and enum declarations fourth. Members should be commented after all the type declarations are complete. In some cases, you, the author, may not know the purpose of a particular member and may need to consult with the DEV (and perhaps have them comment it).
 
+###What Does Not Need To Be Commented For the DotNet Reference API?
+
+   * Any types or members __not__ in the above listed assemblies (public, internal, private, or otherwise).
+   * Any internal or private types in any of the managed code assemblies (with the exception of shared internals).
+   * Any public, protected, internal, or private members within any internal or private types in any of the assemblies (for example, a class marked as “internal” that exposes a public method does not need that public method commented).
+
+###XML Code Comment Compiler Warnings in Visual Studio
+
+The following compiler warnings are currently checked in the build. 
+
+1570,1572,1573,1574,1584,1587,1591
+
+Refer to [SDK Gallery](http://sdkgallery)and the link  __“API Reference Build Warnings”__ to check your respective XML compiler warnings from the build:
+ 
+The intention is that SDK Leads and other authors will make a complete pass over all their respective source code areas adding comments to the required types and members to remove all compiler warnings.
+ 
+They compiler warnings are described in detail below:
+
+__1591 – Missing XML comment for publicly visible type or member ‘type_name’ or ‘type_name.member_name’ (depending on what is missing a comment)__
+
+1591 is the most common occurrence. It is raised for every public and protected type and for every public or protected member that is missing an XML comment. Note that the warning always states “publicly visible” regardless of whether the comment is missing from a public or a protected type or member. The warning message does not differentiate.
+
+__1570 – XML comment on ‘type_name’ or ‘type_name.member’ has badly formed XML -- <the actual error description is here> - for example, 'End tag 'member' does not match the start tag 'summary'__ (Note that this compiler warning has ‘badly’ formed English ;-)
+
+1570 is probably the second most common warning. It is raised if the XML comment you have authored has an XML error in it (for example you are missing a closing tag like “</summary>”, or “</remarks>”). It is an indicator that the XML in the referenced comment is not well formed. That means that “that” comment will NOT make its way into the output Assembly.XML file and so will be ~missing~ in the output documentation.
+
+__1572- XML comment on ‘type_name.member’ has a param tag for ‘param_name’, but there is no parameter by that name__ – and –
+
+__1573 – Parameter ‘param_name’ has no matching param tag in the XML Comment for ‘type_name.member_name(param_type, param_type2, ..)’ (but other parameters do)__
+
+These two warnings are associated with the XML comments for the individual parameters of methods. If the name you provide for a parameter tag does NOT match the name of the parameter variable it documents 1572 is raised. If, however, a parameter has been added to a method that is NOT documented then 1573 is raised. The most common scenarios are:
+
+   * The author misspelled a parameter name (1572)
+   * A DEV changed a parameter name since the method was commented (1572)
+   * A DEV added a new parameter that has not been commented (1573).
+
+Interestingly, NO warning is raised if parameter comments are missing entirely. This must be a bug in the CSharp compiler. In other words, there must be at least one <param> tag in the code comment block for a 1573 to be raised. If the author does not comment ANY parameters then there are NO warnings.
+
+####Suppressing Compiler Warnings for XML Comments
+
+To suppress compiler warnings on shared internal code use an <exclude></exclude> tag as the triple slash comment (refer to __Excluding Types and Members from the API Reference__ for more details). To suppress the warnings for all missing XML comments for types and methods in an **_Internal_** namespace you can use the following technique: Pair a #pragma warning disable 1591 with a #pragma warning restore 1591 within the scope of each Internal namespace declaration. A namespace declaration can occur across many source files so each declaration will need to be tagged with a #pragma disable and restore pair.
+
+```C#
+namespace ArcGIS.Desktop.__Internal__.XXXXX 
+{
+  //Place this statement within the namespace scope
+  //
+  //disable comment warnings
+  #pragma warning disable 1591
+   …. CODE HERE …
+  //Be sure to turn compiler warnings back on when the namespace
+  //scope ends…
+  //
+  //restore comment warnings
+  #pragma warning restore 1591
+}
+```
+This is the recommended approach for suppressing the compiler warnings for undocumented types and methods in Internal namespaces.
+
+###Overview of the Document! X Reference API Output Structure
+
+Each Assembly in the ArcGIS Professional Reference API is added as a top level node to the online Reference API help, to the Visual Studio help, and .chm formatted help. Each Assembly will typically have one child node per namespace. 
+
+Here is a screenshot of the Table of Contents structure in a .chm that Document! X generates from source code comments (generated for the DocumentXExample project available for download on github). The structure of the online version will be the same (though styled differently).
+
+ 
+
+In the Table of Contents will be an Overview page (hand authored) and a “Namespaces” parent folder. Within the “Namespaces” folder are child folders, one per Namespace. 
+
+Each Namespace folder is organized similarly. There can be up to 5 child folders generated, one per type, “Classes”, “Enumerations”, “Structures”, “Interfaces”, and “Delegates” (not shown) in the assembly XML (from which they were generated). In other words, if an assembly has classes then there will be a “Classes” folder. If an assembly has enums then there will be an “Enumerations” folder and so on.
+
+The Classes folder hierarchy is described below. The Structures, Interfaces, Enumerations, and Delegates folders are similar.
+
+####Classes Folder
+
+Within the Classes folder is the following content:
+
+ 
+
+####Overview Page
+
+The Overview page is created from the type declaration comments. Whatever XML code comments the author adds to the comment block for the type declaration are output into each type’s Overview page. 
+
+ 
+
+An overview page is always generated (whether there are comments on the class declaration or not). For example, this code comment block generates this Overview page:
+
+```C#
+     /// <summary>
+    /// This is the summary
+    /// </summary>
+    /// <remarks>These are the remarks. They are added to the
+    /// Overview page by Document! X</remarks>
+    public class ExampleClass {
+```
+
+
+ 
+Document! X adds the syntax section along with the Inheritance Hierarchy, Requirements, and See Also sections. These sections it generates from reflection on the assembly along with parsing the assembly “.XML” file.
+
+ 
+####Members Page
+
+The members page is automatically generated from the list of public and protected members associated with the class. 
+
+
+ 
+The summary statement of each member is used as the basic description of each member on the Members page.
+
+
+
+####Constructors Page
+
+This page lists the public constructors and their summary descriptions
+ 
+
+
+###Methods, Fields, Properties, and Events
+
+Each public or protected member results in a separate page being generated under the relevant parent sub-folder. The format of an individual member page generally follows the format of the parent Overview page. 
+ 
+
+
+A member page has a summary description, a syntax section showing usage, parameter descriptions, and return value (if appropriate). A remarks section is added if there are remarks for the individual member and an example section if code examples were added. How to include code examples is also shown in the following sections as well as in the Appendix.
 
 
