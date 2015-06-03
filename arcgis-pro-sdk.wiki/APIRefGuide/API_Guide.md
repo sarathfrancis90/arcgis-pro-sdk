@@ -1375,7 +1375,7 @@ For example: www.arcgis.com links to www.arcgis.com
 ```
 Note: try to avoid using href style links as they launch the user off our documentation site.
 
-   ####2.Links to Image Content
+   ####2. Links to Image Content
 
 The key when adding links is ensuring that the links are not broken when the generated HTML pages are incorporated into the various Reference API help products. All local images such as screenshots, diagrams, icons, and bitmaps that you want to reference in the code comments must be copied to the __\ArcGIS\SharedArcGIS\SDK\Images__ folder and checked in to Star Team. Linking to external image content is a 3 step process:
 
@@ -1391,7 +1391,7 @@ Other guidelines for image content:
    2. Do __NOT__ exceed a width of 800 pixels. Images wider than 800 pixels are in danger of being clipped - especially if the table of contents is too wide. Users should not have to scroll to see all of your image 
    3. A well-known folder will be established into which you will copy all your referenced images. This will allow the HTML help to be compiled on a central build machine that can duplicate the necessary folder structure to ensure all references are intact. 
 
-   ####3.Links to Source Code Content, DAML files and XML
+   ####3. Links to Source Code Content, DAML files and XML
 
 Authors can add code snippets and/or links to external source code content to an <example> section within a triple-slash code comment block. Code examples will be positioned by Document! X at the bottom of each page underneath “Remarks” within a section titled “Example”. Document! X colorizes code examples to aid in visual interpretation of code sample syntax (e.g. use of green for comments, blue for keywords, black for code, etc.).
 
