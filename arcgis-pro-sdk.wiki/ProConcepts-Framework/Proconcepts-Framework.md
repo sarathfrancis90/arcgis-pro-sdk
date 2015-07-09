@@ -1092,7 +1092,7 @@ The following table summarizes the currently defined activation behaviors along 
 <table>
 
 <tr>
-<th style="width:50%">Plugin Type</th><th style="width:50%">Framework Provided Activation</th>
+<th width ="50%">Plugin Type</th><th width="50%">Framework Provided Activation</th>
 </tr>
 <tr>
 <td>Ribbon Tab</td><td>Tab is shown or hidden based on the associated condition.  When the tab first appears, other objects which appear on the tab may load if they are visible.</td>
