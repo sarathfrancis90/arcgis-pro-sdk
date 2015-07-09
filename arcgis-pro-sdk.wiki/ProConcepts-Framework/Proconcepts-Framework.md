@@ -1787,6 +1787,7 @@ Unobserved exceptions usually show up only when the exception object is collecte
 ##Further Reading
 
 [Task Asynchronous Pattern - MSDN](https://msdn.microsoft.com/en-us/library/hh873175%28v=vs.110%29.aspx "Task Asynchronous Pattern - MSDN")
+
 [Best practices in Asynchronous Programming – Stephen Cleary](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx "Best practices in Asynchronous Programming – Stephen Cleary")
 
 
