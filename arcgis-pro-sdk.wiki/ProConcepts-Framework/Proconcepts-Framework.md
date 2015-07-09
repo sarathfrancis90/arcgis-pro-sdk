@@ -12,7 +12,7 @@ ArcGIS Pro’s add-in framework supports a host of extensibility points. The lis
 	* Groups
 	* Controls
 		* Buttons
-			* Split Buttons
+		* Split Buttons
 		* Button Palettes
 		* Tools
 		* Tool Palettes
