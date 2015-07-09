@@ -629,7 +629,7 @@ Split buttons group related buttons together. The first button listed should be 
 ```
 Instead of a collection of less commonly used buttons, split buttons can instead present a gallery. The first element is still a button. As we’ll see later, galleries can additionally present their own menu of buttons.  
 
-![Gallery1.png](../images/Proconcepts-Frameworks/Gallery1.png "Framework_Guide Gallery.png")  
+![gallery1.png](../images/Proconcepts-Frameworks/gallery1.png "Framework_Guide Gallery.png")  
 
 ```xml 
 <splitButtons>
@@ -1090,6 +1090,8 @@ The framework defines a fixed set of activation behaviors that can be triggered 
 The following table summarizes the currently defined activation behaviors along with the type of Plugins they apply to:  
 
 <table>
+<col width="500">
+<col width="2000">
 <tr>
 <th>Plugin Type</th><th>Framework Provided Activation</th>
 </tr>
