@@ -1308,7 +1308,7 @@ The DockPane just needs to override *OnDragOver* and *OnDrop* as described above
 
 b) To drop to a specific child control set the DAML attribute *isDropTarget* to false; here the default is false, meaning the DockPane should specify a UI element in xaml as the drop target. In the example below, only the ListBox handles the drop.  
 
-``xml    
+```xml    
 <UserControl x:Class="ArcGIS.Desktop.Mapping.TOC.TOCDockPane"
 xmlns:dragDrop="clr-namespace:ArcGIS.Desktop.Framework.DragDrop;assembly=ArcGIS.Desktop.Framework" >
 ……….
