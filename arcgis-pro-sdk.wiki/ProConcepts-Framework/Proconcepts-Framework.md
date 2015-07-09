@@ -423,10 +423,10 @@ The *IsEditable* and *IsReadOnly* attributes specify how the ComboBox behaves.
 
 <table>
 <tr>
-<th></th><th>**IsReadOnly true**</th><th>**IsReadOnly false**</th>
+<th></th><th>IsReadOnly true</th><th>IsReadOnly false</th>
 </tr>
 <tr>
-<td rowspan="4">**IsEditable true**</td>
+<th rowspan="4">**IsEditable true**</th>
 <td>* Cannot select an item in the ComboBox by entering a string.</td>
 <td>* Can select an item in the ComboBox by entering a string.</td>
 </tr>
