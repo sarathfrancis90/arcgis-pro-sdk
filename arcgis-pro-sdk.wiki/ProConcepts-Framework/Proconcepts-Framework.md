@@ -427,37 +427,37 @@ The *IsEditable* and *IsReadOnly* attributes specify how the ComboBox behaves.
 </tr>
 <tr>
 <th rowspan="4">IsEditable true</th>
-<td>* Cannot select an item in the ComboBox by entering a string.</td>
-<td>* Can select an item in the ComboBox by entering a string.</td>
+<td>Cannot select an item in the ComboBox by entering a string.</td>
+<td>Can select an item in the ComboBox by entering a string.</td>
 </tr>
 <tr>
-<td>* Cannot enter a string that does not correspond to an item in the ComboBox.</td>
-<td>* Can enter a string that does not correspond to an item in the ComboBox.</td>
+<td>Cannot enter a string that does not correspond to an item in the ComboBox.</td>
+<td>Can enter a string that does not correspond to an item in the ComboBox.</td>
 </tr>
 <tr>
-<td>* Can select part of the string in the ComboBox text box.</td>
-<td>* Can select part of the string in the ComboBox text box. </td>
+<td>Can select part of the string in the ComboBox text box.</td>
+<td>Can select part of the string in the ComboBox text box. </td>
 </tr>
 <tr>
-<td>* Can copy the string in the ComboBox text box, but cannot paste a string into the ComboBox text box.</td>
-<td>* Can copy or paste the string in the ComboBox text box./td>
+<td>Can copy the string in the ComboBox text box, but cannot paste a string into the ComboBox text box.</td>
+<td>Can copy or paste the string in the ComboBox text box.</td>
 </tr>
 <tr>
 <th rowspan="4">IsEditable false</th>
-<td>* Can select an item in the ComboBox by entering a string. </td>
-<td>* Can select an item in the ComboBox by entering a string. </td>
+<td>Can select an item in the ComboBox by entering a string. </td>
+<td>Can select an item in the ComboBox by entering a string. </td>
 </tr>
 <tr>
-<td>* Cannot enter a string that does not correspond to an item in the ComboBox. </td>
-<td>* Cannot enter a string that does not correspond to an item in the ComboBox. /td>
+<td>Cannot enter a string that does not correspond to an item in the ComboBox. </td>
+<td>Cannot enter a string that does not correspond to an item in the ComboBox. </td>
 </tr>
 <tr>
-<td>* Cannot select part of the string in the ComboBox. </td>
-<td>* Cannot select part of the string in the ComboBox. /td>
+<td>Cannot select part of the string in the ComboBox. </td>
+<td>Cannot select part of the string in the ComboBox. </td>
 </tr>
 <tr>
-<td>* Cannot copy or paste the string in the ComboBox.</td>
-<td>* Cannot copy or paste the string in the ComboBox.</td>
+<td>Cannot copy or paste the string in the ComboBox.</td>
+<td>Cannot copy or paste the string in the ComboBox.</td>
 </tr>
 </table>
 
