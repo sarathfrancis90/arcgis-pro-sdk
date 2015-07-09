@@ -1,18 +1,18 @@
 #ProConcepts Framework
 ArcGIS Pro is a highly configurable and extensible application. All software modifications and enhancements are achieved using add-ins. The add-in model provides a declaratively-based framework for creating a collection of customizations conveniently packaged within a single compressed file. Add-ins are easily shared as they do not require installation programs or registration; add-ins are added to a system by simply copying them to a well-known folder and removed by deleting them from this folder. Add-ins can also be shared between users within an organization using a centralized network share.  
  
-Add-ins are authored using .NET along with Esriís Desktop Application Markup Language (DAML). The DAML (an XML language created by Esri) describes the customizations; the .NET classes provide the custom behavior. ArcGIS Proís software development kit (SDK) includes an Add-In Wizard that integrates with Microsoft Visual Studio to simplify development.  
+Add-ins are authored using .NET along with Esri‚Äôs Desktop Application Markup Language (DAML). The DAML (an XML language created by Esri) describes the customizations; the .NET classes provide the custom behavior. ArcGIS Pro‚Äôs software development kit (SDK) includes an Add-In Wizard that integrates with Microsoft Visual Studio to simplify development.  
 
 ##Add-In Extensibility Points  
 
-ArcGIS Proís add-in framework supports a host of extensibility points. The list below shows the most common customizations.  
+ArcGIS Pro‚Äôs add-in framework supports a host of extensibility points. The list below shows the most common customizations.  
 
 * Ribbon
 	* Tabs / Contextual Tabs
 	* Groups
 	* Controls
 		* Buttons
-		* Split Buttons
+			* Split Buttons
 		* Button Palettes
 		* Tools
 		* Tool Palettes
@@ -104,7 +104,7 @@ All DAML elements must fall under the root ArcGIS element. The first child node 
   </AddInInfo>
 ```
 
-Customizations follow and these are broken up in several main classifications including modules, categories, conditions, *propertySheets*, backstage, and *dropHandlers*. As weíll see, most customizations appear under the modules element.  
+Customizations follow and these are broken up in several main classifications including modules, categories, conditions, *propertySheets*, backstage, and *dropHandlers*. As we‚Äôll see, most customizations appear under the modules element.  
 
 All root nodes perform one or more of three distinct actions: inserts, updates, and deletes. The type of operation is determined by the element name. For example, a new module is declared using the *insertModule* element; similarly, a module is updated using the *updateModule* element. Note, in cases where no other operation except inserts is valid, the insert prefix has been dropped.  
 
@@ -135,7 +135,7 @@ DAML instructions (insertions, updates, and deletes) are processed from a variet
 
 ##Plug-Ins
 
-Some customizations, like menus, are purely declarativeótheir definition in DAML is all that is necessary for the Framework to create and present them. Most customizations, however, have an active (code-behind) component and most of these inherit from the common base class *PlugIn.*  
+Some customizations, like menus, are purely declarative‚Äîtheir definition in DAML is all that is necessary for the Framework to create and present them. Most customizations, however, have an active (code-behind) component and most of these inherit from the common base class *PlugIn.*  
 
 ```C#
   public abstract class PlugIn : PropertyChangedBase
@@ -153,7 +153,7 @@ Some customizations, like menus, are purely declarativeótheir definition in DAML
   }
 ```
 
-Note that many of the methods and properties on *PlugIn* and its derived classes do not need to be overridden or implemented by the developers; for instance, the implementation of the Caption propertyófound on many plug-insóis provided by the framework and will return whatever caption was supplied when the plug-in was declared using DAML.  Only the protected virtual overrides where a specific behavior is requiredósuch as OnClickóneed be supplied by the developer.  
+Note that many of the methods and properties on *PlugIn* and its derived classes do not need to be overridden or implemented by the developers; for instance, the implementation of the Caption property‚Äîfound on many plug-ins‚Äîis provided by the framework and will return whatever caption was supplied when the plug-in was declared using DAML.  Only the protected virtual overrides where a specific behavior is required‚Äîsuch as OnClick‚Äîneed be supplied by the developer.  
 
 As previously mentioned, all plug-ins require an alphanumeric identifier (ID).  This ID is specified within the plug-in DAML when the plug-in is declared, and is conceptually similar to the GUID used to uniquely name COM CoClasses.  
 
@@ -185,16 +185,16 @@ namespace Acme.Controls
 
 ###Modules  
 
-Modules act as the hub and central access point for their subsystem; if you need access to the functionality within a subsystem, you start with the Module. Modules are singletons that are instantiated automatically by the framework when access is explicitly requested in executing code, or when the Module becomes ìrelevantî due a context shift.  All program elements that are part of the Module are explicitly declared as such; these elements include Ribbon Buttons, Tools, Galleries, Combo Boxes, Edit Boxes, Palettes, and other controls, as well as application Panes and Docking Panes.  The well-defined relationship between a Module and its associated components lets the application initialize, un-initialize, and remove entire subsystems as a whole.  
+Modules act as the hub and central access point for their subsystem; if you need access to the functionality within a subsystem, you start with the Module. Modules are singletons that are instantiated automatically by the framework when access is explicitly requested in executing code, or when the Module becomes ‚Äúrelevant‚Äù due a context shift.  All program elements that are part of the Module are explicitly declared as such; these elements include Ribbon Buttons, Tools, Galleries, Combo Boxes, Edit Boxes, Palettes, and other controls, as well as application Panes and Docking Panes.  The well-defined relationship between a Module and its associated components lets the application initialize, un-initialize, and remove entire subsystems as a whole.  
 
-Most of the logic in the UI level should reside in a module or a helper (non-UI) class the module directly manages. For example, when writing a button, the button class itself should have no business logic in it; all the logic should be centralized in its parent module. Centralizing the business logic reduces the spaghetti-effect. For example, instead of several buttons each listening to a particular event, itís better to have one module listen to the event and each button instead polls the module in *OnUpdate*.  
+Most of the logic in the UI level should reside in a module or a helper (non-UI) class the module directly manages. For example, when writing a button, the button class itself should have no business logic in it; all the logic should be centralized in its parent module. Centralizing the business logic reduces the spaghetti-effect. For example, instead of several buttons each listening to a particular event, it‚Äôs better to have one module listen to the event and each button instead polls the module in *OnUpdate*.  
 
-Modules also support several patterns to make centralizing business logic much easier; for instance, modules automatically load whenever one of their plug-ins load.  For example, in most cases a button on the ribbon doesnít load until it is clicked. When this happens, the buttonís parent module is also loaded; similarly, when a dock pane loads, its parent module also loads.  
-Modules also have a pattern for working with panes. Modules are automatically notified whenever one of its panes are activated, deactivated, opened, or closed. This means your module doesnít have to listen to the Frameworkís *ActivePaneChanged* event and filter for the relevant panes; instead, modules are given direct notification that one of their panes changed.
+Modules also support several patterns to make centralizing business logic much easier; for instance, modules automatically load whenever one of their plug-ins load.  For example, in most cases a button on the ribbon doesn‚Äôt load until it is clicked. When this happens, the button‚Äôs parent module is also loaded; similarly, when a dock pane loads, its parent module also loads.  
+Modules also have a pattern for working with panes. Modules are automatically notified whenever one of its panes are activated, deactivated, opened, or closed. This means your module doesn‚Äôt have to listen to the Framework‚Äôs *ActivePaneChanged* event and filter for the relevant panes; instead, modules are given direct notification that one of their panes changed.
 
 ####Declaring Modules in DAML
 
-Modules are declared within the root ArcGIS element, but must be further enclosed within a modules container element.  The *autoLoad* attribute is used to control whether the module is loaded just-in-time (JIT)óthe defaultóor loaded automatically when the application starts.  In almost all cases, *autoLoad* should be set to false.  
+Modules are declared within the root ArcGIS element, but must be further enclosed within a modules container element.  The *autoLoad* attribute is used to control whether the module is loaded just-in-time (JIT)‚Äîthe default‚Äîor loaded automatically when the application starts.  In almost all cases, *autoLoad* should be set to false.  
 
 ```xml
 <modules>
@@ -208,7 +208,7 @@ Note that if declaring a new module, all constituent plug-in declarations contai
 
 ###Controls
 
-Controls include any of the simple widgets that can appear on the application Ribbon, including: Button, Tool, CheckBox, ComboBox, EditBox, LabelControl, DynamicMenu, and CustomControl.  All simple ribbon controls are declared in a moduleís controls element. Although controls are declared in a controls section, they are referenced when defining a group. This allows the same control to appear in multiple groups without having to re-declare the entire control.  
+Controls include any of the simple widgets that can appear on the application Ribbon, including: Button, Tool, CheckBox, ComboBox, EditBox, LabelControl, DynamicMenu, and CustomControl.  All simple ribbon controls are declared in a module‚Äôs controls element. Although controls are declared in a controls section, they are referenced when defining a group. This allows the same control to appear in multiple groups without having to re-declare the entire control.  
 
 The following declaration includes a few of the most common attributes associated with buttons:  
 
@@ -229,7 +229,7 @@ The following declaration includes a few of the most common attributes associate
 </insertModule>
 ```
 
-As previously stated, framework plug-ins are not permitted to exist un-tethered, and must be linked with a module.  In the case illustrated above, a new buttonómade by ACMEóis declared and added to a module. This logically links the button to the ACME Module.  If at some point, the framework determines that the module should be unloaded, the newly added button will also be unloaded.   
+As previously stated, framework plug-ins are not permitted to exist un-tethered, and must be linked with a module.  In the case illustrated above, a new button‚Äîmade by ACME‚Äîis declared and added to a module. This logically links the button to the ACME Module.  If at some point, the framework determines that the module should be unloaded, the newly added button will also be unloaded.   
 
 Existing controls can also be updated or deleted using a plug-in configuration file, but note that not all attributes can be updated: those that might alter the run-time behavior of the plug-in such as class, assembly, and condition, can only be set through an insert.  
 
@@ -246,13 +246,13 @@ All control elements share several attributes.  The *loadOnClick* attribute dete
 
 Tooltips are defined using the tooltip sub-element and may span as many lines as necessary. The image attribute is used to supply an image that will appear next to the tip text. Command tooltips also support a *disabledText* element; this string becomes the tooltip whenever the command is disabled.  
 
-Most controls support multiple sizes in the ribbon. For example, a button can render small (small icon only), middle (small icon with text), and large (large icon over text). Use the *smallImage* and *largeImage* attributes to specify unique images for the different sizes. Images donít have to be graphics, you can also use XAML. Note, images are not flipped when running right-to-left; if the image should flip when running in this mode, e.g. arrow buttons, set the *flipImageRTL* attribute to true. The graphic below shows three buttons (in blue squares) in the three supported sizes.  
+Most controls support multiple sizes in the ribbon. For example, a button can render small (small icon only), middle (small icon with text), and large (large icon over text). Use the *smallImage* and *largeImage* attributes to specify unique images for the different sizes. Images don‚Äôt have to be graphics, you can also use XAML. Note, images are not flipped when running right-to-left; if the image should flip when running in this mode, e.g. arrow buttons, set the *flipImageRTL* attribute to true. The graphic below shows three buttons (in blue squares) in the three supported sizes.  
 
 ![Ribbon1.png](../images/Proconcepts-Frameworks/Ribbon1.png "Framework_Guide Ribbon1.png")  
 
 The *disableIfBusy* element is used to signal that the control should be disabled whenever the primary worker thread is busy. This prevents work from queuing up. This element is true by default. Controls that always need to be enabled should set this to false.  
 
-All control declarations support a condition attribute allowing the assignment of a condition.  If the specified condition isnít met, the control will be automatically disabled by the framework.  In addition, controls remain unloaded until their condition is met.  If no condition is specified, the control is assumed to be always relevant. See the ëCondtions and Stateí section for more information.  
+All control declarations support a condition attribute allowing the assignment of a condition.  If the specified condition isn‚Äôt met, the control will be automatically disabled by the framework.  In addition, controls remain unloaded until their condition is met.  If no condition is specified, the control is assumed to be always relevant. See the ‚ÄòCondtions and State‚Äô section for more information.  
 
 Controls are implemented by inheriting from the appropriate plug-in derived base class.  
 
@@ -337,7 +337,7 @@ Check boxes work exactly the same as buttons.
 
 ###Tools
 
-Tools look very similar to buttons except they automatically stay checked after being selected. Tools also work in conjunction with the current paneóall unhandled mouse and keyboard events from the active pane are passed to the active tool for processing.  
+Tools look very similar to buttons except they automatically stay checked after being selected. Tools also work in conjunction with the current pane‚Äîall unhandled mouse and keyboard events from the active pane are passed to the active tool for processing.  
 
 ```xml
 <tool id="acme_zoomTool"
@@ -369,7 +369,7 @@ sealed class ZoomTool : ArcGIS.Desktop.Framework.Contracts.Tool
         ContextMenu menu = FrameworkApplication.CreateContextMenu("acme_AddDataMenu");
         menu.IsOpen = true;
         break;
-      // etc Ö
+      // etc ‚Ä¶
       }
   }
 }
@@ -461,7 +461,7 @@ The *IsEditable* and *IsReadOnly* attributes specify how the ComboBox behaves.
 </tr>
 </table>
 
-In most cases combo boxes are filled with **ComboBoxItem** objects but you can fill them with any object youíd like.  When custom items are added to a combo box a custom item template usually used.
+In most cases combo boxes are filled with **ComboBoxItem** objects but you can fill them with any object you‚Äôd like.  When custom items are added to a combo box a custom item template usually used.
 
 ```xml
 <comboBox id="acme_ComboBox1" 
@@ -627,7 +627,7 @@ Split buttons group related buttons together. The first button listed should be 
   </splitButton>
 </splitButtons>
 ```
-Instead of a collection of less commonly used buttons, split buttons can instead present a gallery. The first element is still a button. As weíll see later, galleries can additionally present their own menu of buttons.  
+Instead of a collection of less commonly used buttons, split buttons can instead present a gallery. The first element is still a button. As we‚Äôll see later, galleries can additionally present their own menu of buttons.  
 
 ![gallery1.png](../images/Proconcepts-Frameworks/gallery1.png "Framework_Guide Gallery.png")  
 
@@ -667,7 +667,7 @@ If you just want to add a string to the ribbon you can use the LabelControl.
 
 ###Galleries
 
-A Gallery is a control that displays a collection of related items or Commands in the Ribbon. If there are too many items in the gallery, an expand arrow is provided to display the rest of the collection in an expanded pane. Galleries typically provide a richer representation of the choices offered, each often representing a preview of the result if chosen. Galleries can be organized to show multiple rows and columns simultaneously and are excellent choices when you donít want to be constrained by the smaller one dimensional area offered by a menu.  
+A Gallery is a control that displays a collection of related items or Commands in the Ribbon. If there are too many items in the gallery, an expand arrow is provided to display the rest of the collection in an expanded pane. Galleries typically provide a richer representation of the choices offered, each often representing a preview of the result if chosen. Galleries can be organized to show multiple rows and columns simultaneously and are excellent choices when you don‚Äôt want to be constrained by the smaller one dimensional area offered by a menu.  
 
 The graphic below shows the Basemap drop-down gallery.  
 
@@ -685,7 +685,7 @@ Gallery items are represented in the UI via an ItemTemplate. Galleries can speci
 
 Note, when specifying a custom template, you must list the file and its key. Also, if you want grouping, make sure the objects expose a public Group property of type string as the binding logic uses this.  
 
-To better support a responsive UI experience, the framework provides a waiting spinner and loading message on the galleryís dropdown when it is trying to asynchronously load a large number of items. The *LoadingMessage* can be updated at runtime or set statically using the *loadingMessage* attribute. Note, to get this default behavior, no heavy code should be put in the galleryís constructor since it will block the UI thread and prevent the spinner from showing up. The loading message only appears in drop down galleries (not in-inline).  
+To better support a responsive UI experience, the framework provides a waiting spinner and loading message on the gallery‚Äôs dropdown when it is trying to asynchronously load a large number of items. The *LoadingMessage* can be updated at runtime or set statically using the *loadingMessage* attribute. Note, to get this default behavior, no heavy code should be put in the gallery‚Äôs constructor since it will block the UI thread and prevent the spinner from showing up. The loading message only appears in drop down galleries (not in-inline).  
 
 All items added to the ItemCollection must be created on the main UI thread as these ultimately become the content of buttons added to the gallery popup control.  
 
@@ -744,7 +744,7 @@ sealed class MapGallery : ArcGIS.Desktop.Framework.Contracts.Gallery
 
 ##Tabs and Groups
 
-Youíll note that declaring a control does not establish where and how the control will actually appear.  The location controls within the ribbon, including their size and relative placement, is established using the *group* and *tab* elements.  
+You‚Äôll note that declaring a control does not establish where and how the control will actually appear.  The location controls within the ribbon, including their size and relative placement, is established using the *group* and *tab* elements.  
 
 ArcGIS Pro uses the ribbon paradigm popularized by newer versions of Microsoft Office.  The ribbon consists of a single fixed toolbar containing one or more tabs. The number of available (visible) tabs may vary dynamically depending on the state of the application. Tabs are activated through user interaction (clicks), or when directed by code running within the application.  
 
@@ -752,7 +752,7 @@ Each tab is itself composed of one or more groups, small rectangular regions hav
 
 ![Tabs.png](../images/Proconcepts-Frameworks/Tabs.png "Framework_Guide Tabs.png")  
  
-Groups may optionally support a ìdialog launcherî buttonóa small link widget located next to the group captionówhich is used to bring up a dialog where more obscure functions may be accessed.  Groups are declared as lists of controls within a *groups* container element:  
+Groups may optionally support a ‚Äúdialog launcher‚Äù button‚Äîa small link widget located next to the group caption‚Äîwhich is used to bring up a dialog where more obscure functions may be accessed.  Groups are declared as lists of controls within a *groups* container element:  
 
 ```xml
 <groups>
@@ -802,7 +802,7 @@ Like controls, existing groups can be modified in DAML. The following example in
 </updateModule>
 ```
 
-Once a group is declared, it can be referenced and placed on tabs. Tabs are declared as lists of groups within a tabs collection element.  In the following example, the previously declared groups are added to a new tab labeled ìHomeî.  
+Once a group is declared, it can be referenced and placed on tabs. Tabs are declared as lists of groups within a tabs collection element.  In the following example, the previously declared groups are added to a new tab labeled ‚ÄúHome‚Äù.  
 
 ```xml
 <tabs>
@@ -820,7 +820,7 @@ Once a group is declared, it can be referenced and placed on tabs. Tabs are decl
 </tabs>
 ```
 
-Like controls, a tabís relevance can be governed using a condition. The condition attribute is used to control whether or not the tab is visible, and thus available. Conditions are not used to control tab activation, only tab availability. If no condition is specified, the tab will always be visible.  
+Like controls, a tab‚Äôs relevance can be governed using a condition. The condition attribute is used to control whether or not the tab is visible, and thus available. Conditions are not used to control tab activation, only tab availability. If no condition is specified, the tab will always be visible.  
 
 Collections of related tabs can be grouped together in colored, named groups to improve clarity.  These collections are called tab groups.  In the ribbon displayed below, there is a tab group containing three tabs.   
 
@@ -848,11 +848,11 @@ Tab groups are declared within a *tabGroups* collection element and consist of a
   <group refID="esri_mapping_layer3DGroup" />
 </tab>
 ```
-Tab groups are typically used in situations where the user temporarily enters a mode, such as ìediting graphic elements.î  Tag groups are not typically used with tabs which are perpetually visible (global tabs). Tabs in a tab group should have the same *condition*. If any tab in a tab group has a relevant condition, the entire tab group is displayed.  
+Tab groups are typically used in situations where the user temporarily enters a mode, such as ‚Äúediting graphic elements.‚Äù  Tag groups are not typically used with tabs which are perpetually visible (global tabs). Tabs in a tab group should have the same *condition*. If any tab in a tab group has a relevant condition, the entire tab group is displayed.  
 
 ##Toolbars
 
-The ribbon group supports an inner collection/grouping of controls into a toolbar. Toolbars are purely declarative and their definition describes what the toolbar looks like according to how much space is available in the ribbon. Toolbars want to draw as one long control; if there are size constraints, the toolbar will stack its groups to save real estate. For example, when there is a lot of room in the ribbon, such as when the user expands the main window, all of the toolbarís group may appear in one long row; as the application shrinks, the toolbar will move successive groups underneath one another. Only one toolbar should be declared in a group. The example below shows a toolbar with several combo boxes and buttons.  
+The ribbon group supports an inner collection/grouping of controls into a toolbar. Toolbars are purely declarative and their definition describes what the toolbar looks like according to how much space is available in the ribbon. Toolbars want to draw as one long control; if there are size constraints, the toolbar will stack its groups to save real estate. For example, when there is a lot of room in the ribbon, such as when the user expands the main window, all of the toolbar‚Äôs group may appear in one long row; as the application shrinks, the toolbar will move successive groups underneath one another. Only one toolbar should be declared in a group. The example below shows a toolbar with several combo boxes and buttons.  
 
 ```xml
 <toolbars>
@@ -895,7 +895,7 @@ Panes are declared within a panes collection element:
 
 Panes can be associated with a default tab, and/or a default tool such that if no other relevant tool/tab is already selected, the default will automatically be selected when the pane is activated.   
 
-Panes are composed of three parts: a DAML definition, a controller, and a view. The controller is similar to what weíve seen with custom controls and must inherit from the Frameworkís Pane base class.  The view component is the custom appearance of the control and this class typically derives from a WPF UserControl. The DAML *className* attribute defines the controller and the content element defines the view. When the pane in instantiated, the controller is set as the data context of the view. This allows for a view/view-model relationship and all the benefits that accompany this pattern.  
+Panes are composed of three parts: a DAML definition, a controller, and a view. The controller is similar to what we‚Äôve seen with custom controls and must inherit from the Framework‚Äôs Pane base class.  The view component is the custom appearance of the control and this class typically derives from a WPF UserControl. The DAML *className* attribute defines the controller and the content element defines the view. When the pane in instantiated, the controller is set as the data context of the view. This allows for a view/view-model relationship and all the benefits that accompany this pattern.  
 
 ```C#
 class MapPane : ArcGIS.Desktop.Framework.Contracts.Pane
@@ -919,13 +919,13 @@ class MapPane : ArcGIS.Desktop.Framework.Contracts.Pane
 }
 ```
 
-Panes are managed by the *PaneCollection* class which is available via *FrameworkApplication.Panes*. Panes are created programmatically using the *PaneCollection.Create* method.  This method has an additional overload which allows the caller to pass user defined data; the appropriate constructor will be called on the pane derived class depending on which version of Create is called.   After the paneís constructor is called, the paneís *InitializeAsync* function is called to give it a chance to initialize asynchronously if necessary. Similarly, when a pane is closed, its *UninitializeAsync* function is called. The *PaneCollection* class also holds the *ActivePane* and has methods for finding and activating existing panes.  
+Panes are managed by the *PaneCollection* class which is available via *FrameworkApplication.Panes*. Panes are created programmatically using the *PaneCollection.Create* method.  This method has an additional overload which allows the caller to pass user defined data; the appropriate constructor will be called on the pane derived class depending on which version of Create is called.   After the pane‚Äôs constructor is called, the pane‚Äôs *InitializeAsync* function is called to give it a chance to initialize asynchronously if necessary. Similarly, when a pane is closed, its *UninitializeAsync* function is called. The *PaneCollection* class also holds the *ActivePane* and has methods for finding and activating existing panes.  
 
 Each pane instance has an associated instance identifier *(InstanceID)* which allows users to differentiate between multiple instances of the same pane. Panes can further override *ContentID* to provide a custom identifier.  
 
 Panes directly receive mouse and keyboard events; if not handled, the events are forwarded to the current tool if active.  
 
-As weíll see in more detail in the Undo/Redo section, Panes and DockPanes play a critical role in governing application operations.  
+As we‚Äôll see in more detail in the Undo/Redo section, Panes and DockPanes play a critical role in governing application operations.  
 
 ##DockPanes
 
@@ -933,7 +933,7 @@ In addition to panes, the framework also supports dock panes which often supplem
 
 Dock panes are singletons, there is never more than one instance of a particular dock pane and once created, they are not destroyed until the application shuts down.  
 
-Dock panes are defined in the same fashion as panes. When the framework creates a dock pane, it will also create its content class and set the contentís data context to the dock pane. This automatic binding allows you to use the MVVM pattern when developing panes and dock panes. For example, a well-designed dock pane will have as little logic as possible in its XAML code behind; instead, all of the controls in the XAML should be bound to properties in the dock pane base class. The dock pane and pane bases classes can be regarded as view-models.  
+Dock panes are defined in the same fashion as panes. When the framework creates a dock pane, it will also create its content class and set the content‚Äôs data context to the dock pane. This automatic binding allows you to use the MVVM pattern when developing panes and dock panes. For example, a well-designed dock pane will have as little logic as possible in its XAML code behind; instead, all of the controls in the XAML should be bound to properties in the dock pane base class. The dock pane and pane bases classes can be regarded as view-models.  
 
 ```xml
 <dockPanes>
@@ -948,7 +948,7 @@ Dock panes are defined in the same fashion as panes. When the framework creates 
 </dockPanes>
 ```
 
-Dock panes can be declared such that they are positioned relative to other dock panes using the *dockWith* attribute. In the example above, the dock pane declares that the first time it appears it should be grouped with the ëesri_coreProjectDockPaneí dock pane. Note, from here on, every time this dock pane is presented, its location will come from its persisted dock state to support user relocation. Dock panes are also conditional, they can be made to appear automatically whenever the application reaches a defined state. If a dock pane does not specify a state it is considered global and will be presented automatically at start-up. See the Conditions section for more details.  
+Dock panes can be declared such that they are positioned relative to other dock panes using the *dockWith* attribute. In the example above, the dock pane declares that the first time it appears it should be grouped with the ‚Äòesri_coreProjectDockPane‚Äô dock pane. Note, from here on, every time this dock pane is presented, its location will come from its persisted dock state to support user relocation. Dock panes are also conditional, they can be made to appear automatically whenever the application reaches a defined state. If a dock pane does not specify a state it is considered global and will be presented automatically at start-up. See the Conditions section for more details.  
 
 
 All dock panes must derive from the *DockPane* base class which in turn inherits from the *PlugIn* base class. Dock panes are managed by the *DockPaneManager* class available via *FrameworkApplication.Dockpanes*. Dock panes are found rather than created since they are logically singletons. Use *FrameworkApplication.DockPanes*.Find to find and create dock panes.
@@ -981,7 +981,7 @@ Property sheets hold a collection of individual unrelated property pages. Each p
 
 ![Layerproperties.png](../images/Proconcepts-Frameworks/Layerproperties.png "Framework_Guide Layerproperties.png")   
 
-Property sheets are purely declarative, they are defined only in DAML and have no corresponding managed class. Property pages, like panes and dock panes, have both declarative and active components; the active portion of all property pages must derive from the *ArcGIS.Desktop.Framework.Contracts.Page* class. The view class typically derives from WPFís *UserControl*.
+Property sheets are purely declarative, they are defined only in DAML and have no corresponding managed class. Property pages, like panes and dock panes, have both declarative and active components; the active portion of all property pages must derive from the *ArcGIS.Desktop.Framework.Contracts.Page* class. The view class typically derives from WPF‚Äôs *UserControl*.
 
 ```xml
 <propertySheets>
@@ -1033,17 +1033,17 @@ Like panes, dock panes, and property pages, a custom backstage tab has two compo
 ```
 
 ###The Run-time API
-Having introduced the many framework types, letís now take a simplified view of the run-time API. The main object in the framework graph is the FrameworkApplication object which represents the running application. From FrameworkApplication you can access the PaneCollection which holds the currently open Panes and lets you create new ones. The FrameworkApplication also provides a reference to the DockPaneManager which allows you to find and create DockPanes. The PropertySheet class has static methods to show a specified sheet. The Categories class expose a static method to get components registered in a particular category.  
+Having introduced the many framework types, let‚Äôs now take a simplified view of the run-time API. The main object in the framework graph is the FrameworkApplication object which represents the running application. From FrameworkApplication you can access the PaneCollection which holds the currently open Panes and lets you create new ones. The FrameworkApplication also provides a reference to the DockPaneManager which allows you to find and create DockPanes. The PropertySheet class has static methods to show a specified sheet. The Categories class expose a static method to get components registered in a particular category.  
 
 ![RuntmeAPI.png](../images/Proconcepts-Frameworks/RuntimeAPI.png "Framework_Guide RuntimeAPI.png")  
  
 ##Conditions and State
 
-The framework incorporates a mechanism for triggering the activation of customizations based on user defined conditions. Unlike classic events or callbacks, the binding between condition and customizations is provided staticallyódeclarativelyóusing DAML. This mechanism provides a simplified and declarative means for expressing when various GUI elements such as ribbon tabs, dock panes, buttons and tools should and shouldnít be visible or enabled within the application.  The goal here is to present an uncluttered user interface ìtunedî for the activity currently at hand.  Using conditions also ensures that code modules and their associated resources are loaded and consumed only when they are relevant.  The use of Conditions and State also simplifies coding by greatly reducing the need for complex and largely redundant event wiring associated with more traditional models.  
+The framework incorporates a mechanism for triggering the activation of customizations based on user defined conditions. Unlike classic events or callbacks, the binding between condition and customizations is provided statically‚Äîdeclaratively‚Äîusing DAML. This mechanism provides a simplified and declarative means for expressing when various GUI elements such as ribbon tabs, dock panes, buttons and tools should and shouldn‚Äôt be visible or enabled within the application.  The goal here is to present an uncluttered user interface ‚Äútuned‚Äù for the activity currently at hand.  Using conditions also ensures that code modules and their associated resources are loaded and consumed only when they are relevant.  The use of Conditions and State also simplifies coding by greatly reducing the need for complex and largely redundant event wiring associated with more traditional models.  
 
 Before diving into how context triggered activation actually works, two important terms need to be defined:  
 
-**State:**  States are named Boolean values that symbolize a particular aspect of the applicationís overall status; for example, whether a particular view is active, or whether a particular type of feature is selected. States are declared using ordinary character strings; to avoid name collisions, they are typically named using the PlugIn naming convention.   
+**State:**  States are named Boolean values that symbolize a particular aspect of the application‚Äôs overall status; for example, whether a particular view is active, or whether a particular type of feature is selected. States are declared using ordinary character strings; to avoid name collisions, they are typically named using the PlugIn naming convention.   
 
 **Condition:**  Conditions are DAML expressions composed of one or more states, such as (A or B), where both A and B are states. Conditions themselves are named so that they can be referenced by those DAML elements that permit the use of conditions; for instance, a custom ribbon tab can automatically become visible when a map view is active, and hide when any other type of view is active.   
 
@@ -1077,7 +1077,7 @@ A more complex condition:
 
 The above condition evaluates to (someState AND (someOtherState OR yetAnotherState)).   
 
-Conditions are defined at the root level in the DAML fileóoutside the scope of any module blockósince they are simply expressions (without an active aspect), and do not need to be associated with any controlling module; conditions should be considered global in scope.  The Boolean operators And, Or, and Not can be combined recursively to form complex conditional expressions if necessary, but conditions themselves cannot be used (recursively) in place of  states within another Condition block.    
+Conditions are defined at the root level in the DAML file‚Äîoutside the scope of any module block‚Äîsince they are simply expressions (without an active aspect), and do not need to be associated with any controlling module; conditions should be considered global in scope.  The Boolean operators And, Or, and Not can be combined recursively to form complex conditional expressions if necessary, but conditions themselves cannot be used (recursively) in place of  states within another Condition block.    
 
 Conditions are associated with a particular plug-in using the *condition* attribute. The xml fragment below specifies that this tab should appear whenever the active view is a map view.  
 
@@ -1103,7 +1103,7 @@ The following table summarizes the currently defined activation behaviors along 
 <td>DockPane</td><td>DockPane is shown based on the associated condition.  The DockPane object itself will not be loaded or created until the condition is initially met.</td>
 </tr>
 <tr>
-<td>Controls (Buttons, Tools, Etc.)</td><td>Control plug-ins are enabled and disabled based on their associated condition. The Control Plugin object itself will not be loaded or created until the condition is initially met, and thereafter, OnUpdate will not be called unless the supplied context is currently satisfied.  Note that the loadOnClick attribute is checked after the Condition, so loadOnClick controls will still appear disabled if their Condition hasnít yet been satisfied. <br> Buttons and checkboxes also have a checkedCondition whereby their checked state is automatically set based on their specified condition.</td>
+<td>Controls (Buttons, Tools, Etc.)</td><td>Control plug-ins are enabled and disabled based on their associated condition. The Control Plugin object itself will not be loaded or created until the condition is initially met, and thereafter, OnUpdate will not be called unless the supplied context is currently satisfied.  Note that the loadOnClick attribute is checked after the Condition, so loadOnClick controls will still appear disabled if their Condition hasn‚Äôt yet been satisfied. <br> Buttons and checkboxes also have a checkedCondition whereby their checked state is automatically set based on their specified condition.</td>
 </tr>
 <tr>
 <td>BackStage</td><td>BackStage tabs, like Controls, are disabled if they specify a condition that is no satisfied.</td>
@@ -1131,7 +1131,7 @@ The framework currently defines the following implicit states:
 </tr>
 </table>
 
-*Explicit* states are set manually using developer supplied code; the meanings of these states are usually defined by the developer and used to identify more specific types of context such as custom modes; i.e.: ìIím editingî, or a custom status: ìa raster layer is selected in the TOC.î   
+*Explicit* states are set manually using developer supplied code; the meanings of these states are usually defined by the developer and used to identify more specific types of context such as custom modes; i.e.: ‚ÄúI‚Äôm editing‚Äù, or a custom status: ‚Äúa raster layer is selected in the TOC.‚Äù   
 
 Explicit state changes are made by calling Activate or Deactivate on the State object:  
 
@@ -1165,7 +1165,7 @@ During condition matching, the framework will always consider the state associat
 
 The framework provides an event mechanism that enables communication between loosely coupled components in the application. The mechanism allows publishers and subscribers to communicate through events without having a direct reference to each other and this helps with application modularization.  
 
-The framework maintains a weak delegate reference to the subscriberís handler on subscription. This means the reference that the framework holds to the subscriber will not prevent garbage collection of the subscriber. The weak delegate reference relieves the subscriber from the need to unsubscribe to enable proper garbage collection. This should be regarded as a safety net however, subscribers should unsubscribe.  
+The framework maintains a weak delegate reference to the subscriber‚Äôs handler on subscription. This means the reference that the framework holds to the subscriber will not prevent garbage collection of the subscriber. The weak delegate reference relieves the subscriber from the need to unsubscribe to enable proper garbage collection. This should be regarded as a safety net however, subscribers should unsubscribe.  
 
 ###Publishing
 
@@ -1189,13 +1189,13 @@ FrameworkApplication.EventAggregator.GetEvent<LayerSelectionChangedEvents>().Sub
 
 public void OnLayerSelectionChanged(LayerSelectionEventArgs e)
 {
-  Ö
+  ‚Ä¶
 }
 ```
 
 ###Subscribing Using Strong References
 
-If you are raising multiple events in a short period of time and have noticed performance concerns with them, you may need to subscribe with strong delegate referencesóand therefore must manually unsubscribe from the event when disposing the subscriber.  
+If you are raising multiple events in a short period of time and have noticed performance concerns with them, you may need to subscribe with strong delegate references‚Äîand therefore must manually unsubscribe from the event when disposing the subscriber.  
 
 ```C#
 bool keepSubscriberReferenceAlive = true;
@@ -1205,7 +1205,7 @@ FrameworkApplication.EventAggregator.GetEvent<LayerSelectionChangedEvents>().Sub
 
 ##Component Categories
 
-The framework supports a mechanism for registering components in a specific category. This mechanism relies on DAML declarations instead of registry settings. First a category is declared and these are purely declarativeóthey have no active portion (code behind). The DAML fragment below shows an example category declaration.  
+The framework supports a mechanism for registering components in a specific category. This mechanism relies on DAML declarations instead of registry settings. First a category is declared and these are purely declarative‚Äîthey have no active portion (code behind). The DAML fragment below shows an example category declaration.  
 
 ```xml
 <categories>
@@ -1270,7 +1270,7 @@ The Pro Framework help support drag and drop operations for Panes and *Dockpanes
 
 ####Dropping in a Pane
 
-Paneís automatically have their *OnDragOver()* called. If the pane wants to allow the drop, it should set the drop effects accordingly. The implementation of *OnDrop* can mark the drop operation as handled or it can let the operation pass down to other drop handlers - if there are any - by setting Handle = False. For example:  
+Pane‚Äôs automatically have their *OnDragOver()* called. If the pane wants to allow the drop, it should set the drop effects accordingly. The implementation of *OnDrop* can mark the drop operation as handled or it can let the operation pass down to other drop handlers - if there are any - by setting Handle = False. For example:  
 
 ```C#
 public override void OnDragOver(DropInfo dropInfo)
@@ -1295,7 +1295,7 @@ public override void OnDrop(DropData dropInfo)
     } 
 ```
 
-However, if a pane contains WPF controls which have their own drag and drop logic, you can set the paneís DAML attribute *isDropTarget* to false to allow the inner controls to handle the operation instead; the default is true.  
+However, if a pane contains WPF controls which have their own drag and drop logic, you can set the pane‚Äôs DAML attribute *isDropTarget* to false to allow the inner controls to handle the operation instead; the default is true.  
 
 ####Dropping in a DockPane
 
@@ -1313,7 +1313,7 @@ b) To drop to a specific child control set the DAML attribute *isDropTarget* to 
 ```xml    
 <UserControl x:Class="ArcGIS.Desktop.Mapping.TOC.TOCDockPane"
 xmlns:dragDrop="clr-namespace:ArcGIS.Desktop.Framework.DragDrop;assembly=ArcGIS.Desktop.Framework" >
-ÖÖÖ.
+‚Ä¶‚Ä¶‚Ä¶.
    <Style x:Key="bookmarkListBoxStyle" TargetType="{x:Type ListBox}">
       <Setter Property="dragDrop:DragDrop.IsDragSource" Value="True" />
       <Setter Property="dragDrop:DragDrop.IsDropTarget" Value="True" />
@@ -1338,7 +1338,7 @@ In the example above, TOCDropHandler should return an instance of DropHandlerBas
 
 ```C#
 internal class TOCMapViewDropHandler : DropHandlerBase,  IDragSource
-  {Ö.}
+  {‚Ä¶.}
 _tocDropHandler = new TOCMapViewDropHandler(this);
 public TOCMapViewDropHandler TOCDropHandler
     {
@@ -1380,7 +1380,7 @@ internal class CustomDropHandler : DropHandlerBase
   }
 ```
 
-3) In the windowís ViewModel, add the binding property *DropHandler* which returns an instance of a CustomDropHandler:  
+3) In the window‚Äôs ViewModel, add the binding property *DropHandler* which returns an instance of a CustomDropHandler:  
 
 ```C#
 internal class WPFWindowVM : SomeBaseClass
@@ -1389,7 +1389,7 @@ internal class WPFWindowVM : SomeBaseClass
     public object DropHandler
     {
       Get{return _drophandler;}
-    }ÖÖÖ.}
+    }‚Ä¶‚Ä¶‚Ä¶.}
 }
 ```
 
@@ -1430,7 +1430,7 @@ ArcGIS Pro differs markedly from existing ArcGIS Desktop applications in that it
 
 ##Challenges for the multithreaded programmer  
 
-Four key differences distinguish any multithreaded applicationóincluding ArcGIS Proófrom a classic single threaded application:  
+Four key differences distinguish any multithreaded application‚Äîincluding ArcGIS Pro‚Äîfrom a classic single threaded application:  
 
 * To ensure a responsive user experience, the Graphical User Interface (GUI) thread must be able to take input from the user and produce graphical output smoothly and without interruption.  This means that the execution of coded actions must be performed asynchronously on separate worker thread/s; the GUI thread should never perform work or blocking waits of any kind.  This is in contrast to the existing ArcGIS desktop applications where most work is performed directly on a single GUI thread.  
 
@@ -1438,15 +1438,15 @@ Four key differences distinguish any multithreaded applicationóincluding ArcGIS 
 
 * Conflicting operations should not be executed simultaneously, and should always be performed in an appropriate logical sequence.  For example, operations on a map cannot be executed while the project that contains the map is still in the process of loading; and a selected set of features cannot be deleted until the selection itself has been fully computed.  Most operations initiated through user interaction are logically order dependent and should be executed serially. 
 
-* Care must be taken to ensure that access to volatile stateóthat is, access to non-constant variables within the programóis properly synchronized when such state is shared between threads.  For example, if a collection object is shared between a worker thread and the GUI thread, both threads need to coordinate access to the collection so that one thread isnít reading items from the collection while the other is simultaneously adding or removing items.  This kind of protective coding is common to all kinds of multithreaded programing and is normally accomplished using a lock.  In an application where multiple independent parties can extend the application behavior, coordinating operations can become unworkably complex without a common framework to manage how components work together.   
+* Care must be taken to ensure that access to volatile state‚Äîthat is, access to non-constant variables within the program‚Äîis properly synchronized when such state is shared between threads.  For example, if a collection object is shared between a worker thread and the GUI thread, both threads need to coordinate access to the collection so that one thread isn‚Äôt reading items from the collection while the other is simultaneously adding or removing items.  This kind of protective coding is common to all kinds of multithreaded programing and is normally accomplished using a lock.  In an application where multiple independent parties can extend the application behavior, coordinating operations can become unworkably complex without a common framework to manage how components work together.   
 
-A full treatment of multithreaded programming is beyond the scope of this document, but the following information will cover the most common patterns along with how Esriís APIs and threading model should be used to tackle each of the previously listed challenges.
+A full treatment of multithreaded programming is beyond the scope of this document, but the following information will cover the most common patterns along with how Esri‚Äôs APIs and threading model should be used to tackle each of the previously listed challenges.
 
-##ArcGIS Proís Internal Threading Model
+##ArcGIS Pro‚Äôs Internal Threading Model
 
 Esri engineers have placed a high priority on making ArcGIS Pro as easy to program against as possible in the new multithreaded architecture.  To this end, Pro incorporates the latest asynchronous language features from Microsoft along with new application specific threading infrastructure tailored to reduce coding complexity.  
 
-In most cases, Add-In developers should only need to contend with two threads: the user interface thread, and a single specialized worker thread provided by the application.  Internally, ArcGIS Pro uses a large number of threads for purposes including rasterization, graphics rendering, data loading, and select Geoprocessing algorithms that leverage parallelism to speed computation.  To keep all of these activities running smoothly and without conflicts requires a considerable amount of coordination and associated complexity; for this reason, these threads are entirely internal and isolated from developers within the implementation of the public SDK.  When a method in the public API is called, the internal implementation mayówhen applicableósplit the operation up and delegate fragments to one or more of these specialized internal threads, or queue operations that will ultimately be executed within an external process or web service.  
+In most cases, Add-In developers should only need to contend with two threads: the user interface thread, and a single specialized worker thread provided by the application.  Internally, ArcGIS Pro uses a large number of threads for purposes including rasterization, graphics rendering, data loading, and select Geoprocessing algorithms that leverage parallelism to speed computation.  To keep all of these activities running smoothly and without conflicts requires a considerable amount of coordination and associated complexity; for this reason, these threads are entirely internal and isolated from developers within the implementation of the public SDK.  When a method in the public API is called, the internal implementation may‚Äîwhen applicable‚Äîsplit the operation up and delegate fragments to one or more of these specialized internal threads, or queue operations that will ultimately be executed within an external process or web service.  
 
 ![Threadingmodel.png](../images/Proconcepts-Frameworks/Threadingmodel.png "Framework_Guide Threadingmodel.png")  
  
@@ -1462,9 +1462,9 @@ Methods within the ArcGIS Pro SDK fall into three categories:
 
 If a method on a particular object is called on the wrong thread, the call will generate an **_ArcGIS.Core.CalledOnWrongThreadException_** exception.  If unsure about a particular case, you can refer to the SDK component help or Microsoft provided help to determine whether a particular method or property has a restriction.  
 
-Within the SDKóparticularly within the ArcGIS.Core namespaceóworker thread bound methods and properties tend to be very fine grained.  To reduce the overhead associated with scheduling and thread context switches, these methods are synchronous and must be coded using Tasks.   
+Within the SDK‚Äîparticularly within the ArcGIS.Core namespace‚Äîworker thread bound methods and properties tend to be very fine grained.  To reduce the overhead associated with scheduling and thread context switches, these methods are synchronous and must be coded using Tasks.   
 
-Microsoftís .NET Task Parallel Library **_TPL_** and the associated programming pattern known as the Task Asynchronous Pattern **_TAP,_** simplify the authoring of asynchronous code within a multithreaded application.  The Task class is used to represent an operation executed asynchronously.  
+Microsoft‚Äôs .NET Task Parallel Library **_TPL_** and the associated programming pattern known as the Task Asynchronous Pattern **_TAP,_** simplify the authoring of asynchronous code within a multithreaded application.  The Task class is used to represent an operation executed asynchronously.  
 
 In the example below, the PrintReportAsync method is invoked and immediately returns a Task object to the caller.  Meanwhile, the printing function continues to run in the background on another thread.  
 
@@ -1478,11 +1478,11 @@ In the example below, the PrintReportAsync method is invoked and immediately ret
     }
 ```
 
-The author of the example wants to show a message when the printing is complete and uses the Wait method on the returned Task object to suspend the calling thread until the task is done.  This approach has two major problems: Since the calling thread cannot do anything else while it is waiting, itís actually less efficient than simply calling a synchronous version of the print function.  Secondly, since the calling thread is a GUI thread in this case, the user interface will freeze.  A suspended thread obviously cannot process user input, render graphical elements, or do anything at all for that matter.  For these reasons, you should never use the Wait method on a GUI thread.  
+The author of the example wants to show a message when the printing is complete and uses the Wait method on the returned Task object to suspend the calling thread until the task is done.  This approach has two major problems: Since the calling thread cannot do anything else while it is waiting, it‚Äôs actually less efficient than simply calling a synchronous version of the print function.  Secondly, since the calling thread is a GUI thread in this case, the user interface will freeze.  A suspended thread obviously cannot process user input, render graphical elements, or do anything at all for that matter.  For these reasons, you should never use the Wait method on a GUI thread.  
 
-Luckily, .NET introduced the language features **_async_** and **_await_**.  The **async** modifier marks the method so that the compiler knows that the method is asynchronous and will be using the await operator.  The **await** operator is where the magic comes in, as this is used to call methods asynchronously and afterward, force the calling thread to automatically return to the next line and continue execution once the asynchronous operation has completed.  The calling the threadónormally the GUI threadóis not blocked and is free to take other actions while the Task on the worker thread is still running.  
+Luckily, .NET introduced the language features **_async_** and **_await_**.  The **async** modifier marks the method so that the compiler knows that the method is asynchronous and will be using the await operator.  The **await** operator is where the magic comes in, as this is used to call methods asynchronously and afterward, force the calling thread to automatically return to the next line and continue execution once the asynchronous operation has completed.  The calling the thread‚Äînormally the GUI thread‚Äîis not blocked and is free to take other actions while the Task on the worker thread is still running.  
 
-Note that the author now accomplishes her original goal with very little change, but doesnít hang the user interface.   
+Note that the author now accomplishes her original goal with very little change, but doesn‚Äôt hang the user interface.   
 
 ```C#
     private async void Button_Click(object sender, RoutedEventArgs e)
@@ -1510,7 +1510,7 @@ When an asynchronous function is unavailable, you can easily write your own wrap
     }
 ```
 
-Instead of using a separate function, an *anonymous* functionócalled a Lambdaócan be employed.  Using lambdas keeps the worker code within the same function and lets you use arguments and local variables within the lambda as if they were part of the containing function.   
+Instead of using a separate function, an *anonymous* function‚Äîcalled a Lambda‚Äîcan be employed.  Using lambdas keeps the worker code within the same function and lets you use arguments and local variables within the lambda as if they were part of the containing function.   
 
 ```C#
     private void Button_Click(object sender, RoutedEventArgs e)
@@ -1518,7 +1518,7 @@ Instead of using a separate function, an *anonymous* functionócalled a Lambdaóca
       int steps = GetSteps();
       Task t = Task.Run(() =>
       {
-        // I can use the variable ìstepsî here even though I'm in a
+        // I can use the variable ‚Äústeps‚Äù here even though I'm in a
         // different function running on a different thread!
         // Do work
       });
@@ -1549,7 +1549,7 @@ The **await** operator can also be used in-line to obtain the result of the asyn
       MessageBox.Show(String.Format("Result was {0}",  computedValue.ToString()));
     }
 ```
-Note that there is a small overhead associated with **await**, so itís always more efficient to call multiple synchronous methods within your own lambda than to call many asynchronous functions using await; this is particularly true when coding loops where the cost of using await through hundreds or thousands of iterations will become substantial.  
+Note that there is a small overhead associated with **await**, so it‚Äôs always more efficient to call multiple synchronous methods within your own lambda than to call many asynchronous functions using await; this is particularly true when coding loops where the cost of using await through hundreds or thousands of iterations will become substantial.  
 
 ##Using QueuedTask   
 
@@ -1565,11 +1565,11 @@ The QueuedTask class is used instead of the Task class for several reasons:
 
 **Queuing and concurrency control**
 
-When Tasks are dispatched using Task.Run, the associated Task will execute on a random thread in the managed thread pool each time itís called.  If a subsequent call to Task.Run is called from anywhere else in the application, the new Task will start running immediately on yet another threadópotentially while the first Task is still running on the first thread.  Going back to the list of challenges inherent in multithreaded code, it should be obvious that executing unorganized operations concurrently is likely to lead to crashes and corruption of application state.  The queuing behavior of QueuedTask.Run ensures the proper ordering of calls and reduces the risk of conflicts.  Remember that the parallelism going on within ArcGIS Pro is accomplished internally; this simplifies the public programming model and greatly reduces the likelihood of conflicts.  
+When Tasks are dispatched using Task.Run, the associated Task will execute on a random thread in the managed thread pool each time it‚Äôs called.  If a subsequent call to Task.Run is called from anywhere else in the application, the new Task will start running immediately on yet another thread‚Äîpotentially while the first Task is still running on the first thread.  Going back to the list of challenges inherent in multithreaded code, it should be obvious that executing unorganized operations concurrently is likely to lead to crashes and corruption of application state.  The queuing behavior of QueuedTask.Run ensures the proper ordering of calls and reduces the risk of conflicts.  Remember that the parallelism going on within ArcGIS Pro is accomplished internally; this simplifies the public programming model and greatly reduces the likelihood of conflicts.  
 
 **Affinity and state**
 
-For performance reasons, ArcGIS Pro maintains considerable state on specific threads and in many cases, uses objects that have thread affinity.  Thread affinity simply means that an object is tied to a particular thread and should not be interacted with from any thread but the thread it has affinity with.  Affinity constraints are common in operating systems and components, including database connections, Windows, Controls, input queues, timers, and COM servers.  In WPF for example, calling methods on any object derived from WPFís DependencyObject class will result in an exception if the call is made from a thread the object wasnít created on.   
+For performance reasons, ArcGIS Pro maintains considerable state on specific threads and in many cases, uses objects that have thread affinity.  Thread affinity simply means that an object is tied to a particular thread and should not be interacted with from any thread but the thread it has affinity with.  Affinity constraints are common in operating systems and components, including database connections, Windows, Controls, input queues, timers, and COM servers.  In WPF for example, calling methods on any object derived from WPF‚Äôs DependencyObject class will result in an exception if the call is made from a thread the object wasn‚Äôt created on.   
 
 Threads in the managed thread pool are also incompatible with most COM components, so you should not attempt to use Task.Run with code that might execute COM components directly or indirectly.   
 
@@ -1582,18 +1582,18 @@ When Tasks are dispatched using QuededTask.Run, they are automatically integrate
 
 2. The application busy state system where UI elements such as buttons and tools are automatically enabled and disabled when Tasks are running.  Task execution can also be coordinated with critical phases such as view creation and application shutdown.
 
-3. Queued Tasks are enlisted in the frameworkís diagnostic facilities, when enabled.  This lets developers monitor the sequence of running Tasks, the functions Tasks are executing, and the duration of execution.  This kind of information is invaluable in debugging and performance analysis.
+3. Queued Tasks are enlisted in the framework‚Äôs diagnostic facilities, when enabled.  This lets developers monitor the sequence of running Tasks, the functions Tasks are executing, and the duration of execution.  This kind of information is invaluable in debugging and performance analysis.
 
 **Acceptable cases for using Task.Run**
 
-There are cases where the use of Task.Run is ok, such as when executing independent background operations consisting entirely of managed codeóso long as the particular managed components in use do not have thread affinity.  The developer takes full responsibility for handling cancellation, displaying progress, enabling/disabling the UI appropriately, coordinating operations, and handling logical conflicts.   
+There are cases where the use of Task.Run is ok, such as when executing independent background operations consisting entirely of managed code‚Äîso long as the particular managed components in use do not have thread affinity.  The developer takes full responsibility for handling cancellation, displaying progress, enabling/disabling the UI appropriately, coordinating operations, and handling logical conflicts.   
 
 ##Progress and Cancelation
 Asynchronous methods may sometimes accept a Progressor argument, an object which is used by the caller to configure the progress dialog and cancellation settings, and to coordinate communication between the caller and callee.  Asynchronous methods which are not cancelable take a Progressor class while cancelable methods take a CancelableProgressor class.  
 
-Progressor objects follow the pattern established by Microsoftís CancelationToken, and cannot be created directly; instead, the developer must create a ProgressorSource or CancelableProgressorSource.  
+Progressor objects follow the pattern established by Microsoft‚Äôs CancelationToken, and cannot be created directly; instead, the developer must create a ProgressorSource or CancelableProgressorSource.  
 
-The ìsourceî objects let you configure how the progressor will handle progress without exposing these settings to external code which might access the progressor.  The ProgressorSource object exposes the following constructors: 
+The ‚Äúsource‚Äù objects let you configure how the progressor will handle progress without exposing these settings to external code which might access the progressor.  The ProgressorSource object exposes the following constructors: 
 
 ```C#
   public ProgressorSource(Action<Progressor> callback)
@@ -1603,7 +1603,7 @@ The ìsourceî objects let you configure how the progressor will handle progress w
 
 The first override takes a delegate which will be called at regular intervals while the task is running.  This option is appropriate when you want to provide specialized feedback during task execution.  
 
-The second override takes a separately constructed progress dialog object.  If not already shown, the progressor will automatically show this progress dialog when the task starts executing and automatically hide it when the task completes.  If the dialog is already visible, the progressor will simply update the contents of the dialog while running, and it will be the developerís duty to hide the progress dialog when appropriate.  This option is appropriate when you want to manually control progress dialog visibility, such as when you need to keep the progress dialog up across several separate tasks.  
+The second override takes a separately constructed progress dialog object.  If not already shown, the progressor will automatically show this progress dialog when the task starts executing and automatically hide it when the task completes.  If the dialog is already visible, the progressor will simply update the contents of the dialog while running, and it will be the developer‚Äôs duty to hide the progress dialog when appropriate.  This option is appropriate when you want to manually control progress dialog visibility, such as when you need to keep the progress dialog up across several separate tasks.  
 
 The third override will automatically create and show a progress dialog when the task starts executing and hide it when the task completes.  The delayedShow parameter controls whether the progress dialog should show immediately or delay its appearance to allow quick tasks to complete and avoid appearing at all if unnecessary.  If the task is expected to execute quickly, set this parameter to true.  If you expect the task to take more than a second or two to complete, set delayedShow to false so that the progress dialog appears immediately to convey a more responsive feel.  
 
@@ -1617,7 +1617,7 @@ CancelableProgressors require an additional argument which specifies what the ca
 
 ##Example method implementation using cancelation  
 
-The specialized CancelableProgressor exposes a CancellationToken property which can be used to communicate cancellation.  Within the methodís implementation, code running in loops should simply check the IsCancellationRequested property and exit the method by throwing an OperationCanceledException (which acknowledges the request for cancellation) as demonstrated below:    
+The specialized CancelableProgressor exposes a CancellationToken property which can be used to communicate cancellation.  Within the method‚Äôs implementation, code running in loops should simply check the IsCancellationRequested property and exit the method by throwing an OperationCanceledException (which acknowledges the request for cancellation) as demonstrated below:    
 
 ```C#
 public Task<long> CalcFactorialAsync(int x, CancelableProgressor progressor)
@@ -1666,7 +1666,7 @@ public Task<long> CalcFactorialAsync(int x, Progressor progressor)
 
 **Constant state assumptions**
 
-Consider the following example authored by an Add-In developer.  This call is invoked from the GUI thread, and the intent here is to delete the specified layer from the active viewís map.  
+Consider the following example authored by an Add-In developer.  This call is invoked from the GUI thread, and the intent here is to delete the specified layer from the active view‚Äôs map.  
 
 ```C#
 private Task DeleteSelectedLayerAsync(Layer layer)
@@ -1678,12 +1678,12 @@ private Task DeleteSelectedLayerAsync(Layer layer)
 }
 ```
 
-Though straightforward in appearance, this function will occasionally result in an exception when put into use within the application.  The mistake here was to assume that the state of the system remains static across threads.  Previously queued operations may be running, and these need to complete before another operation can start executing.  During that time, the state of the application may change due to user interaction or the result of operations still running.  In this case, the active view may have become a table before the lambda actually starts executing, in which case, the map will be null resulting in an exception.  The safe approach is to avoid ìchainingî calls on member variables or variables passed between threads; use local variables as a snapshot of the application state when the method was called since they wonít change out from under you.  
+Though straightforward in appearance, this function will occasionally result in an exception when put into use within the application.  The mistake here was to assume that the state of the system remains static across threads.  Previously queued operations may be running, and these need to complete before another operation can start executing.  During that time, the state of the application may change due to user interaction or the result of operations still running.  In this case, the active view may have become a table before the lambda actually starts executing, in which case, the map will be null resulting in an exception.  The safe approach is to avoid ‚Äúchaining‚Äù calls on member variables or variables passed between threads; use local variables as a snapshot of the application state when the method was called since they won‚Äôt change out from under you.  
 
 ```C#
 private Task DeleteSelectedLayerAsync(Layer layer)
 {
-  // Take a ìsnapshotî of the map on the active view.
+  // Take a ‚Äúsnapshot‚Äù of the map on the active view.
   Map m = MapView.Active.Map;
   return QueuedTask.Run(() =>
   {
@@ -1704,9 +1704,9 @@ To get around this limitation, WPF provides a static BindingOperations class tha
 BindingOperations.EnableCollectionSynchronization(Items, _lockObj); 
 ```
 
-In the example above, the _lockObj member variableóof type Objectóis typically instantiated when the containing class is created and will serve as the coordinating lock.  Once EnableCollectionSynchronization is called, WPF will enter the specified lock whenever reading from or writing to the bound collection.  Note that as the owner of the collection, you are likewise obligated to enter the lock when reading from or writing to the collection.    
+In the example above, the _lockObj member variable‚Äîof type Object‚Äîis typically instantiated when the containing class is created and will serve as the coordinating lock.  Once EnableCollectionSynchronization is called, WPF will enter the specified lock whenever reading from or writing to the bound collection.  Note that as the owner of the collection, you are likewise obligated to enter the lock when reading from or writing to the collection.    
 
-ReadOnlyObservableCollection wrappers are commonly used to enforce read only semantics on observable collection properties.  To properly setup the multithreaded synchronization, youíll need to call EnableCollectionSynchronization on the wrapper instead of the collection itself, since itís the wrapper that WPF will actually be binding to.   
+ReadOnlyObservableCollection wrappers are commonly used to enforce read only semantics on observable collection properties.  To properly setup the multithreaded synchronization, you‚Äôll need to call EnableCollectionSynchronization on the wrapper instead of the collection itself, since it‚Äôs the wrapper that WPF will actually be binding to.   
 
 ```C#
 internal class HelloWorld
@@ -1736,13 +1736,13 @@ public void FillCollectionAsync()
 }
 ```
 
-**ìLiveî objects as properties**
+**‚ÄúLive‚Äù objects as properties**
 
-Care should be taken when exposing objectsóespecially collectionsóas public properties if the collection is likely to change on a separate thread.  If someone gets and holds such a property and later starts enumerating through it thread A, an exception may be generated if your own code modifies the collection on thread B since there is no lock to collaborate with.  Handing out read only ìsnapshotsî of the collection is safer.  
+Care should be taken when exposing objects‚Äîespecially collections‚Äîas public properties if the collection is likely to change on a separate thread.  If someone gets and holds such a property and later starts enumerating through it thread A, an exception may be generated if your own code modifies the collection on thread B since there is no lock to collaborate with.  Handing out read only ‚Äúsnapshots‚Äù of the collection is safer.  
 
 **Invoking code on the GUI thread**
 
-There are occasionally instances where while your code is running along on a worker thread, you encounter a situation where you need to ask for input from the user before proceeding.  You should not try to present a dialog directly from the worker thread as Windows have thread affinity.  A Window or dialog created on the worker thread will not connect to the GUI threadís input queue and will not honor the z-order and focus policy set by the GUI thread.  In general, you can execute code on the GUI thread from a worker thread using the applicationís dispatcher object.   
+There are occasionally instances where while your code is running along on a worker thread, you encounter a situation where you need to ask for input from the user before proceeding.  You should not try to present a dialog directly from the worker thread as Windows have thread affinity.  A Window or dialog created on the worker thread will not connect to the GUI thread‚Äôs input queue and will not honor the z-order and focus policy set by the GUI thread.  In general, you can execute code on the GUI thread from a worker thread using the application‚Äôs dispatcher object.   
 
 This can be done synchronously:
 
@@ -1763,13 +1763,13 @@ Or asynchronously:
       });
 ```
 
-Developers should try to collect needed information from the user on the GUI thread before executing work so that you donít have to use this trick.  Blocking calls made between threads risk deadlocks and hold up operations running on the worker thread.   
+Developers should try to collect needed information from the user on the GUI thread before executing work so that you don‚Äôt have to use this trick.  Blocking calls made between threads risk deadlocks and hold up operations running on the worker thread.   
 
 **Asynchronous Exception Handling**
 
-Like synchronous functions, asynchronous functions can throw exceptions.  This introduces an interesting problem since the caller provides the try/catch on one thread, and the exception is thrown on another.  In addition, the calling frame isnít usually still on the stack when the exception is thrown.   
+Like synchronous functions, asynchronous functions can throw exceptions.  This introduces an interesting problem since the caller provides the try/catch on one thread, and the exception is thrown on another.  In addition, the calling frame isn‚Äôt usually still on the stack when the exception is thrown.   
 
-.NET once again comes to the rescue and lets you use async/await with try/catch such that if an exception is thrown by the code executing within the Task, youíll be able to catch back where the asynchronous function was called.  Note that the asynchronous function must return Task or Task\<T> for asynchronous exceptions to be properly conveyed (not void).   
+.NET once again comes to the rescue and lets you use async/await with try/catch such that if an exception is thrown by the code executing within the Task, you‚Äôll be able to catch back where the asynchronous function was called.  Note that the asynchronous function must return Task or Task\<T> for asynchronous exceptions to be properly conveyed (not void).   
 
 ```C#
       try
@@ -1782,15 +1782,15 @@ Like synchronous functions, asynchronous functions can throw exceptions.  This i
       }
 ```
 
-If an exception is thrown from the worker and you didnít provide a try/catch around where you awaited the call, the .NET runtime will plug the exceptionóas an inner exceptionóinto a UnobservedException.
+If an exception is thrown from the worker and you didn‚Äôt provide a try/catch around where you awaited the call, the .NET runtime will plug the exception‚Äîas an inner exception‚Äîinto a UnobservedException.
 
-Unobserved exceptions usually show up only when the exception object is collected by .NETís garbage collection thread, nowhere near where the exception actually occurred.  If you get one of these, examine the inner exception within to obtain the faulting call stack.  In VisualStudioís watch window, you can use the $exception pseudo variable to examine the current exception object.  
+Unobserved exceptions usually show up only when the exception object is collected by .NET‚Äôs garbage collection thread, nowhere near where the exception actually occurred.  If you get one of these, examine the inner exception within to obtain the faulting call stack.  In VisualStudio‚Äôs watch window, you can use the $exception pseudo variable to examine the current exception object.  
 
 ##Further Reading
 
 [Task Asynchronous Pattern - MSDN](https://msdn.microsoft.com/en-us/library/hh873175%28v=vs.110%29.aspx "Task Asynchronous Pattern - MSDN")
 
-[Best practices in Asynchronous Programming ñ Stephen Cleary](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx "Best practices in Asynchronous Programming ñ Stephen Cleary")
+[Best practices in Asynchronous Programming ‚Äì Stephen Cleary](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx "Best practices in Asynchronous Programming ‚Äì Stephen Cleary")
 
 
 
