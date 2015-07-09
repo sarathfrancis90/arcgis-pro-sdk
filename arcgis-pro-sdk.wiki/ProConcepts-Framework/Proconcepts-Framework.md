@@ -1696,7 +1696,7 @@ Programmers in a multithreaded environment should also code defensively.  Consid
 
 By default, WPF data bound collections must be modified on the thread where the bound WPF control was created.  This limitation becomes a problem when you want to fill the collection from a worker thread to produce a nice experience: for example, a search result list should be gradually filled as more matches are found, without forcing the user to wait until the whole search is complete.  
 
-To get around this limitation, WPF provides a static BindingOperations class that lets you establish an association between a lock and a collection (e.g. ObservableCollection<T>).  This association allows bound collections to be updated from threads outside the main GUI thread, in a coordinated manner without generating the usual exception.  
+To get around this limitation, WPF provides a static BindingOperations class that lets you establish an association between a lock and a collection (e.g. ObservableCollection\<T>).  This association allows bound collections to be updated from threads outside the main GUI thread, in a coordinated manner without generating the usual exception.  
 
 ```C#
 BindingOperations.EnableCollectionSynchronization(Items, _lockObj); 
@@ -1767,7 +1767,7 @@ Developers should try to collect needed information from the user on the GUI thr
 
 Like synchronous functions, asynchronous functions can throw exceptions.  This introduces an interesting problem since the caller provides the try/catch on one thread, and the exception is thrown on another.  In addition, the calling frame isn’t usually still on the stack when the exception is thrown.   
 
-.NET once again comes to the rescue and lets you use async/await with try/catch such that if an exception is thrown by the code executing within the Task, you’ll be able to catch back where the asynchronous function was called.  Note that the asynchronous function must return Task or Task<T> for asynchronous exceptions to be properly conveyed (not void).   
+.NET once again comes to the rescue and lets you use async/await with try/catch such that if an exception is thrown by the code executing within the Task, you’ll be able to catch back where the asynchronous function was called.  Note that the asynchronous function must return Task or Task\<T> for asynchronous exceptions to be properly conveyed (not void).   
 
 ```C#
       try
