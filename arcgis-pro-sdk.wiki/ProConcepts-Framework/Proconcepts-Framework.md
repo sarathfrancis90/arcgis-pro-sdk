@@ -826,7 +826,9 @@ Collections of related tabs can be grouped together in colored, named groups to 
 
 ![Featurelayer.png](../images/Proconcepts-Frameworks/Featurelayer.png "Framework_Guide Featurelayer.png")  
 
-Tab groups are declared within a tabGroups collection element and consist of an id, color, and a caption.  Tabs are associated with a tag group using the tabGroupID attribute.
+Tab groups are declared within a *tabGroups* collection element and consist of an id, color, and a caption.  Tabs are associated with a tag group using the *tabGroupID* attribute.  
+
+```xml
 <tabGroups>
   <tabGroup caption="FEATURE LAYER" id="esri_mapping_featureLayerTabGroup">
     <color A="255" R="238" G="170" B="90" />
@@ -845,7 +847,7 @@ Tab groups are declared within a tabGroups collection element and consist of an 
   <group refID="esri_mapping_layerExtrusion" />
   <group refID="esri_mapping_layer3DGroup" />
 </tab>
-
+```
 Tab groups are typically used in situations where the user temporarily enters a mode, such as “editing graphic elements.”  Tag groups are not typically used with tabs which are perpetually visible (global tabs). Tabs in a tab group should have the same *condition*. If any tab in a tab group has a relevant condition, the entire tab group is displayed.  
 
 ##Toolbars
