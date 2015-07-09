@@ -93,7 +93,7 @@ Note, DAML elements within one file can alter or remove elements in other files.
     </updateGroup>
   </groups>
 </updateModule>
-All DAML elements must fall under the root ArcGIS element. The first child node is the AddInInfo element which holds the metadata about the add-in itself. This includes a unique GUID identifier, its version, a name, and description.
+All DAML elements must fall under the root ArcGIS element. The first child node is the *AddInInfo* element which holds the metadata about the add-in itself. This includes a unique GUID identifier, its version, a name, and description.
   <AddInInfo id="{3329a7d3-9f16-4642-9a70-475b421c77b5}" 
              version="1.0" desktopVersion="1.1.2829">
     <Name>Acme</Name>
@@ -104,9 +104,9 @@ All DAML elements must fall under the root ArcGIS element. The first child node 
   </AddInInfo>
 ```
 
-Customizations follow and these are broken up in several main classifications including modules, categories, conditions, propertySheets, backstage, and dropHandlers. As we’ll see, most customizations appear under the modules element.  
+Customizations follow and these are broken up in several main classifications including modules, categories, conditions, *propertySheets*, backstage, and *dropHandlers*. As we’ll see, most customizations appear under the modules element.  
 
-All root nodes perform one or more of three distinct actions: inserts, updates, and deletes. The type of operation is determined by the element name. For example, a new module is declared using the insertModule element; similarly, a module is updated using the updateModule element. Note, in cases where no other operation except inserts is valid, the insert prefix has been dropped.  
+All root nodes perform one or more of three distinct actions: inserts, updates, and deletes. The type of operation is determined by the element name. For example, a new module is declared using the *insertModule* element; similarly, a module is updated using the *updateModule* element. Note, in cases where no other operation except inserts is valid, the insert prefix has been dropped.  
 
 ```xml
   <modules>
@@ -119,13 +119,13 @@ All root nodes perform one or more of three distinct actions: inserts, updates, 
 
 Each type of customization must be assigned a unique ID by the author. IDs are established when the element is inserted; customizations are referenced by their ID when they are being updated or deleted.  
 
-In the excerpt below, the caption of a previously inserted button is updated using the updateButton element. Note that the id attribute is used when declaring new objects, while the refID attribute is used to reference existing elements.  
+In the excerpt below, the caption of a previously inserted button is updated using the *updateButton* element. Note that the id attribute is used when declaring new objects, while the *refID* attribute is used to reference existing elements.  
 
 ```xml
      <updateButton refID="esri_SubSystem_Button1" caption="New Caption"/>
 ```
 
-Similarly, a button would be deleted using deleteButton.  
+Similarly, a button would be deleted using *deleteButton.*  
 
 ```xml
   <deleteButton refID="esri_SubSystem_Button1"/>
@@ -135,7 +135,7 @@ DAML instructions (insertions, updates, and deletes) are processed from a variet
 
 ##Plug-Ins
 
-Some customizations, like menus, are purely declarative—their definition in DAML is all that is necessary for the Framework to create and present them. Most customizations, however, have an active (code-behind) component and most of these inherit from the common base class PlugIn.  
+Some customizations, like menus, are purely declarative—their definition in DAML is all that is necessary for the Framework to create and present them. Most customizations, however, have an active (code-behind) component and most of these inherit from the common base class *PlugIn.*  
 
 ```C#
   public abstract class PlugIn : PropertyChangedBase
@@ -153,11 +153,11 @@ Some customizations, like menus, are purely declarative—their definition in DAML
   }
 ```
 
-Note that many of the methods and properties on PlugIn and its derived classes do not need to be overridden or implemented by the developers; for instance, the implementation of the Caption property—found on many plug-ins—is provided by the framework and will return whatever caption was supplied when the plug-in was declared using DAML.  Only the protected virtual overrides where a specific behavior is required—such as OnClick—need be supplied by the developer.  
+Note that many of the methods and properties on *PlugIn* and its derived classes do not need to be overridden or implemented by the developers; for instance, the implementation of the Caption property—found on many plug-ins—is provided by the framework and will return whatever caption was supplied when the plug-in was declared using DAML.  Only the protected virtual overrides where a specific behavior is required—such as OnClick—need be supplied by the developer.  
 
 As previously mentioned, all plug-ins require an alphanumeric identifier (ID).  This ID is specified within the plug-in DAML when the plug-in is declared, and is conceptually similar to the GUID used to uniquely name COM CoClasses.  
 
-All plug-ins with an active component use the class and assembly attributes to connect the DAML to the managed code. The class name is the full class name which includes the namespace. The assembly is expected to reside in the same folder as the DAML file so do not provide a path. Note, the root ArcGIS node has the defaultNamespace and defaultAssembly attributes to mitigate unnecessarily repeating this information throughout the DAML.  
+All plug-ins with an active component use the class and assembly attributes to connect the DAML to the managed code. The class name is the full class name which includes the namespace. The assembly is expected to reside in the same folder as the DAML file so do not provide a path. Note, the root ArcGIS node has the *defaultNamespace* and *defaultAssembly* attributes to mitigate unnecessarily repeating this information throughout the DAML.  
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -165,7 +165,7 @@ All plug-ins with an active component use the class and assembly attributes to c
         defaultNamespace="Acme"
 ```
 
-If your plug-in belongs to a different namespace, specify it as part of the class name. If the namespace is part of the default namespace, provide only the missing portion. In the example below the FullExtentButton class is added to the Acme.Controls namespace; since the default name is just Acme, the DAML class entry needs to read Controls.FullExtentButton.  
+If your plug-in belongs to a different namespace, specify it as part of the class name. If the namespace is part of the default namespace, provide only the missing portion. In the example below the *FullExtentButton* class is added to the *Acme.Controls* namespace; since the default name is just Acme, the DAML class entry needs to read *Controls.FullExtentButton.*  
 
 ```C#
 namespace Acme.Controls
@@ -183,18 +183,18 @@ namespace Acme.Controls
 </button>
 ```
 
-##Modules  
+###Modules  
 
 Modules act as the hub and central access point for their subsystem; if you need access to the functionality within a subsystem, you start with the Module. Modules are singletons that are instantiated automatically by the framework when access is explicitly requested in executing code, or when the Module becomes “relevant” due a context shift.  All program elements that are part of the Module are explicitly declared as such; these elements include Ribbon Buttons, Tools, Galleries, Combo Boxes, Edit Boxes, Palettes, and other controls, as well as application Panes and Docking Panes.  The well-defined relationship between a Module and its associated components lets the application initialize, un-initialize, and remove entire subsystems as a whole.  
 
-Most of the logic in the UI level should reside in a module or a helper (non-UI) class the module directly manages. For example, when writing a button, the button class itself should have no business logic in it; all the logic should be centralized in its parent module. Centralizing the business logic reduces the spaghetti-effect. For example, instead of several buttons each listening to a particular event, it’s better to have one module listen to the event and each button instead polls the module in OnUpdate.  
+Most of the logic in the UI level should reside in a module or a helper (non-UI) class the module directly manages. For example, when writing a button, the button class itself should have no business logic in it; all the logic should be centralized in its parent module. Centralizing the business logic reduces the spaghetti-effect. For example, instead of several buttons each listening to a particular event, it’s better to have one module listen to the event and each button instead polls the module in *OnUpdate*.  
 
 Modules also support several patterns to make centralizing business logic much easier; for instance, modules automatically load whenever one of their plug-ins load.  For example, in most cases a button on the ribbon doesn’t load until it is clicked. When this happens, the button’s parent module is also loaded; similarly, when a dock pane loads, its parent module also loads.  
-Modules also have a pattern for working with panes. Modules are automatically notified whenever one of its panes are activated, deactivated, opened, or closed. This means your module doesn’t have to listen to the Framework’s ActivePaneChanged event and filter for the relevant panes; instead, modules are given direct notification that one of their panes changed.
+Modules also have a pattern for working with panes. Modules are automatically notified whenever one of its panes are activated, deactivated, opened, or closed. This means your module doesn’t have to listen to the Framework’s *ActivePaneChanged* event and filter for the relevant panes; instead, modules are given direct notification that one of their panes changed.
 
-##Declaring Modules in DAML
+####Declaring Modules in DAML
 
-Modules are declared within the root ArcGIS element, but must be further enclosed within a modules container element.  The autoLoad attribute is used to control whether the module is loaded just-in-time (JIT)—the default—or loaded automatically when the application starts.  In almost all cases, autoLoad should be set to false.  
+Modules are declared within the root ArcGIS element, but must be further enclosed within a modules container element.  The *autoLoad* attribute is used to control whether the module is loaded just-in-time (JIT)—the default—or loaded automatically when the application starts.  In almost all cases, *autoLoad* should be set to false.  
 
 ```xml
 <modules>
@@ -204,9 +204,9 @@ Modules are declared within the root ArcGIS element, but must be further enclose
   </insertModule>
 </modules>
 ```
-Note that if declaring a new module, all constituent plug-in declarations contained within the insertModule element are implicitly inserts, and so the insert prefix on element names can be omitted; e.g., insertButton becomes simply button.  
+Note that if declaring a new module, all constituent plug-in declarations contained within the *insertModule* element are implicitly inserts, and so the insert prefix on element names can be omitted; e.g., *insertButton* becomes simply button.  
 
-##Controls
+###Controls
 
 Controls include any of the simple widgets that can appear on the application Ribbon, including: Button, Tool, CheckBox, ComboBox, EditBox, LabelControl, DynamicMenu, and CustomControl.  All simple ribbon controls are declared in a module’s controls element. Although controls are declared in a controls section, they are referenced when defining a group. This allows the same control to appear in multiple groups without having to re-declare the entire control.  
 
@@ -242,10 +242,208 @@ The following example updates the caption on the button added in the example abo
   </controls>
 </updateModule>
 ```
-All control elements share several attributes.  The loadOnClick attribute determines when the button should be created by the framework. By default, controls appear enabled, but are not actually instantiated until they are clicked. This simple JIT strategy improves resource utilization and startup time by deferring the instantiation of controls until they are initiated by the end user. Note that non-visible controls are never loaded until they become visible (or are executed programmatically), regardless of the value assigned to loadOnClick.  
+All control elements share several attributes.  The *loadOnClick* attribute determines when the button should be created by the framework. By default, controls appear enabled, but are not actually instantiated until they are clicked. This simple JIT strategy improves resource utilization and startup time by deferring the instantiation of controls until they are initiated by the end user. Note that non-visible controls are never loaded until they become visible (or are executed programmatically), regardless of the value assigned to *loadOnClick.*  
 
-Tooltips are defined using the tooltip sub-element and may span as many lines as necessary. The image attribute is used to supply an image that will appear next to the tip text. Command tooltips also support a disabledText element; this string becomes the tooltip whenever the command is disabled.  
+Tooltips are defined using the tooltip sub-element and may span as many lines as necessary. The image attribute is used to supply an image that will appear next to the tip text. Command tooltips also support a *disabledText* element; this string becomes the tooltip whenever the command is disabled.  
 
-Most controls support multiple sizes in the ribbon. For example, a button can render small (small icon only), middle (small icon with text), and large (large icon over text). Use the smallImage and largeImage attributes to specify unique images for the different sizes. Images don’t have to be graphics, you can also use XAML. Note, images are not flipped when running right-to-left; if the image should flip when running in this mode, e.g. arrow buttons, set the flipImageRTL attribute to true. The graphic below shows three buttons (in blue squares) in the three supported sizes.  
+Most controls support multiple sizes in the ribbon. For example, a button can render small (small icon only), middle (small icon with text), and large (large icon over text). Use the *smallImage* and *largeImage* attributes to specify unique images for the different sizes. Images don’t have to be graphics, you can also use XAML. Note, images are not flipped when running right-to-left; if the image should flip when running in this mode, e.g. arrow buttons, set the *flipImageRTL* attribute to true. The graphic below shows three buttons (in blue squares) in the three supported sizes.  
 
 ![Ribbon1.png](../images/Proconcepts-Frameworks/Ribbon1.png "Framework_Guide Ribbon1.png")  
+
+The *disableIfBusy* element is used to signal that the control should be disabled whenever the primary worker thread is busy. This prevents work from queuing up. This element is true by default. Controls that always need to be enabled should set this to false.  
+
+All control declarations support a condition attribute allowing the assignment of a condition.  If the specified condition isn’t met, the control will be automatically disabled by the framework.  In addition, controls remain unloaded until their condition is met.  If no condition is specified, the control is assumed to be always relevant. See the ‘Condtions and State’ section for more information.  
+
+Controls are implemented by inheriting from the appropriate plug-in derived base class.  
+
+The Button class shown below is typical of controls:  the virtual *OnClick* is overridden by the leaf class and used to perform whatever custom behavior is desired.  
+
+```C#
+sealed class ShowPeopleSheet : ArcGIS.Desktop.Framework.Contracts.Button
+{
+  protected override void OnClick()
+  {
+    User user = new User();
+    user.FirstName = "Michael";
+    user.LastName = "Faraday";
+    PropertySheet.Show("UserManager", null, user);
+  }
+}
+```
+
+Controls can update their properties, e.g. caption and tooltip, at run-time and these changes will automatically reflect in the application.   
+
+```C#
+  protected override void OnClick()
+  {
+    this.Caption = "New Caption";
+    this.Tooltip = "New Tooltip";
+    this.Checked = true;
+  }
+```
+All controls can be accessed and updated at run-time using the *FrameworkApplication.GetPlugInWrapper* function.
+
+```C#
+  protected override void OnClick()
+  {
+    IPlugInWrapper wrapper = FrameworkApplication.GetPlugInWrapper("acme_ZoomBtn");
+    wrapper.Caption = "New Caption";
+    wrapper.Tooltip = "New Tooltip";
+  }
+```
+To support accessibility, an appropriate keytip should be supplied for each control.  The character/s chosen should make sense and should not conflict with any existing keytips; keytips can consist of multiple characters to disambiguate if necessary.  
+
+###Buttons and Checkboxes
+
+Buttons are simple controls that respond to an *OnClick* event. Use the Checked property for a checked appearance.  
+
+```xml
+<button id="acme_AddFromFileButton"
+    className=" AddFromFile"
+    caption="Add from file"
+    keytip="AF"
+    largeImage="Images\AddFromFile32.png"
+    smallImage="Images\AddFromFile16.pngg">
+  <tooltip heading="Add from file" image="Images\AddFromFile16.png">
+    Add spatial data files to the project
+    <disabledText>Requires an open project with a map</disabledText>
+  </tooltip>
+</button>
+```
+
+Buttons are implemented by deriving from the Button base class.
+
+```C#
+sealed class AddFromFile : ArcGIS.Desktop.Framework.Contracts.Button
+{
+  protected override void OnClick()
+  {
+    base.OnClick();
+  }
+}
+```
+###CheckBoxes
+
+Check boxes work exactly the same as buttons.  
+
+```xml
+<checkBox id="acme_AutoSave"
+          className="AutoSave"
+          caption="Auto Save"
+          keytip="AS">
+  <tooltip heading="Auto Save" image="Images\AutoSave16.png">Automatically save edits.</tooltip>
+</checkBox
+```
+
+###Tools
+
+Tools look very similar to buttons except they automatically stay checked after being selected. Tools also work in conjunction with the current pane—all unhandled mouse and keyboard events from the active pane are passed to the active tool for processing.  
+
+```xml
+<tool id="acme_zoomTool"
+      caption="Zoom"
+      className="ZoomTool"
+      keytip="ZT">
+  <tooltip heading="Zoom" image="Images\Zoom16.png">Zoom the map.
+    <disabledText>No active map.</disabledText>
+  </tooltip>
+</tool>
+```
+Tools are implemented by deriving from the Tool base class.
+
+```C#
+sealed class ZoomTool : ArcGIS.Desktop.Framework.Contracts.Tool
+{
+  protected override void OnMouseDown(MouseButtonEventArgs e)
+  {
+    // Do work
+    e.Handled = true;
+  }
+
+  protected override void OnMouseUp(MouseButtonEventArgs e)
+  {
+    switch (e.ChangedButton)
+    {
+      case MouseButton.Right:
+        e.Handled = true;
+        ContextMenu menu = FrameworkApplication.CreateContextMenu("acme_AddDataMenu");
+        menu.IsOpen = true;
+        break;
+      // etc …
+      }
+  }
+}
+```
+A default tool can be assigned when declaring a pane; this tool will be automatically selected when an instance of the pane is created.  When working with multiple panes, the active tool may change automatically to reflect the incoming pane.  When returning to the old pane, the system will try to re-activate the most recently used tool for the pane type.    
+
+###Edit Boxes
+
+Edit Boxes provide a convenient means for users to enter text within a control on a ribbon tab.  The edit box can be configured to appear with or without a caption.  The *sizeString* attribute is used to establish the width of the control through a string that is representative of the kind of input that will appear in the control; the edit hint can also be updated at runtime. Use the *DataType* attribute (string, double, or int) to specify the type of edit box and the format attribute to control the representation of numeric values.  
+
+```xml
+<editBox id="acme_Currency" caption="Currency:"
+         className="CurrencyEditBox"
+         dataType="double"
+         format="C" keytip="CC" 
+         sizeString="$9.99"/>
+```
+
+Edit Box controls are implemented by deriving from the EditBox base class.  
+
+```C#
+sealed class CurrencyEditBox : ArcGIS.Desktop.Framework.Contracts.EditBox
+{
+  protected override void OnEnter()
+  {
+    // Do work
+  }
+}
+```
+
+C# Format examples:  
+
+```C#
+    decimal value = 123.456m;
+    Console.WriteLine(value.ToString("C2"));
+    // Displays $123.46
+
+    value = -12345;
+    Console.WriteLine(value.ToString("D"));
+    // Displays -12345
+    Console.WriteLine(value.ToString("D8"));
+    // Displays -00012345
+```
+
+###Combo Boxes
+
+The ComboBox allows users to select an item from a drop-down list or optionally to enter new text in the text box of the control. A ComboBox typically contains a collection of ComboBoxItem objects but can contain a collection of objects of any type (such as string or image).
+
+The *IsEditable* and *IsReadOnly* attributes specify how the ComboBox behaves.  
+
+
+<table>
+<tr>
+<th></th><th>**IsReadOnly true**</th><th>**IsReadOnly false**</th>
+</tr>
+<tr>
+<td rowspan="4">**IsEditable true**</td>
+<td>* Cannot select an item in the ComboBox by entering a string.</td>
+<td>* Can select an item in the ComboBox by entering a string.</td>
+</tr>
+<tr>
+<td>* Cannot enter a string that does not correspond to an item in the ComboBox.</td>
+<td>* Can enter a string that does not correspond to an item in the ComboBox.</td>
+</tr>
+<tr>
+<td>* Can select part of the string in the ComboBox text box.</td>
+<td>* Can select part of the string in the ComboBox text box. /td>
+</tr>
+<tr>
+<td>* Can copy the string in the ComboBox text box, but cannot paste a string into the ComboBox text box.</td>
+<td>* Can copy or paste the string in the ComboBox text box./td>
+</tr>
+</table>
+
+
+
+
