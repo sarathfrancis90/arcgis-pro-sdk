@@ -1090,10 +1090,9 @@ The framework defines a fixed set of activation behaviors that can be triggered 
 The following table summarizes the currently defined activation behaviors along with the type of Plugins they apply to:  
 
 <table>
-<col width="500">
-<col width="2000">
+
 <tr>
-<th>Plugin Type</th><th>Framework Provided Activation</th>
+<th style="width:20%">Plugin Type</th><th>Framework Provided Activation</th>
 </tr>
 <tr>
 <td>Ribbon Tab</td><td>Tab is shown or hidden based on the associated condition.  When the tab first appears, other objects which appear on the tab may load if they are visible.</td>
@@ -1120,7 +1119,7 @@ The framework currently defines the following implicit states:
 
 <table>
 <tr>
-<th>Implicit State</th><th>Details</th>
+<th style="width:20%">Implicit State</th><th>Details</th>
 </tr>
 <tr>
 <td>Active Pane</td><td>The ID of the active Pane is designated as an implicit state and activated when the pane is active.</td>
