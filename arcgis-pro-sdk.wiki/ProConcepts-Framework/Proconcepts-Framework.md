@@ -5,7 +5,7 @@ ArcGIS Pro is a highly configurable and extensible application. All software mod
 Subject:       Framework
 Contributor:   ArcGIS Pro SDK Team <arcgisprosdk@esri.com>
 Organization:  Esri, http://www.esri.com
-Date:          5\12\2015
+Date:          7\10\2015
 ArcGIS Pro:    1.1
 Visual Studio: 2013
  ```
@@ -256,7 +256,7 @@ Tooltips are defined using the tooltip sub-element and may span as many lines as
 
 Most controls support multiple sizes in the ribbon. For example, a button can render small (small icon only), middle (small icon with text), and large (large icon over text). Use the *smallImage* and *largeImage* attributes to specify unique images for the different sizes. Images don’t have to be graphics, you can also use XAML. Note, images are not flipped when running right-to-left; if the image should flip when running in this mode, e.g. arrow buttons, set the *flipImageRTL* attribute to true. The graphic below shows three buttons (in blue squares) in the three supported sizes.  
 
-![Ribbon1.png](../images/Proconcepts-Frameworks/Ribbon1.png "Framework_Guide Ribbon1.png")  
+![Ribbon1.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Ribbon1.png "Framework_Guide Ribbon1.png")  
 
 The *disableIfBusy* element is used to signal that the control should be disabled whenever the primary worker thread is busy. This prevents work from queuing up. This element is true by default. Controls that always need to be enabled should set this to false.  
 
@@ -535,7 +535,7 @@ Spinners do not support delay loading with *loadOnClick*, they are instantiated 
   </tooltip>
 </spinner>
 ```
-![Spinner.png](../images/Proconcepts-Frameworks/Spinner.png "Framework_Guide Spinner.png")  
+![Spinner.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Spinner.png "Framework_Guide Spinner.png")  
 
 Spinner controls are implemented by deriving from the Spinner base class.
 
@@ -624,7 +624,7 @@ Menus are purely declarative and these are added under the menus element. Menus 
 
 Split buttons group related buttons together. The first button listed should be the mostly common used button in the collection and it is presented directly on the ribbon. The remaining buttons are less frequency used and these are added to a drop down menu. Split buttons are purely declarative, they have no associated action portion. Each button participating in the control has an active portion but not the split button itself.  
 
-![Paste.png](../images/Proconcepts-Frameworks/Paste.png "Framework_Guide Paste.png")   
+![Paste.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Paste.png "Framework_Guide Paste.png")   
 
 ```xml
 <splitButtons>
@@ -637,7 +637,7 @@ Split buttons group related buttons together. The first button listed should be 
 ```
 Instead of a collection of less commonly used buttons, split buttons can instead present a gallery. The first element is still a button. As we’ll see later, galleries can additionally present their own menu of buttons.  
 
-![gallery1.png](../images/Proconcepts-Frameworks/gallery1.png "Framework_Guide Gallery.png")  
+![gallery1.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/gallery1.png "Framework_Guide Gallery.png")  
 
 ```xml 
 <splitButtons>
@@ -671,7 +671,7 @@ If you just want to add a string to the ribbon you can use the LabelControl.
               caption="the quick brown fox jumps over the lazy dog" 
               hasTwoLines="true"/>
 ```
-!Addintab.png](../images/Proconcepts-Frameworks/Addintab.png "Framework_Guide Addintab.png")  
+!Addintab.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Addintab.png "Framework_Guide Addintab.png")  
 
 ###Galleries
 
@@ -679,11 +679,11 @@ A Gallery is a control that displays a collection of related items or Commands i
 
 The graphic below shows the Basemap drop-down gallery.  
 
-![Basemap.png](../images/Proconcepts-Frameworks/Basemap.png "Framework_Guide Basemap.png")  
+![Basemap.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Basemap.png "Framework_Guide Basemap.png")  
 
 Galleries can present a condensed grid within the ribbon itself using the in-line gallery representation.  The items presented in this fashion are often either the most common or most recently used items depending on the implementation.  The graphic below shows the Layer Templates in-line gallery.  
 
-![Layertemplates.png](../images/Proconcepts-Frameworks/Layertemplates.png "Framework_Guide Layertemplates.png")  
+![Layertemplates.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Layertemplates.png "Framework_Guide Layertemplates.png")  
 
 The actual contents of a gallery are populated at runtime.  Relatively static aspects such as the caption, the dropdown image, item size constraint, tooltip, etc. are specified declaratively.  
 
@@ -758,7 +758,7 @@ ArcGIS Pro uses the ribbon paradigm popularized by newer versions of Microsoft O
 
 Each tab is itself composed of one or more groups, small rectangular regions having a caption and containing one or more controls.  The representation of controls within groups varies depending on how frequently the control is expected to be used, and is configured declaratively in the DAML.  Frequently used controls should be large and obvious, while less frequently used tools should be smaller.  In addition, controls are typically paired with a caption to make their function more obvious.  
 
-![Tabs.png](../images/Proconcepts-Frameworks/Tabs.png "Framework_Guide Tabs.png")  
+![Tabs.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Tabs.png "Framework_Guide Tabs.png")  
  
 Groups may optionally support a “dialog launcher” button—a small link widget located next to the group caption—which is used to bring up a dialog where more obscure functions may be accessed.  Groups are declared as lists of controls within a *groups* container element:  
 
@@ -832,7 +832,7 @@ Like controls, a tab’s relevance can be governed using a condition. The condit
 
 Collections of related tabs can be grouped together in colored, named groups to improve clarity.  These collections are called tab groups.  In the ribbon displayed below, there is a tab group containing three tabs.   
 
-![Featurelayer.png](../images/Proconcepts-Frameworks/Featurelayer.png "Framework_Guide Featurelayer.png")  
+![Featurelayer.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Featurelayer.png "Framework_Guide Featurelayer.png")  
 
 Tab groups are declared within a *tabGroups* collection element and consist of an id, color, and a caption.  Tabs are associated with a tag group using the *tabGroupID* attribute.  
 
@@ -883,7 +883,7 @@ The ribbon group supports an inner collection/grouping of controls into a toolba
 
 The framework supports multiple panes, letting users display and interact with multiple subjects.  Only one pane can be active at a time. The active pane establishes what is available on the ribbon; switching between different panes may result in changes to what tabs and controls are available. The active pane represents what the user is working with at any given time and therefore provides the primary context for the application. You can open many panes at the same time and these can be grouped, tiled (horizontally or vertically), or floated.   
 
-![Dockpane.png](../images/Proconcepts-Frameworks/Dockpane.png "Framework_Guide Dockpane.png")  
+![Dockpane.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Dockpane.png "Framework_Guide Dockpane.png")  
  
 Panes are declared within a panes collection element:  
 
@@ -987,7 +987,7 @@ class TOCDockPaneViewModel : ArcGIS.Desktop.Framework.Contracts.DockPane
 
 Property sheets hold a collection of individual unrelated property pages. Each page contains controls for setting a group of related properties. A property sheet can be shown modal or modeless. 
 
-![Layerproperties.png](../images/Proconcepts-Frameworks/Layerproperties.png "Framework_Guide Layerproperties.png")   
+![Layerproperties.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Layerproperties.png "Framework_Guide Layerproperties.png")   
 
 Property sheets are purely declarative, they are defined only in DAML and have no corresponding managed class. Property pages, like panes and dock panes, have both declarative and active components; the active portion of all property pages must derive from the *ArcGIS.Desktop.Framework.Contracts.Page* class. The view class typically derives from WPF’s *UserControl*.
 
@@ -1021,7 +1021,7 @@ Finally, when a property sheet closes, each loaded page will have its *Page.Unin
 
 The Backstage is a full-screen user interface view that exposes additional functionality for the application and current project. The backstage consists of tabs and buttons. Each tab is scoped to a particular task and presents its own user interface. Buttons are simply commands that perform an operation and have no additional user interface in the backstage.  
 
-![Backstage.png](../images/Proconcepts-Frameworks/Backstage.png "Framework_Guide Backstage.png")  
+![Backstage.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Backstage.png "Framework_Guide Backstage.png")  
  
 Backstage tabs are also contextual and will appear disabled in they specify a condition that has not been satisfied.  
 
@@ -1043,7 +1043,7 @@ Like panes, dock panes, and property pages, a custom backstage tab has two compo
 ###The Run-time API
 Having introduced the many framework types, let’s now take a simplified view of the run-time API. The main object in the framework graph is the FrameworkApplication object which represents the running application. From FrameworkApplication you can access the PaneCollection which holds the currently open Panes and lets you create new ones. The FrameworkApplication also provides a reference to the DockPaneManager which allows you to find and create DockPanes. The PropertySheet class has static methods to show a specified sheet. The Categories class expose a static method to get components registered in a particular category.  
 
-![RuntmeAPI.png](../images/Proconcepts-Frameworks/RuntimeAPI.png "Framework_Guide RuntimeAPI.png")  
+![RuntmeAPI.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/RuntimeAPI.png "Framework_Guide RuntimeAPI.png")  
  
 ##Conditions and State
 
@@ -1456,7 +1456,7 @@ Esri engineers have placed a high priority on making ArcGIS Pro as easy to progr
 
 In most cases, Add-In developers should only need to contend with two threads: the user interface thread, and a single specialized worker thread provided by the application.  Internally, ArcGIS Pro uses a large number of threads for purposes including rasterization, graphics rendering, data loading, and select Geoprocessing algorithms that leverage parallelism to speed computation.  To keep all of these activities running smoothly and without conflicts requires a considerable amount of coordination and associated complexity; for this reason, these threads are entirely internal and isolated from developers within the implementation of the public SDK.  When a method in the public API is called, the internal implementation may—when applicable—split the operation up and delegate fragments to one or more of these specialized internal threads, or queue operations that will ultimately be executed within an external process or web service.  
 
-![Threadingmodel.png](../images/Proconcepts-Frameworks/Threadingmodel.png "Framework_Guide Threadingmodel.png")  
+![Threadingmodel.png](http://ArcGIS.github.io/arcgis-pro-sdk/images/Proconcepts_Frameworks/Threadingmodel.png "Framework_Guide Threadingmodel.png")  
  
 ##Tasks and the Task Asynchronous Pattern
 
