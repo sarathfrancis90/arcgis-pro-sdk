@@ -1,6 +1,14 @@
 #ProConcepts Framework
 ArcGIS Pro is a highly configurable and extensible application. All software modifications and enhancements are achieved using add-ins. The add-in model provides a declaratively-based framework for creating a collection of customizations conveniently packaged within a single compressed file. Add-ins are easily shared as they do not require installation programs or registration; add-ins are added to a system by simply copying them to a well-known folder and removed by deleting them from this folder. Add-ins can also be shared between users within an organization using a centralized network share.  
- 
+ ```
+ Language:      C# and Visual Basic
+Subject:       Framework
+Contributor:   ArcGIS Pro SDK Team <arcgisprosdk@esri.com>
+Organization:  Esri, http://www.esri.com
+Date:          5\12\2015
+ArcGIS Pro:    1.1
+Visual Studio: 2013
+ ```
 Add-ins are authored using .NET along with Esri’s Desktop Application Markup Language (DAML). The DAML (an XML language created by Esri) describes the customizations; the .NET classes provide the custom behavior. ArcGIS Pro’s software development kit (SDK) includes an Add-In Wizard that integrates with Microsoft Visual Studio to simplify development.  
 
 ##Add-In Extensibility Points  
